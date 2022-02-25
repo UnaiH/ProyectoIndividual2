@@ -6,30 +6,41 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/uso"
+        android:id="@+id/idioma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="154dp"
+        android:layout_marginTop="107dp"
         android:layout_marginEnd="165dp"
-        android:text="Usar"
+        android:text="Idioma"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/config"
+        android:id="@+id/colores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginEnd="127dp"
-        android:layout_marginBottom="403dp"
-        android:text="Configuración"
+        android:layout_marginStart="117dp"
+        android:layout_marginTop="58dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="471dp"
+        android:text="Cambiar Interfaz"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uso"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintTop_toBottomOf="@+id/idioma" />
+
+    <Button
+        android:id="@+id/volverConf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="158dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="159dp"
+        android:text="Volver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/colores" />
 </androidx.constraintlayout.widget.ConstraintLayout>
