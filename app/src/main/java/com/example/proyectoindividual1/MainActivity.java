@@ -15,10 +15,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void IniciarSesion(View view) {
-        setContentView(R.layout.menuprinc);
+        finish();
         Intent i = new Intent(this, menuPrincipal.class);
+        startActivity(i);
     }
-
+    public void Registrarse(View view) {
+        finish();
+        Intent i = new Intent(this, registro.class);
+        startActivity(i);
+    }
     @Override
     public void onClick(View view) {
 

@@ -26,6 +26,7 @@
         android:layout_marginStart="127dp"
         android:layout_marginEnd="127dp"
         android:layout_marginBottom="403dp"
+        android:onClick="onClickConfig"
         android:text="Configuración"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

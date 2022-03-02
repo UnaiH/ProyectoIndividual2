@@ -4,11 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/anadir.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/configuracion.xml" value="0.5" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/enlectura.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/idiomas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/interfaz.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/leidos.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/leidos.xml" value="0.25" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/menuprinc.xml" value="0.5" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/registro.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/tiposlistas.xml" value="0.36666666666666664" />

@@ -18,6 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".registro"></activity>
+        <activity android:name=".menuPrincipal"></activity>
+        <activity android:name=".tipoListas"></activity>
+        <activity android:name=".Configuracion"></activity>
+
     </application>
 
 </manifest>
