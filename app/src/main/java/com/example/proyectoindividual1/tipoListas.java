@@ -26,7 +26,7 @@ public class tipoListas extends AppCompatActivity implements View.OnClickListene
     }
     public void onClickAnadir(View view) {
         finish();
-        Intent i = new Intent(this, menuPrincipal.class);
+        Intent i = new Intent(this, anadirLibro.class);
         startActivity(i);
     }
 

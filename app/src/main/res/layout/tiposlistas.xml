@@ -10,11 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="158dp"
-        android:layout_marginTop="107dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="159dp"
         android:onClick="onClickEnLectura"
         android:text="En Lectura"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.484"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,40 +23,35 @@
         android:id="@+id/leidosb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="244dp"
         android:onClick="onClickLeidos"
         android:text="Leídos"
-        app:layout_constraintBottom_toTopOf="@+id/anadirb"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lecturab"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/anadirb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
-        android:layout_marginEnd="159dp"
-        android:layout_marginBottom="108dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="340dp"
         android:onClick="onClickAnadir"
         android:text="Añadir libro"
-        app:layout_constraintBottom_toTopOf="@+id/bVolver"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
+        android:layout_marginTop="460dp"
         android:layout_marginEnd="158dp"
-        android:layout_marginBottom="144dp"
         android:onClick="onClick"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
