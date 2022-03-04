@@ -15,7 +15,7 @@ public class BD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("CREATE TABLE Usuarios ('NombreUsuario' VARCHAR(225) PRIMARY KEY, 'Contrasena' VARCHAR(255))");
-        sqLiteDatabase.execSQL("CREATE TABLE Libros ('Titulo' VARCHAR(225), 'Autor' VARCHAR(225), 'Genero' VARCHAR(225), 'Paginas' INTEGER, 'Actual' INTEGER, 'Acabado' INTEGER, 'Portada' VARCHAR(225))");
+        sqLiteDatabase.execSQL("CREATE TABLE Libros ('Titulo' VARCHAR(225), 'Autor' VARCHAR(225), 'Genero' VARCHAR(225), 'Paginas' INTEGER, 'Actual' INTEGER, 'Acabado' INTEGER)");
     }
 
     @Override

@@ -9,52 +9,44 @@
         android:id="@+id/bingles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="162dp"
-        android:layout_marginTop="93dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginEnd="161dp"
+        android:onClick="onClickIngles"
         android:text="Inglés"
-        app:layout_constraintBottom_toTopOf="@+id/beuskera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.052" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bcastellano"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="139dp"
-        android:layout_marginEnd="139dp"
-        android:layout_marginBottom="180dp"
-        android:text="Castellano"
-        app:layout_constraintBottom_toTopOf="@+id/bvolveridiomas"
+        android:layout_marginTop="252dp"
+        android:layout_marginEnd="154dp"
+        android:onClick="onClickEspañol"
+        android:text="Español"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/bvolveridiomas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
+        android:layout_marginTop="452dp"
         android:layout_marginEnd="160dp"
-        android:layout_marginBottom="179dp"
+        android:onClick="onClick"
         android:text="Volver"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/beuskera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="155dp"
-        android:layout_marginBottom="40dp"
+        android:onClick="onClickEuskera"
         android:text="euskera"
-        app:layout_constraintBottom_toTopOf="@+id/bcastellano"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

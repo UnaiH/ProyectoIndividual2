@@ -1,0 +1,11 @@
+<resources>
+    <!-- Reply Preference -->
+    <string name="idiomas">Settings</string>
+    <string name="accion">Settings</string>
+
+    <string-array name="listaidiomas">
+        <item>Español</item>
+        <item>Euskera</item>
+        <item>Inglés</item>
+    </string-array>
+</resources>

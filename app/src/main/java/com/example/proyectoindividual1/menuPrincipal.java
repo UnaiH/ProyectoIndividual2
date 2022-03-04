@@ -20,7 +20,12 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
     }
     public void onClickConfig(View view) {
         finish();
-        Intent i = new Intent(this, Configuracion.class);
+        Intent i = new Intent(this, config.class);
+        startActivity(i);
+    }
+    public void onClickIdiomas(View view) {
+        finish();
+        Intent i = new Intent(this, idiomas.class);
         startActivity(i);
     }
 

@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoIndividual1">
         <activity
-            android:name=".anadirLibro"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -24,7 +21,9 @@
         <activity android:name=".registro" />
         <activity android:name=".menuPrincipal" />
         <activity android:name=".tipoListas" />
-        <activity android:name=".Configuracion" />
+        <activity android:name=".idiomas" />
+        <activity android:name=".config" />
+
     </application>
 
 </manifest>
