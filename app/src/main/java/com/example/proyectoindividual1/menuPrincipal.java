@@ -14,6 +14,15 @@ import androidx.preference.PreferenceManager;
 public class menuPrincipal extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.contains("tema")) {
+            Boolean modOsc = prefs.getBoolean("tema", false);
+            if (modOsc) {
+                setTheme(R.style.ModoOscuro);
+            } else {
+                setTheme(R.style.Theme_ProyectoIndividual1);
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menuprinc);
         Bundle extras = getIntent().getExtras();
@@ -22,9 +31,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
             TextView bienvenida = (TextView) findViewById(R.id.bienvenidatext);
             bienvenida.setText("Te damos la bienvenida "+usu);
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String idioma =prefs.getString("Nombre","Usuario");
-        Log.i("Idioma", "Idioma"+idioma);
     }
 
     public void onClickUsar(View view) {

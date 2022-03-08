@@ -3,40 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <PreferenceCategory
         android:visibility="visible"
-        app:key="tema_interfaz"
-        app:title="Tema de la Intefaz">
+        android:key="tema_interfaz"
+        android:title="Tema de la Intefaz">
         <CheckBoxPreference
-            app:defaultValue="false"
-            app:key="switch"
-            app:summary="Se cambia el mado a oscuro cuando está activado y normal cuando está desactivado."
-            app:title="Tema Oscuro" />
+            android:defaultValue="false"
+            android:key="tema"
+            android:summary="Se cambia el mado a oscuro cuando está activado y normal cuando está desactivado."
+            android:title="Tema Oscuro" />
     </PreferenceCategory>
     <PreferenceCategory
-        app:key="info_personal"
-        app:title="Información personal">
-        <EditTextPreference
-            app:key="nombre"
-            app:title="Nombre"
-            app:summary="Introduce el nombre para referirnos a ti:"
-            app:dialogIcon="@mipmap/ic_launcher"/>
-    </PreferenceCategory>
-    <PreferenceCategory
-        app:key="datos_libros"
-        app:title="Datos con los que definir los libros">
+        android:key="datos_libros"
+        android:title="Datos con los que definir los libros">
         <CheckBoxPreference
-            app:key="genero"
-            app:title="Genero del libro"
-            app:summary="Marca esta casilla si deseas poder escribir el genero del libro. Por ejemplo si es un drama o una novela romántica"/>
+            android:key="genero"
+            android:title="Genero del libro"
+            android:summary="Marca esta casilla si deseas poder escribir el genero del libro. Por ejemplo si es un drama o una novela romántica"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        app:key="idim"
-        app:title="Idioma de la aplicación">
+        android:key="idiomas"
+        android:title="Idioma de la aplicación">
         <ListPreference
             android:entries="@array/listaidiomas"
             android:entryValues="@array/listaidiomas"
             android:summary="Lista de los idiomas disponibles en la aplicación."
             android:key="listapreferencias"
-            android:title="Lista preferencias"/>
+            android:title="Lista Idiomas"/>
     </PreferenceCategory>
 </PreferenceScreen>
