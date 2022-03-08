@@ -15,7 +15,6 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
 
     public void onClickALibro(View view) {
-        finish();
         Intent i = new Intent(this, anadirLibroALista.class);
         startActivity(i);
     }

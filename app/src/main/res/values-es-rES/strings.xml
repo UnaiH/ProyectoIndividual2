@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProyectoIndividual1Esp</string>
+    <string name="idiomas">Opciones</string>
+    <string name="accion">Opciones</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="messages_header">Mensajes</string>
+    <string name="sync_header">Sinc</string>
+    <string name="signature_title">Tu firma</string>
+    <string name="reply_title">Accion de respuesta predefinida</string>
+    <string name="sync_title">Sinc email periodicamente</string>
+    <string name="attachment_title">Descargar los ingresos adjuntos</string>
+    <string name="attachment_summary_on">Descarga automatica de los adjuntos para los emails entrantes</string>
+    <string name="attachment_summary_off">Solo descargar los adjuntos cuando se solicite manualmente</string>
+</resources>

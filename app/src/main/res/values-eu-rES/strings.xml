@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ProyectoIndividual1EU</string>
+    <string name="idiomas">Aukerak</string>
+    <string name="accion">Aukerak</string>
+    <string name="hello_blank_fragment">Kaixo zati zuriak</string>
+    <string name="messages_header">Mezua</string>
+    <string name="sync_header">Sink</string>
+    <string name="signature_title">Zure sinadura</string>
+    <string name="reply_title">Aurretik zehaztatutako erantzun akzioa</string>
+    <string name="sync_title">Sink email aldian-aldian</string>
+    <string name="attachment_title">Jaitsi sartu diren gaineratuak</string>
+    <string name="attachment_summary_on">Automatikoki jaitsi gaineratuak sartutako emilerentzat</string>
+    <string name="attachment_summary_off">Bakarrik jaitsi geineratuak eskuz eskatuta</string>
+</resources>

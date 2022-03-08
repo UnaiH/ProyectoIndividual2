@@ -1,8 +1,16 @@
 package com.example.proyectoindividual1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -10,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -39,11 +48,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void IniciarSesion(View view) {
-        EditText usuariois = (EditText) findViewById(R.id.Usuario);
+        EditText usuarios = (EditText) findViewById(R.id.Usuario);
         String Linea ="";
         try {
             BufferedReader ficherointerno = new BufferedReader(new InputStreamReader(
-                    openFileInput(usuariois.getText().toString()+".txt")));
+                    openFileInput(usuarios.getText().toString()+".txt")));
             Linea = ficherointerno.readLine();
             Log.i("TAG", Linea );
             ficherointerno.close();
@@ -52,8 +61,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         EditText contr = (EditText) findViewById(R.id.Contr);
         if(contr.getText().toString().equals(Linea)) {
-            finish();
             Intent i = new Intent(this, menuPrincipal.class);
+            i.putExtra("usuario", usuarios.getText().toString());
+            setResult(RESULT_OK, i);
+            finish();
             startActivity(i);
         }
         else{
@@ -73,6 +84,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     @Override
     public void onClick(View view) {
-
     }
 }

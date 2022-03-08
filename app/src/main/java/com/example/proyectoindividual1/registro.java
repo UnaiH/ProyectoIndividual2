@@ -1,7 +1,10 @@
 package com.example.proyectoindividual1;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -37,6 +41,19 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
             } catch (IOException e) {
                 Log.i("Error", "Error al registrarse");
             }
+
+            NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(registro.this,"CanalLibro");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+                elManager.createNotificationChannel(elCanal);
+            }
+            builder.setContentTitle("Libro Añadido")
+                    .setContentText("Se ha registrado el usuario: "+usuarioret)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setAutoCancel(true);
+            elManager.notify(1, builder.build());
+
             finish();
             Intent i = new Intent(this, MainActivity.class);
             i.putExtra("regok", 1);
