@@ -84,7 +84,27 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
             }
         }
         finish();
-        Intent i = new Intent(this, anadirLibroALista.class);
+        Intent i = new Intent(this, tipo_listas.class);
         startActivity(i);
+    }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, tipo_listas.class);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Seguro que deseas salir de esta pantalla? Si lo haces no se registrara el libro")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
