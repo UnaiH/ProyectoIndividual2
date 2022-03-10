@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,18 +15,21 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class leidos extends AppCompatActivity {
-    ListView l;
-    String[] titulos = {};
-    String[] autor = {};
-    Date[] fechaFin = {};
+    String[] titulos = {"uno","dos","tres","cuatro","cinco"};
+    String[] autor = {"uno","dos","tres","cuatro","cinco"};
+    String[] fechaFin = {"uno","dos","tres","cuatro","cinco"};
+    Integer[] libros={R.drawable.libro1,R.drawable.libro2,R.drawable.libro3,R.drawable.libro4,R.drawable.libro5};
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,21 +45,12 @@ public class leidos extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leidos);
-        l = findViewById(R.id.lalista);
-        ArrayAdapter<String> arr;
-        arr = new ArrayAdapter<String>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, android.R.id.text1, titulos){
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                View vista= super.getView(position, convertView, parent);
-                TextView lineaprincipal=(TextView) vista.findViewById(android.R.id.text1);
-                TextView lineasecundaria=(TextView) vista.findViewById(android.R.id.text2);
-                TextView lineaterciaria=(TextView) vista.findViewById(android.R.id.text2);
-                lineaprincipal.setText(titulos[position]);
-                lineasecundaria.setText(autor[position]);
-                lineaterciaria.setText(fechaFin[position].toString());
-                return vista;
-            }
-        };
-        l.setAdapter(arr);
+        TextView tview = new TextView(this);
+        tview.setTypeface(Typeface.DEFAULT_BOLD);
+        tview.setText("Lista de libros leidos");
+        ListView lista=(ListView)findViewById(android.R.id.list);
+        lista.addHeaderView(tview);
+        AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaFin,libros);
+        lista.setAdapter(adaptador);
     }
 }
