@@ -26,13 +26,23 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EditText tgen=(EditText) findViewById(R.id.ngenero);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
+
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
                 setTheme(R.style.Theme_ProyectoIndividual1);
+            }
+        }
+        if ( prefs.contains("genero")) {
+            Boolean gen = prefs.getBoolean("genero", true);
+            if (!gen) {
+                tgen.setVisibility(View.VISIBLE);
+            } else {
+                tgen.setVisibility(View.VISIBLE);
             }
         }
         super.onCreate(savedInstanceState);
@@ -45,7 +55,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
         EditText paginas = (EditText) findViewById(R.id.npag2);
         EditText genero = (EditText) findViewById(R.id.ngenero);
 
-        if (paginas==null || Integer.parseInt(paginas.getText().toString())<=0){
+        if (paginas.getText()==null || Integer.parseInt(paginas.getText().toString())<=0){
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this,"CanalLibro");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -57,35 +67,29 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setAutoCancel(true);
             elManager.notify(1, builder.build());
+            finish();
+            Intent i = new Intent(this, tipo_listas.class);
+            startActivity(i);
         }
         else{
-            class DialogoAnadirLibro extends DialogFragment{
-                @NonNull
-                @Override
-                public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-                    super.onCreateDialog(savedInstanceState);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Añadir libro");
-                    builder.setMessage("¿Deseas añadir el libro?");
-                    builder.setPositiveButton("Por supuesto", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
+            Intent i = new Intent(this, tipo_listas.class);
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Seguro que deseas añadir el libro?")
+                    .setCancelable(false)
+                    .setPositiveButton("Por supuesto", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                            startActivity(i);
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
                         }
                     });
-                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-                    return builder.create();
-                }
-            }
+            AlertDialog alert = builder.create();
+            alert.show();
         }
-        finish();
-        Intent i = new Intent(this, tipo_listas.class);
-        startActivity(i);
     }
     @Override
     public void onBackPressed() {

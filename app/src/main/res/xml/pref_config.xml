@@ -15,6 +15,7 @@
         android:key="datos_libros"
         android:title="Datos con los que definir los libros">
         <CheckBoxPreference
+            android:defaultValue="true"
             android:key="genero"
             android:title="Genero del libro"
             android:summary="Marca esta casilla si deseas poder escribir el genero del libro. Por ejemplo si es un drama o una novela romántica"/>

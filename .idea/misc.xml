@@ -15,6 +15,7 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/anadir.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/config.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/configuracion.xml" value="0.5" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/elementosleidos.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/enlectura.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_anadir_libro.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_datos_leidos.xml" value="0.46770833333333334" />
@@ -33,7 +34,7 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/tiposlistas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/toastregistro.xml" value="0.25" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/toastregistroneg.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/xml/pref_config.xml" value="0.1" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/xml/pref_config.xml" value="0.5" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/xml/preferencias.xml" value="0.21666666666666667" />
       </map>
     </option>

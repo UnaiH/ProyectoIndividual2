@@ -1,5 +1,5 @@
 package com.example.proyectoindividual1;
-
+//Esta clase se emplea como pantalla de inicio al ejecutar la aplicación
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         valor=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Existe un toast para indicar que al registrarse y volver a esta el registro se ha realizado correctamente.
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             valor= extras.getInt("regok");
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void IniciarSesion(View view) {
+        //OnClick del botón para iniciar sesión una vez se clica se lee lo escrito en EditText en el que se escribe el Usuario. Se comprueba que el archivo que tiene como nombre el usuario.txt y se comprueba que el fichero tiene la contraseña indicada en el EditText
         EditText usuarios = (EditText) findViewById(R.id.Usuario);
         String Linea ="";
         try {
@@ -72,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else{
+            //Si la constraseña no coincide o en su defecto no existe el usuario se mostrará un toast indicando que las contraseñas no coinciden.
             LayoutInflater inflater = getLayoutInflater();
             View el_layout = inflater.inflate(R.layout.ltoastregneg,(ViewGroup) findViewById(R.id.ltoastregmal));
             Toast toastcustomizado = new Toast(this);
@@ -82,12 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
     public void Registrarse(View view) {
+        //El boton registrarse redirige a la actividad del registro.
         finish();
         Intent i = new Intent(this, registro.class);
         startActivity(i);
     }
     @Override
     public void onBackPressed() {
+        //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("¿Seguro que deseas salir de la aplicacion?")
                 .setCancelable(false)

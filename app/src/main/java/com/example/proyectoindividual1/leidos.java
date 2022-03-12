@@ -29,6 +29,7 @@ public class leidos extends AppCompatActivity {
     String[] titulos = {"uno","dos","tres","cuatro","cinco"};
     String[] autor = {"uno","dos","tres","cuatro","cinco"};
     String[] fechaFin = {"uno","dos","tres","cuatro","cinco"};
+    String[] fechaInicio = {"uno","dos","tres","cuatro","cinco"};
     Integer[] libros={R.drawable.libro1,R.drawable.libro2,R.drawable.libro3,R.drawable.libro4,R.drawable.libro5};
 
     @Override
@@ -45,12 +46,8 @@ public class leidos extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leidos);
-        TextView tview = new TextView(this);
-        tview.setTypeface(Typeface.DEFAULT_BOLD);
-        tview.setText("Lista de libros leidos");
-        ListView lista=(ListView)findViewById(android.R.id.list);
-        lista.addHeaderView(tview);
-        AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaFin,libros);
+        ListView lista=(ListView)findViewById(R.id.listaleidos);
+        AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaFin,fechaInicio,libros);
         lista.setAdapter(adaptador);
     }
 }
