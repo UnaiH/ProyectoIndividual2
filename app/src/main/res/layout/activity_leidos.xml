@@ -1,19 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.proyectoindividual1.leidos"
-    android:orientation="vertical">
+    android:layout_height="match_parent" >
+    <ImageView
+        android:layout_rowSpan="2"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+
+        android:scaleType="fitXY"
+        android:id="@+id/imageLibro"
+        android:layout_row="0"
+        android:layout_column="0" />
+
     <TextView
-        android:text="LISTA DE LIBROS LEIDOS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24dp"
-        android:textStyle="bold"
-        android:id="@+id/textView" />
-    <ListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/listaleidos" />
-</LinearLayout>
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+        android:textSize="30dp"
+        android:textColor="#1E90FF"
+        android:id="@+id/tituloLeido"
+        android:layout_row="0"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="#4B0082"
+        android:id="@+id/autorLibro"
+        android:layout_row="1"
+        android:layout_column="1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_marginLeft="10dp"
+        android:textSize="20dp"
+        android:textColor="#4B0082"
+        android:id="@+id/fechaFin"
+        android:layout_row="1"
+        android:layout_column="1" />
+</GridLayout>
