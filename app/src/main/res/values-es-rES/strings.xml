@@ -23,4 +23,15 @@
     <string name="leido">leído</string>
     <string name="leyendo">leyendo</string>
     <string name="volver">volver</string>
+    <string name="toastregpos">Registro realizado correctamente</string>
+    <string name="toastregneg">Contraseñas no coinciden</string>
+    <string name="usar">Usar</string>
+    <string name="conf">Configuración</string>
+    <string name="bvenida">Te damos la bienvenida</string>
+    <string name="aplicar">Aplicar</string>
+    <string name="titulo">Título</string>
+    <string name="autor">Autor</string>
+    <string name="numpag">Número de páginas</string>
+    <string name="gene">Género del libro</string>
+    <string name="anlib">Añadir el libro</string>
 </resources>

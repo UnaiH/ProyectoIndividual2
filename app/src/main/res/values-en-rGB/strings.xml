@@ -23,4 +23,15 @@
     <string name="leido">read</string>
     <string name="leyendo">reading</string>
     <string name="volver">back</string>
+    <string name="toastregpos">Sign in succesfully</string>
+    <string name="toastregneg">Invalid password</string>
+    <string name="usar">Use</string>
+    <string name="conf">Settings</string>
+    <string name="bvenida">Wellcome</string>
+    <string name="aplicar">Apply</string>
+    <string name="titulo">Tittle</string>
+    <string name="autor">Author</string>
+    <string name="numpag">Quantity page</string>
+    <string name="gene">Book theme</string>
+    <string name="anlib">Add book</string>
 </resources>

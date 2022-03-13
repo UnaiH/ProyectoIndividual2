@@ -23,4 +23,15 @@
     <string name="leyendo">irakurtzen</string>
     <string name="leido">irakurrita</string>
     <string name="volver">itzuli</string>
+    <string name="toastregpos">Ondo erregistratu da</string>
+    <string name="toastregneg">Pasahitzak es dira berdinak</string>
+    <string name="usar">Erabili</string>
+    <string name="conf">Konfigurazioa</string>
+    <string name="bvenida">Ongi etorri</string>
+    <string name="aplicar">Aplikatu</string>
+    <string name="titulo">Titulua</string>
+    <string name="autor">Idazle</string>
+    <string name="numpag">Horri kopurua</string>
+    <string name="gene">Liburu generoa</string>
+    <string name="anlib">Gehitu liburua</string>
 </resources>
