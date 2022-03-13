@@ -14,9 +14,9 @@
         android:layout_marginTop="136dp"
         android:layout_marginEnd="159dp"
         android:onClick="onClickLeyendo"
-        android:text="@string/leyendo"
+        android:text="En Lectura"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.484"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,8 +28,9 @@
         android:layout_marginTop="244dp"
         android:layout_marginEnd="162dp"
         android:onClick="onClickLeidos"
-        android:text="@string/leido"
+        android:text="Leídos"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,11 +39,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="135dp"
-        android:layout_marginTop="340dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="136dp"
         android:onClick="onClickALibro"
-        android:text="@string/anadirlib"
+        android:text="Añadir libro"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,12 +53,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="159dp"
-        android:layout_marginTop="460dp"
+        android:layout_marginTop="244dp"
         android:layout_marginEnd="158dp"
         android:onClick="onClickVolver"
-        android:text="@string/volver"
+        android:text="Volver"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

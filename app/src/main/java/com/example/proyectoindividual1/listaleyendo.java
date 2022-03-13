@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DatosLeidos#newInstance} factory method to
+ * Use the {@link listaleyendo#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DatosLeidos extends Fragment {
+public class listaleyendo extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class DatosLeidos extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DatosLeidos() {
+    public listaleyendo() {
         // Required empty public constructor
     }
 
@@ -34,11 +34,11 @@ public class DatosLeidos extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment DatosLeidos.
+     * @return A new instance of fragment listaleyendo.
      */
     // TODO: Rename and change types and number of parameters
-    public static DatosLeidos newInstance(String param1, String param2) {
-        DatosLeidos fragment = new DatosLeidos();
+    public static listaleyendo newInstance(String param1, String param2) {
+        listaleyendo fragment = new listaleyendo();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,10 +55,10 @@ public class DatosLeidos extends Fragment {
         }
     }
 
-    /*@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        //return inflater.inflate(R.layout.fragment_datos_leidos, container, false);
-    }*/
+        return inflater.inflate(R.layout.fragment_listaleyendo, container, false);
+    }
 }

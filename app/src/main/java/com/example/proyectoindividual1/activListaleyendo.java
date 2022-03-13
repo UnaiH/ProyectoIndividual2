@@ -20,6 +20,6 @@ public class activListaleyendo extends AppCompatActivity{
             }
         }
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_leidos);
+        setContentView(R.layout.activity_leyendo);
     }
 }

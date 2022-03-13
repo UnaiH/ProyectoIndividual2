@@ -49,7 +49,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                 elManager.createNotificationChannel(elCanal);
             }
-            builder.setContentTitle("Registro corecto")
+            builder.setContentTitle("Registro correcto")
                     .setContentText("Se ha registrado el usuario correctamente: "+usuarioret)
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setAutoCancel(true);

@@ -1,7 +1,7 @@
 <resources>
     <!-- Reply Preference -->
-    <string name="idiomas">Settings</string>
-    <string name="accion">Settings</string>
+    <string name="idiomas">Opciones</string>
+    <string name="accion">Opciones</string>
 
     <string-array name="listaidiomas">
         <item>Español</item>

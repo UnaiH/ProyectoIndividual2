@@ -12,4 +12,15 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="idiomas">Settings</string>
     <string name="accion">Settings</string>
+    <string name="usuarioInicio">User</string>
+    <string name="contrasenaInicio">Password:</string>
+    <string name="iniciarsesion">Log in</string>
+    <string name="registrarse">Sign in</string>
+    <string name="registrotextoescrito1">Write the user that you want:</string>
+    <string name="registrotextoescrito2">And now write the password:</string>
+    <string name="registrotextoescrito3">Repeat the password please:</string>
+    <string name="anadirlib">add book</string>
+    <string name="leido">read</string>
+    <string name="leyendo">reading</string>
+    <string name="volver">back</string>
 </resources>

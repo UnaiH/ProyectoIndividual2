@@ -1,19 +1,31 @@
 <resources>
-    <string name="app_name">ProyectoIndividual1EN</string>
+    <string name="app_name">ProyectoIndividual1ES</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
+    <string name="messages_header">Mensajes</string>
+    <string name="sync_header">Sinc</string>
 
     <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
+    <string name="signature_title">Tu firma</string>
+    <string name="reply_title">Accion de respuesta predefinida</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
+    <string name="sync_title">Sinc email periodicamente</string>
+    <string name="attachment_title">Descargar los ingresos adjuntos</string>
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="usuarioInicio">Usuario</string>
+    <string name="contrasenaInicio">Contraseña</string>
+    <string name="iniciarsesion">Iniciar sesión</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="registrotextoescrito1">Escriba el usuario deseado:</string>
+    <string name="registrotextoescrito2">Escriba a continuación la contraseña deseada::</string>
+    <string name="registrotextoescrito3">Repita la contraseña, por favor:</string>
+    <string name="leido">leído</string>
+    <string name="leyendo">leyendo</string>
+    <string name="anadirlib">añadir libro</string>
+    <string name="volver">volver</string>
+
 </resources>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProyectoIndividual1Esp</string>
+    <string name="app_name">ProyectoIndividual1ES</string>
     <string name="idiomas">Opciones</string>
     <string name="accion">Opciones</string>
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
@@ -12,4 +12,15 @@
     <string name="attachment_title">Descargar los ingresos adjuntos</string>
     <string name="attachment_summary_on">Descarga automatica de los adjuntos para los emails entrantes</string>
     <string name="attachment_summary_off">Solo descargar los adjuntos cuando se solicite manualmente</string>
+    <string name="usuarioInicio">Usuario</string>
+    <string name="contrasenaInicio">Contraseña</string>
+    <string name="iniciarsesion">Iniciar sesión</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="registrotextoescrito1">Escriba el usuario deseado:</string>
+    <string name="registrotextoescrito2">Escriba a continuación la contraseña deseada:</string>
+    <string name="registrotextoescrito3">Repita la contraseña, por favor:</string>
+    <string name="anadirlib">añadir libro</string>
+    <string name="leido">leído</string>
+    <string name="leyendo">leyendo</string>
+    <string name="volver">volver</string>
 </resources>

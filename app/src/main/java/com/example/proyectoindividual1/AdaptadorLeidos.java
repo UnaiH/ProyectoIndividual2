@@ -13,19 +13,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AdaptadorLeidos extends BaseAdapter {
-        private String[] titulos;
-        private String[] autores;
-        private String[] fechafin;
-        private Integer[] imageid;
-        private Activity context;
+    private LayoutInflater inflater;
+    private String[] titulos;
+    private String[] autores;
+    private String[] fechafin;
+    private String[] fechaInicio;
+    private Integer[] imageid;
+    private Activity context;
 
-        public AdaptadorLeidos(Activity context, String[] titulos, String[] autores, String[] fechafin, Integer[] imageid) {
-            this.context = context;
-            this.titulos = titulos;
-            this.autores = autores;
-            this.fechafin = fechafin;
-            this.imageid = imageid;
-        }
+    public AdaptadorLeidos(Activity context, String[] titulos, String[] autores,String[] fechainicio, String[] fechafin, Integer[] imageid) {
+        this.context = context;
+        this.titulos = titulos;
+        this.autores = autores;
+        this.fechaInicio=fechainicio;
+        this.fechafin = fechafin;
+        this.imageid = imageid;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
 
     @Override
     public int getCount() {
@@ -44,19 +48,18 @@ public class AdaptadorLeidos extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View row=view;
-        LayoutInflater inflater = context.getLayoutInflater();
-        if(view==null)
-            row = inflater.inflate(activity_leidos, null, true);
-        TextView textViewTitulo = (TextView) row.findViewById(R.id.tituloLeido);
-        TextView textViewAutor = (TextView) row.findViewById(R.id.autorLibro);
-        TextView textViewFechaFin = (TextView) row.findViewById(R.id.fechaFin);
-        ImageView imagen = (ImageView) row.findViewById(R.id.imageLibro);
+        view=inflater.inflate(R.layout.elementosleidos,null);
+        TextView textViewTitulo = (TextView) view.findViewById(R.id.tituloLeido);
+        TextView textViewAutor = (TextView) view.findViewById(R.id.autorLibro);
+        TextView textViewFechaIni = (TextView) view.findViewById(R.id.fechaInicio);
+        TextView textViewFechaFin = (TextView) view.findViewById(R.id.fechaFin);
+        ImageView imagen = (ImageView) view.findViewById(R.id.imageLibro);
 
         textViewTitulo.setText(titulos[i]);
         textViewAutor.setText(autores[i]);
+        textViewFechaIni.setText(fechaInicio[i]);
         textViewFechaFin.setText(fechafin[i]);
         imagen.setImageResource(imageid[i]);
-        return  row;
+        return  view;
     }
 }
