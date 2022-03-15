@@ -36,7 +36,7 @@
     <string name="titulo">Título</string>
     <string name="autor">Autor</string>
     <string name="numpag">Número de páginas</string>
-    <string name="gene">Género del libro</string>
+    <string name="gene">Genero del libro</string>
     <string name="anlib">Añadir el libro</string>
 
 </resources>

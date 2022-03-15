@@ -50,15 +50,16 @@ public class config extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.getBoolean("tema", false)){
-            setTheme(R.style.ModoOscuro);
-        }
-        else {
-            setTheme(R.style.Theme_ProyectoIndividual1);
-        }
-        finish();
+        //Este es el botón aplicar de config.
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, menuPrincipal.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
         startActivity(i);
     }
 

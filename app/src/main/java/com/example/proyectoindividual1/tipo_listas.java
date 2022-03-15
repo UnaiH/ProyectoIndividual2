@@ -7,14 +7,48 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
+import java.util.Locale;
 
 public class tipo_listas extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String idioma;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Inglés")) {
+                idioma = "en-rGB";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+            }
+            else if (idim.equals("Euskera")){
+                idioma = "eu-rES";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+
+            }
+            else{
+                idioma = "es-rES";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+
+            }
+        }
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
@@ -28,22 +62,50 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
 
     public void onClickALibro(View view) {
-        finish();
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, anadirLibroALista.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
         startActivity(i);
     }
     public void onClickLeidos(View view) {
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, leidos.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
         startActivity(i);
     }
     public void onClickLeyendo(View view) {
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, activListaleyendo.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
         startActivity(i);
     }
 
     public void onClickVolver(View view) {
-        finish();
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, menuPrincipal.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
         startActivity(i);
     }
 

@@ -3,6 +3,7 @@ package com.example.proyectoindividual1;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+import androidx.preference.PreferenceManager;
 
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -11,6 +12,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -35,6 +37,41 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int valor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String idioma;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Inglés")) {
+                idioma = "en";
+                Locale local = new Locale(idioma);
+                Locale.setDefault(local);
+                Configuration configuracion = getBaseContext().getResources().getConfiguration();
+                configuracion.setLocale(local);
+                configuracion.setLayoutDirection(local);
+                Context context = getBaseContext().createConfigurationContext(configuracion);
+                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+            }
+            else if (idim.equals("Euskera")){
+                idioma = "eu";
+                Locale local = new Locale(idioma);
+                Locale.setDefault(local);
+                Configuration configuracion = getBaseContext().getResources().getConfiguration();
+                configuracion.setLocale(local);
+                configuracion.setLayoutDirection(local);
+                Context context = getBaseContext().createConfigurationContext(configuracion);
+                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+            }
+            else{
+                idioma = "es";
+                Locale local = new Locale(idioma);
+                Locale.setDefault(local);
+                Configuration configuracion = getBaseContext().getResources().getConfiguration();
+                configuracion.setLocale(local);
+                configuracion.setLayoutDirection(local);
+                Context context = getBaseContext().createConfigurationContext(configuracion);
+                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+            }
+        }
         valor=0;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

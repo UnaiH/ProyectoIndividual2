@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,12 +13,45 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
+
+import java.util.Locale;
+
 //Es el menú principal una vez iniciada la sesión
 public class menuPrincipal extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Si en la configuración se ha indicado que se desea el modo oscuro o no.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma;
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Inglés")) {
+                idioma = "en-rGB";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+            }
+            else if (idim.equals("Euskera")){
+                idioma = "eu-rES";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+
+            }
+            else{
+                idioma = "es-rES";
+                Locale locale = new Locale(idioma);
+                Locale.setDefault(locale);
+                Configuration config = new Configuration();
+                config.locale = locale;
+                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
+
+            }
+        }
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
@@ -39,14 +73,28 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
 
     public void onClickUsar(View view) {
         //El botón usar hará que se pase a tipo_listas
-        finish();
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, tipo_listas.class);
+        String usuario = "";
+        if (extras != null) {
+           usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
         startActivity(i);
     }
     public void onClickConfig(View view) {
-        //El botón usar hará que se pase a config
-        finish();
+        //El botón configuración hará que se pase a config
+        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, config.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
         startActivity(i);
     }
 

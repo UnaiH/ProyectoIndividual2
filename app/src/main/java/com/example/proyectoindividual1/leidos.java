@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
@@ -39,13 +41,10 @@ public class leidos extends AppCompatActivity {
         int longit = titulos.length;
         Integer[] libros = new Integer[longit];
         Random rand = new Random();
-        Log.i("TAG", "onCreate: "+libros.length);
-        Log.i("TAG", "onCreate: "+longit);
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(longit)];
             Log.i("TAG", ""+aux);
         }
-        Log.i("TAG", "onCreate: "+libros.length);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
@@ -60,5 +59,31 @@ public class leidos extends AppCompatActivity {
         ListView lista=(ListView)findViewById(R.id.listaleidos);
         AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaInicio, fechaFin, libros);
         lista.setAdapter(adaptador);
+    }
+    public void onBackPressed() {
+        Intent i = new Intent(this, tipo_listas.class);
+        Bundle extras = getIntent().getExtras();
+        String usu = "";
+        if (extras != null) {
+            usu= extras.getString("usuario");
+        }
+        i.putExtra("usuario", usu);
+        setResult(RESULT_OK, i);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("¿Seguro que deseas salir de esta pantalla?")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        finish();
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

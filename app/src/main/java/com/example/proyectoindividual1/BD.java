@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class BD extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
@@ -19,14 +20,14 @@ public class BD extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        sqLiteDatabase.execSQL("CREATE TABLE Libros ('NombreUsuario' VARCHAR(225), 'Titulo' VARCHAR(225), 'Autor' VARCHAR(225), 'Genero' VARCHAR(225), 'Paginas' INTEGER, 'Actual' INTEGER, 'Empezado' DATE, 'Acabado' DATE, 'Prevista' DATE, PRIMARY KEY (NombreUsuario,Titulo,Autor,Empezado))");
+        sqLiteDatabase.execSQL("CREATE TABLE Libros (NombreUsuario VARCHAR(225), Titulo VARCHAR(225), Autor VARCHAR(225), Genero VARCHAR(225), Paginas INTEGER, Actual INTEGER, Empezado VARCHAR(225), Acabado VARCHAR(225), Prevista VARCHAR(225), PRIMARY KEY (NombreUsuario,Titulo,Autor,Empezado))");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public boolean anadirLibro(String usuario, String titulo, String autor, String genero, int pag, int act, LocalDate comienzo, LocalDate finprev){
+    public boolean anadirLibro(String usuario, String titulo, String autor, String genero, int pag, int act, String comienzo, String finprev){
         SQLiteDatabase bd = getWritableDatabase();
         bd.execSQL("INSERT INTO Libros ('NombreUsuario', 'Titulo', 'Autor', 'Genero', 'Paginas', 'Actual', 'Empezado', 'Prevista') VALUES ('"+usuario+"','"+titulo+"','"+autor+"','"+genero+"','"+pag+"','"+act+"','"+comienzo+"','"+finprev+"')");
         bd.close();
