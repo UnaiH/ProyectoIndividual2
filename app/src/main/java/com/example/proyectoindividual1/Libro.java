@@ -2,6 +2,8 @@ package com.example.proyectoindividual1;
 
 import java.sql.Blob;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Libro {
@@ -10,17 +12,19 @@ public class Libro {
     private int paginas;
     private int actual;
     private String genero;
-    private Date fechaInicio;
-    private Date fechaFin;
-    private Date fechaPrevista;
-    public Libro(String pNombre, String pAutor, int pPaginas, String pGenero, Date fechaPrevista){
+    private String fechaInicio;
+    private String fechaFin;
+    private String fechaPrevista;
+    public Libro(String pNombre, String pAutor, int pPaginas, int pAct, String pGenero, String pfechaInit, String pfechaPrevista, String pfechaFin){
         this.actual = 0;
         this.nombre = pNombre;
         this.autor = pAutor;
         this.paginas = pPaginas;
+        this.actual = pAct;
         this.genero = pGenero;
-        this.fechaInicio = (Date) Calendar.getInstance().getTime();
-        this.fechaPrevista = fechaPrevista;
+        this.fechaInicio = pfechaInit;
+        this.fechaPrevista = pfechaPrevista;
+        this.fechaFin = pfechaFin;
     }
 
     public int getActual() {
@@ -42,16 +46,19 @@ public class Libro {
     public void actualizarPaginas(int pag){
         this.actual = pag;
     }
-    public Date getFechaInicio(){
+    public String getFechaInicio(){
         return fechaInicio;
     }
-    public Date getFechaFin() {
+    public String getFechaFin() {
         return fechaFin;
     }
-    public Date getFechaPrevista(){
+    public String getFechaPrevista(){
         return fechaPrevista;
     }
     public void setFechaFin() {
-        this.fechaFin = (Date) Calendar.getInstance().getTime();
+        Date date = (Date) Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy");
+        String fech = dateFormat.format(date);
+        this.fechaFin = fech;
     }
 }

@@ -28,8 +28,9 @@ public class BD extends SQLiteOpenHelper {
 
     }
     public boolean anadirLibro(String usuario, String titulo, String autor, String genero, int pag, int act, String comienzo, String finprev){
+        String fin = "nulo";
         SQLiteDatabase bd = getWritableDatabase();
-        bd.execSQL("INSERT INTO Libros ('NombreUsuario', 'Titulo', 'Autor', 'Genero', 'Paginas', 'Actual', 'Empezado', 'Prevista') VALUES ('"+usuario+"','"+titulo+"','"+autor+"','"+genero+"','"+pag+"','"+act+"','"+comienzo+"','"+finprev+"')");
+        bd.execSQL("INSERT INTO Libros ('NombreUsuario', 'Titulo', 'Autor', 'Genero', 'Paginas', 'Actual', 'Empezado', 'Acabado', 'Prevista') VALUES ('"+usuario+"','"+titulo+"','"+autor+"','"+genero+"','"+pag+"','"+act+"','"+comienzo+"','"+fin+"','"+finprev+"')");
         bd.close();
         return true;
     }
@@ -46,14 +47,29 @@ public class BD extends SQLiteOpenHelper {
         return true;
     }
     public ArrayList misLeidos(String usu){
+        String fin = "nulo";
+        ArrayList<Libro> misLibros = new ArrayList<Libro>();
         SQLiteDatabase bd = getWritableDatabase();
-        Cursor c = bd.rawQuery("SELECT * FROM Libros WHERE NombreUsuario=='"+usu+"'",null);
+        Cursor c = bd.rawQuery("SELECT * FROM Libros WHERE Libros.NombreUsuario=='"+usu+"'AND Libros.Acabado!='"+fin+"'",null);
         while (c.moveToNext()){
-            Log.i("TAG", ""+c);
+            Libro libact = new Libro(c.getString(1),c.getString(2),c.getInt(4),c.getInt(5),c.getString(3),c.getString(6),c.getString(8),c.getString(7));
+            misLibros.add(libact);
         }
         c.close();
         bd.close();
+        return misLibros;
+    }
+    public ArrayList misLeyendo(String usu){
+        String fin = "nulo";
         ArrayList<Libro> misLibros = new ArrayList<Libro>();
+        SQLiteDatabase bd = getWritableDatabase();
+        Cursor c = bd.rawQuery("SELECT * FROM Libros WHERE Libros.NombreUsuario=='"+usu+"' AND Libros.Acabado=='"+fin+"'",null);
+        while (c.moveToNext()){
+            Libro libact = new Libro(c.getString(1),c.getString(2),c.getInt(4),c.getInt(5),c.getString(3),c.getString(6),c.getString(8),c.getString(7));
+            misLibros.add(libact);
+        }
+        c.close();
+        bd.close();
         return misLibros;
     }
 }
