@@ -2,9 +2,11 @@ package com.example.proyectoindividual1;
 
 import android.app.AlertDialog;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
@@ -22,6 +24,8 @@ import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+
+import java.util.Locale;
 
 public class config extends AppCompatActivity implements View.OnClickListener {
     @Override
@@ -73,9 +77,9 @@ public class config extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de la configuración? Se guardaran los cambios realizados.")
+        builder.setMessage(R.string.salirConf)
                 .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         Bundle extras = getIntent().getExtras();
                         Intent i = new Intent(config.this, menuPrincipal.class);
@@ -89,7 +93,7 @@ public class config extends AppCompatActivity implements View.OnClickListener {
                         startActivity(i);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

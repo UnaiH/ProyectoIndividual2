@@ -4,31 +4,31 @@
     <PreferenceCategory
         android:visibility="visible"
         android:key="tema_interfaz"
-        android:title="Tema de la Intefaz">
+        android:title="@string/temint">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="tema"
-            android:summary="Se cambia el mado a oscuro cuando está activado y normal cuando está desactivado."
-            android:title="Tema Oscuro" />
+            android:summary="@string/modoscdef"
+            android:title="@string/modosc" />
     </PreferenceCategory>
     <PreferenceCategory
         android:key="datos_libros"
-        android:title="Datos con los que definir los libros">
+        android:title="@string/datdeflib">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="genero"
-            android:title="Genero del libro"
-            android:summary="Marca esta casilla si deseas poder escribir el genero del libro. Por ejemplo si es un drama o una novela romántica"/>
+            android:title="@string/genlib"
+            android:summary="@string/podgenlib"/>
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:key="idiomas"
-        android:title="Idioma de la aplicación">
+        android:key="@string/idiom"
+        android:title="@string/idimaplic">
         <ListPreference
             android:entries="@array/listaidiomas"
             android:entryValues="@array/listaidiomas"
-            android:summary="Lista de los idiomas disponibles en la aplicación."
+            android:summary="@string/listidiom"
             android:key="listapreferencias"
-            android:title="Lista Idiomas"/>
+            android:title="@string/lisidomas"/>
     </PreferenceCategory>
 </PreferenceScreen>

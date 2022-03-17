@@ -35,12 +35,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/RegistroLogin"
+        android:id="@+id/botonLogin2"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="426dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="168dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="168dp"
+        android:layout_marginEnd="162dp"
         android:onClick="Registrarse"
         android:text="@string/registrarse"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="152dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"

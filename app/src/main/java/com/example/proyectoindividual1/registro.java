@@ -1,5 +1,7 @@
 package com.example.proyectoindividual1;
 
+import static com.example.proyectoindividual1.R.string.menscorreg;
+
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -40,7 +42,18 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 fichero.write(contret.getText().toString());
                 fichero.close();
             } catch (IOException e) {
-                Log.i("Error", "Error al registrarse");
+                Log.i("Error", getResources().getString(R.string.errorreg));
+                NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+                    elManager.createNotificationChannel(elCanal);
+                }
+                builder.setContentTitle("Error")
+                        .setContentText(getResources().getString(R.string.errorreg))
+                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setAutoCancel(true);
+                elManager.notify(1, builder.build());
             }
             //Una vez creado se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
@@ -49,8 +62,8 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                 elManager.createNotificationChannel(elCanal);
             }
-            builder.setContentTitle("Registro correcto")
-                    .setContentText("Se ha registrado el usuario correctamente: "+usuarioret)
+            builder.setContentTitle(getResources().getString(R.string.correg))
+                    .setContentText(getResources().getString(R.string.menscorreg))
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setAutoCancel(true);
             elManager.notify(1, builder.build());
@@ -81,14 +94,14 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
         //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de la aplicacion?")
+        builder.setMessage(R.string.salida)
                 .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

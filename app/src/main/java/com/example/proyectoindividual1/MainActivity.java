@@ -41,35 +41,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("listapreferencias")) {
             String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Inglés")) {
-                idioma = "en";
-                Locale local = new Locale(idioma);
-                Locale.setDefault(local);
-                Configuration configuracion = getBaseContext().getResources().getConfiguration();
-                configuracion.setLocale(local);
-                configuracion.setLayoutDirection(local);
-                Context context = getBaseContext().createConfigurationContext(configuracion);
-                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+            if (idim.equals("Español")) {
+                idioma = "es";
+                this.cambiarIdioma(idioma);
             }
-            else if (idim.equals("Euskera")){
+            else if (idim.equals("Euskara")){
                 idioma = "eu";
-                Locale local = new Locale(idioma);
-                Locale.setDefault(local);
-                Configuration configuracion = getBaseContext().getResources().getConfiguration();
-                configuracion.setLocale(local);
-                configuracion.setLayoutDirection(local);
-                Context context = getBaseContext().createConfigurationContext(configuracion);
-                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+                this.cambiarIdioma(idioma);
             }
             else{
-                idioma = "es";
-                Locale local = new Locale(idioma);
-                Locale.setDefault(local);
-                Configuration configuracion = getBaseContext().getResources().getConfiguration();
-                configuracion.setLocale(local);
-                configuracion.setLayoutDirection(local);
-                Context context = getBaseContext().createConfigurationContext(configuracion);
-                getBaseContext().getResources().updateConfiguration(configuracion,context.getResources().getDisplayMetrics());
+                idioma = "en";
+                this.cambiarIdioma(idioma);
             }
         }
         valor=0;
@@ -88,8 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toastcustomizado.setDuration(Toast.LENGTH_LONG);
             toastcustomizado.setView(el_layout);
             toastcustomizado.show();
-        }
-        Log.i("TAG", "onCreate: ");
+        };
     }
 
     public void IniciarSesion(View view) {
@@ -102,7 +83,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Linea = ficherointerno.readLine();
             ficherointerno.close();
         } catch (IOException e) {
-            Log.i("Error", "Error en el inicio de sesión");
+            Log.i("Error", String.valueOf(R.string.errorsesion));
+            NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+                elManager.createNotificationChannel(elCanal);
+            }
+            builder.setContentTitle("Error")
+                    .setContentText(String.valueOf(getResources().getString(R.string.errorsesion)))
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setAutoCancel(true);
+            elManager.notify(1, builder.build());
+
+            finish();
+            Intent i = new Intent(this, MainActivity.class);
+            i.putExtra("regok", 1);
+            startActivity(i);
         }
         EditText contr = (EditText) findViewById(R.id.Contr);
         if(contr.getText().toString().equals(Linea)) {
@@ -133,14 +130,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onBackPressed() {
         //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de la aplicacion?")
+        builder.setMessage(R.string.salida)
                 .setCancelable(false)
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
@@ -152,5 +149,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+    }
+    private void cambiarIdioma(String idioma){
+        Locale local = new Locale(idioma);
+        Locale.setDefault(local);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.setLocale(local);
+        config.setLayoutDirection(local);
+        Context con = getBaseContext().createConfigurationContext(config);
+        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

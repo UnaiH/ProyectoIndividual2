@@ -20,35 +20,6 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         String idioma;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Inglés")) {
-                idioma = "en-rGB";
-                Locale locale = new Locale(idioma);
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.locale = locale;
-                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
-            }
-            else if (idim.equals("Euskera")){
-                idioma = "eu-rES";
-                Locale locale = new Locale(idioma);
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.locale = locale;
-                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
-
-            }
-            else{
-                idioma = "es-rES";
-                Locale locale = new Locale(idioma);
-                Locale.setDefault(locale);
-                Configuration config = new Configuration();
-                config.locale = locale;
-                this.getResources().updateConfiguration(config,this.getResources().getDisplayMetrics());
-
-            }
-        }
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
@@ -116,14 +87,14 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de la aplicacion?")
+        builder.setMessage(R.string.salida)
                 .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

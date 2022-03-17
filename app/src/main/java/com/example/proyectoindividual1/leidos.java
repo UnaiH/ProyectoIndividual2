@@ -66,14 +66,11 @@ public class leidos extends AppCompatActivity {
                 Log.i("TAG", "onCreate: "+titulos[2]);
             }
         }
-        Log.i("TAG", "onCreate: "+titulos.length);
         int longit = titulos.length;
         Integer[] libros = new Integer[longit];
         Random rand = new Random();
-        Log.i("TAG", "onCreate: "+longit);
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(longit)];
-            Log.i("TAG", ""+aux);
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("tema")) {
@@ -100,14 +97,14 @@ public class leidos extends AppCompatActivity {
         i.putExtra("usuario", usu);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de esta pantalla?")
+        builder.setMessage(R.string.salida)
                 .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }

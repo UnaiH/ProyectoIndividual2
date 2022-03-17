@@ -5,7 +5,7 @@
 
     <string-array name="listaidiomas">
         <item>Español</item>
-        <item>Euskera</item>
-        <item>Inglés</item>
+        <item>Euskara</item>
+        <item>English</item>
     </string-array>
 </resources>

@@ -128,9 +128,9 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 setResult(RESULT_OK, i);
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 String finalUsu = usu;
-                builder.setMessage("¿Seguro que deseas añadir el libro?")
+                builder.setMessage(R.string.anlibdiag)
                         .setCancelable(false)
-                        .setPositiveButton("Por supuesto", new DialogInterface.OnClickListener() {
+                        .setPositiveButton(R.string.psop, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
                                     ActivityCompat.requestPermissions(anadirLibroALista.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
@@ -180,8 +180,8 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                     }
                                     String ahora = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                                     base.anadirLibro(usu,titulo.getText().toString(),autor.getText().toString(),genero.getText().toString(),Integer.parseInt(paginas.getText().toString()),0,ahora,fecha);
-                                    builder.setContentTitle("Adición correcta")
-                                            .setContentText("Se ha añadido el libro correctamente")
+                                    builder.setContentTitle(getResources().getString(R.string.addcor))
+                                            .setContentText(getResources().getString(R.string.addlibmen))
                                             .setSmallIcon(R.drawable.ic_launcher_background)
                                             .setAutoCancel(true);
                                     elManager.notify(1, builder.build());
@@ -195,8 +195,8 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                         NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                                         elManager.createNotificationChannel(elCanal);
                                     }
-                                    builder.setContentTitle("Problema BD")
-                                            .setContentText("Problema en la creación de la BD")
+                                    builder.setContentTitle(getResources().getString(R.string.BDe))
+                                            .setContentText(getResources().getString(R.string.BDMe))
                                             .setSmallIcon(R.drawable.ic_launcher_background)
                                             .setAutoCancel(true);
                                     elManager.notify(1, builder.build());
@@ -205,7 +205,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                 }
                             }
                         })
-                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        .setNegativeButton(R.string.can, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 dialog.cancel();
                             }
@@ -226,15 +226,15 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
         i.putExtra("usuario", usu);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de esta pantalla? Si lo haces no se registrará el libro")
+        builder.setMessage(R.string.saliranlib)
                 .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                         startActivity(i);
                     }
                 })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
