@@ -73,11 +73,20 @@ public class config extends AppCompatActivity implements View.OnClickListener {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("¿Seguro que deseas salir de la aplicacion?")
+        builder.setMessage("¿Seguro que deseas salir de la configuración? Se guardaran los cambios realizados.")
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
+                        Bundle extras = getIntent().getExtras();
+                        Intent i = new Intent(config.this, menuPrincipal.class);
+                        String usuario = "";
+                        if (extras != null) {
+                            usuario = extras.getString("usuario");
+                        }
+                        i.putExtra("usuario", usuario);
+                        setResult(RESULT_OK, i);
                         finish();
+                        startActivity(i);
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

@@ -61,4 +61,8 @@ public class Libro {
         String fech = dateFormat.format(date);
         this.fechaFin = fech;
     }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
 }

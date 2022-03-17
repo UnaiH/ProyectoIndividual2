@@ -34,4 +34,10 @@
     <string name="numpag">Quantity page</string>
     <string name="gene">Book theme</string>
     <string name="anlib">Add book</string>
+    <string name="finalizar">Finish</string>
+    <string name="cambiar">Change</string>
+    <string name="cambgen">Change book\'s genre</string>
+    <string name="acontbotfin">The finish button appear below. When</string>
+    <string name="alpulelim">you push the button the book will be deleted</string>
+    <string name="leyelistfin">from reading list and add to finish list.</string>
 </resources>

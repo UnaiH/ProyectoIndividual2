@@ -38,5 +38,11 @@
     <string name="numpag">Número de páginas</string>
     <string name="gene">Genero del libro</string>
     <string name="anlib">Añadir el libro</string>
+    <string name="finalizar">Finalizar</string>
+    <string name="cambiar">Cambiar</string>
+    <string name="cambgen">Cambiar el género del libro</string>
+    <string name="acontbotfin">A continuación se encuentra el botón finalizar.</string>
+    <string name="alpulelim">Al pulsarlo se eliminará el libro de la lista</string>
+    <string name="leyelistfin">leyendo y pasará a la lista de los ya finalizados.</string>
 
 </resources>

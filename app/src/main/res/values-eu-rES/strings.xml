@@ -34,4 +34,10 @@
     <string name="numpag">Horri kopurua</string>
     <string name="gene">Liburu generoa</string>
     <string name="anlib">Gehitu liburua</string>
+    <string name="finalizar">Bukatu</string>
+    <string name="cambiar">Aldatu</string>
+    <string name="cambgen">Aldatu liburuaren generoa</string>
+    <string name="acontbotfin">Jarraian bukatu botoia dago. Sakatuz gero</string>
+    <string name="alpulelim">liburua irakurtzen ari zaren zerrendatik</string>
+    <string name="leyelistfin">ezabatuko da eta bukatu zerrendan jarriko da.</string>
 </resources>
