@@ -10,10 +10,12 @@
         android:id="@+id/lecturab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="158dp"
+        android:layout_marginStart="155dp"
         android:layout_marginTop="68dp"
+        android:layout_marginEnd="154dp"
         android:onClick="onClickLeyendo"
         android:text="@string/leyendo"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,8 +25,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
         android:layout_marginTop="172dp"
+        android:layout_marginEnd="162dp"
         android:onClick="onClickLeidos"
         android:text="@string/leido"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,10 +36,12 @@
         android:id="@+id/bVolver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="159dp"
+        android:layout_marginStart="160dp"
         android:layout_marginTop="388dp"
+        android:layout_marginEnd="160dp"
         android:onClick="onClickVolver"
         android:text="@string/volver"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,8 +51,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
         android:layout_marginTop="268dp"
+        android:layout_marginEnd="135dp"
         android:onClick="onClickALibro"
         android:text="@string/anadirlib"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

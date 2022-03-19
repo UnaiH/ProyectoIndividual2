@@ -46,6 +46,7 @@
     <string name="leyelistfin">leyendo y pasará a la lista de los ya finalizados.</string>
     <string name="bienv">Te damos la bienvenida </string>
     <string name="salida">¿Seguro que deseas salir de la aplicacion?</string>
+    <string name="salidapan">¿Seguro que deseas salir de esta pantalla?</string>
     <string name="si">Sí</string>
     <string name="no">No</string>
     <string name="errorsesion">Error en el inicio de sesión</string>
@@ -71,4 +72,5 @@
     <string name="idimaplic">Idioma de la aplicación</string>
     <string name="listidiom">Lista de los idiomas disponibles en la aplicación.</string>
     <string name="lisidomas">Lista Idiomas</string>
+    <string name="camb">Cambiar</string>
 </resources>

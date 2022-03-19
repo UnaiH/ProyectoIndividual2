@@ -18,14 +18,14 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String idioma;
+        //Se pone el modo oscuro si así se especifica en las preferencias.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Theme_ProyectoIndividual1);
+                setTheme(R.style.Normal);
             }
         }
         super.onCreate(savedInstanceState);
@@ -33,6 +33,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
 
     public void onClickALibro(View view) {
+        //Se pasa a la activity para añadir el libro.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, anadirLibroALista.class);
         String usuario = "";
@@ -45,6 +46,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
         startActivity(i);
     }
     public void onClickLeidos(View view) {
+        //Se pasa a la activity que se corresponde la lista de libros ya leidos.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, leidos.class);
         String usuario = "";
@@ -56,6 +58,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
         startActivity(i);
     }
     public void onClickLeyendo(View view) {
+        //Al pulsar se irá a la interfaz donde se mostrarán los libros que el usuario se está leyendo en este momento.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, activListaleyendo.class);
         String usuario = "";
@@ -68,6 +71,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
 
     public void onClickVolver(View view) {
+        //Al pulsar se devolverá al usuario a la interfaz del menú principal.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, menuPrincipal.class);
         String usuario = "";
@@ -86,6 +90,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
     @Override
     public void onBackPressed() {
+        //En caso de que se pulse el "botón" back se preguntará al usuario mediante un Dialog si desea salir de la aplicación.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.salida)
                 .setCancelable(false)

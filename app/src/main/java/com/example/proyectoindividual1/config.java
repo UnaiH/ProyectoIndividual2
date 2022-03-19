@@ -28,19 +28,22 @@ import androidx.preference.PreferenceManager;
 import java.util.Locale;
 
 public class config extends AppCompatActivity implements View.OnClickListener {
+    //Esta clase se encarga de la interfaz de configuración que se emplea además para las preferencias.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Se pone en modo oscuro o no la pantalla
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Theme_ProyectoIndividual1);
+                setTheme(R.style.Normal);
             }
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config);
+        //se añade el fragment que contiene la pref_config. Si no está ya añadida el fragmento se añadiría.
         Fragment fragmento = new configuracion();
         FragmentTransaction ftransac = getFragmentManager().beginTransaction();
         if(savedInstanceState==null){
@@ -54,7 +57,7 @@ public class config extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        //Este es el botón aplicar de config.
+        //Este es el botón aplicar de config. que mandará al usuario al menu principal.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, menuPrincipal.class);
         String usuario = "";
@@ -68,6 +71,7 @@ public class config extends AppCompatActivity implements View.OnClickListener {
     }
 
     public static class configuracion extends PreferenceFragment{
+        //Esta clase sería el fragmento de preferencias.
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -76,6 +80,7 @@ public class config extends AppCompatActivity implements View.OnClickListener {
     }
     @Override
     public void onBackPressed() {
+        //Al pulsar el botón para volver a atrás se muestra un diálog para preguntar si el usuario quiere salir.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.salirConf)
                 .setCancelable(false)

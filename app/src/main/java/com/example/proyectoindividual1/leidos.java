@@ -78,7 +78,7 @@ public class leidos extends AppCompatActivity {
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Theme_ProyectoIndividual1);
+                setTheme(R.style.Normal);
             }
         }
         super.onCreate(savedInstanceState);
@@ -97,7 +97,7 @@ public class leidos extends AppCompatActivity {
         i.putExtra("usuario", usu);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.salida)
+        builder.setMessage(R.string.salidapan)
                 .setCancelable(false)
                 .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {

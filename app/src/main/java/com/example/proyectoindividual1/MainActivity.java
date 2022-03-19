@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int valor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Se carga el idioma al inicio en la actividad principal por si acaso se ha cambiado el idioma del sistema. Si no se ha especificado el idioma en preferencias se pondrá en inglés por considerarse un idioma oficial.
         String idioma;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         if (prefs.contains("listapreferencias")) {
@@ -83,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Linea = ficherointerno.readLine();
             ficherointerno.close();
         } catch (IOException e) {
+            //Si se produjera un error se lanzará una notificación local para informae de que se ha producido y dónde.
             Log.i("Error", String.valueOf(R.string.errorsesion));
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i.putExtra("regok", 1);
             startActivity(i);
         }
+        //Se realiza la comparación de la contraseña del EditText y la guardada en el archivo .txt.
         EditText contr = (EditText) findViewById(R.id.Contr);
         if(contr.getText().toString().equals(Linea)) {
             Intent i = new Intent(this, menuPrincipal.class);
@@ -150,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
 
     }
+    //Método para cambiar el idioma haciendo uso del Locale.
     private void cambiarIdioma(String idioma){
         Locale local = new Locale(idioma);
         Locale.setDefault(local);

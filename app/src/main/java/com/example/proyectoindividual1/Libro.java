@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Libro {
+    //Esta clase denominada Libro se empleará para guardar los datos de cada instancia de la base de datos al cargarlos y al ir a guardarlo tras realizar algún cambio con los set.
     private String nombre;
     private String autor;
     private int paginas;

@@ -92,7 +92,6 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onBackPressed() {
         //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
-        //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.salida)
                 .setCancelable(false)

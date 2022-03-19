@@ -11,6 +11,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,10 +34,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class anadirLibroALista extends AppCompatActivity implements View.OnClickListener {
     private CalendarView calendario;
     private String fecha;
+    private int dia;
+    private int mes;
+    private int anno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -46,7 +51,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Theme_ProyectoIndividual1);
+                setTheme(R.style.Normal);
             }
         }
         super.onCreate(savedInstanceState);
@@ -66,6 +71,9 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
             @Override
             public void onSelectedDayChange(CalendarView calendarView, int year, int month, int day) {
                 fecha = day+"/"+month+"/"+year;
+                dia = day;
+                mes = month;
+                anno = year;
                 Log.i("TAGF", "onSelectedDayChange:"+fecha);
             }
         });
@@ -83,7 +91,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
             usu= extras.getString("usuario");
         }
         if(fecha==""){
-            String fecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            fecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         }
         if (paginas.getText()==null){
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
@@ -135,35 +143,35 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                 if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
                                     ActivityCompat.requestPermissions(anadirLibroALista.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
                                 }
-                                if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)== PackageManager.PERMISSION_GRANTED) {
+                                if ((ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)== PackageManager.PERMISSION_GRANTED)||(ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.READ_CALENDAR)== PackageManager.PERMISSION_GRANTED)) {
                                     fecha = fecha+" 00:00";
                                     String com=fecha;
-                                    /*try
+                                    try
                                     {
-                                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-                                        Cursor cur = this.getContentResolver().query(CalendarContract.Calendars.CONTENT_URI,null, null, null, null);
-                                        if (cur.moveToFirst())
-                                        {
-                                            long calendarID=cur.getLong(cur.getColumnIndex(CalendarContract.Calendars._ID));
-                                            ContentValues eventValues = new ContentValues();
-                                            // provide the required fields for creating an event to
-                                            // ContentValues instance and insert event using
-                                            // ContentResolver
-                                            eventValues.put (CalendarContract.Events.CALENDAR_ID, calendarID);
-                                            eventValues.put(CalendarContract.Events.TITLE, "Event 1"+title);
-                                            eventValues.put(CalendarContract.Events.DESCRIPTION," Calendar API"+desc);
-                                            eventValues.put(CalendarContract.Events.ALL_DAY,true);
-                                            eventValues.put(CalendarContract.Events.DTSTART, (cal.getTimeInMillis()+60*60*1000));
-                                            eventValues.put(CalendarContract.Events.DTEND, cal.getTimeInMillis()+60*60*1000);
-                                            eventValues.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().toString());
-                                            Uri eventUri = this.getContentResolver().insert(CalendarContract.Events.CONTENT_URI, eventValues);
-                                            eventID = ContentUris.parseId(eventUri);
-                                        }
+                                       long calID=1;
+                                       long empMillis = 0;
+                                       long acabaMillis = 0;
+                                       Calendar empieza = Calendar.getInstance();
+                                       empieza.set(anno,mes,dia,0,0);
+                                       empMillis = empieza.getTimeInMillis();
+                                       Calendar acaba = Calendar.getInstance();
+                                       acaba.set(anno,mes,dia,23,59);
+                                       acabaMillis = acaba.getTimeInMillis();
+                                        ContentResolver cr = getContentResolver();
+                                        ContentValues valores = new ContentValues();
+                                        valores.put(CalendarContract.Events.DTSTART,empMillis);
+                                        valores.put(CalendarContract.Events.DTEND,acabaMillis);
+                                        valores.put(CalendarContract.Events.TITLE, titulo.getText().toString()+" "+autor.getText().toString());
+                                        valores.put(CalendarContract.Events.DESCRIPTION, genero.getText().toString()+ finalUsu);
+                                        valores.put(CalendarContract.Events.CALENDAR_ID,calID);
+                                        valores.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+                                        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, valores);
+
                                     }
                                     catch (Exception e)
                                     {
                                         e.printStackTrace();
-                                    }*/
+                                    }
                                 }
                                 BD base = new BD(anadirLibroALista.this);
                                 SQLiteDatabase db = base.getWritableDatabase();

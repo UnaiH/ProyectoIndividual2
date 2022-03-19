@@ -21,7 +21,7 @@ import java.util.Locale;
 public class menuPrincipal extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Si en la configuración se ha indicado que se desea el modo oscuro o no.
+        //Se realiza el cambio de idioma de la aplicación pues es la primera activiadad por la que se pasa tras haber estado en configuración. También se comprueba si se ha especificado si se quiere el modo oscuro o el que se poen de forma predeterminada.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String idioma;
         if (prefs.contains("listapreferencias")) {
@@ -44,7 +44,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Theme_ProyectoIndividual1);
+                setTheme(R.style.Normal);
             }
         }
         super.onCreate(savedInstanceState);
@@ -109,6 +109,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         alert.show();
     }
     private void cambiarIdioma(String idioma){
+        //Este método se encarga de la gestión del cambio de idioma.
         Locale local = new Locale(idioma);
         Locale.setDefault(local);
         Configuration config = getBaseContext().getResources().getConfiguration();

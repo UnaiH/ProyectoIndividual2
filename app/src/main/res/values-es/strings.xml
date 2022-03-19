@@ -68,4 +68,5 @@
     <string name="listidiom">Lista de los idiomas disponibles en la aplicación.</string>
     <string name="lisidomas">Lista Idiomas</string>
     <string name="camb">Cambiar</string>
+    <string name="salidapan">¿Seguro que deseas salir de esta pantalla?</string>
 </resources>
