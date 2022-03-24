@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProyectoIndividual1EU</string>
+    <string name="app_name">Libuk</string>
     <string name="idiomas">Aukerak</string>
     <string name="accion">Aukerak</string>
     <string name="hello_blank_fragment">Kaixo zati zuriak</string>
@@ -50,7 +50,7 @@
     <string name="menscorreg">Erabiltzailea ondo erregistratu da.</string>
     <string name="salirConf">Konfigurazioatik atera nahi duzu? Aldaketak gordeko dira.</string>
     <string name="BDe">Errorea datu-basean</string>
-    <string name="BDMe">Datu-basea sortzearen errorea</string>
+    <string name="BDMe">Datu-basea sortzearen errorea. Beste data batekin egin froga.</string>
     <string name="addcor">Ondo gehituta</string>
     <string name="addlibmen">Liburua ondo gehitu da.</string>
     <string name="anlibdiag">Ziur liburua gehitu nahi duzula?</string>
@@ -69,4 +69,7 @@
     <string name="lisidomas">" Hizkuntzak-zerrenda"</string>
     <string name="camb">Aldatu</string>
     <string name="salidapan">Ziur pantaila honetatik irten nahi duzula?</string>
+    <string name="reglib">Librur erregistrua</string>
+    <string name="nopodregistrar">Liburua ezin izan da behar bezala erregistratu orrialdeak definitu ez direlako edo zenbaki baliogabea delako.</string>
+    <string name="salirleyendo">Ziur irakurtzen ari diren liburuen zerrendatik irten nahi duzula?</string>
 </resources>

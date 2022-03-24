@@ -22,6 +22,7 @@ public class BD extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         //Se crea la tabla en la base de datos que se denominará Libros.
+        Log.i("TAG", "onCreate: Pasa");
         sqLiteDatabase.execSQL("CREATE TABLE Libros (NombreUsuario VARCHAR(225), Titulo VARCHAR(225), Autor VARCHAR(225), Genero VARCHAR(225), Paginas INTEGER, Actual INTEGER, Empezado VARCHAR(225), Acabado VARCHAR(225), Prevista VARCHAR(225), PRIMARY KEY (NombreUsuario,Titulo,Autor,Empezado))");
     }
 
@@ -31,20 +32,33 @@ public class BD extends SQLiteOpenHelper {
     }
     public boolean anadirLibro(String usuario, String titulo, String autor, String genero, int pag, int act, String comienzo, String finprev){
         //Método para añadir una instancia en la tabla de Libros.
+        boolean existe = false;
         String fin = "nulo";
         SQLiteDatabase bd = getWritableDatabase();
-        bd.execSQL("INSERT INTO Libros ('NombreUsuario', 'Titulo', 'Autor', 'Genero', 'Paginas', 'Actual', 'Empezado', 'Acabado', 'Prevista') VALUES ('"+usuario+"','"+titulo+"','"+autor+"','"+genero+"','"+pag+"','"+act+"','"+comienzo+"','"+fin+"','"+finprev+"')");
-        bd.close();
-        return true;
+        ArrayList<String> lista = new ArrayList<String>();
+        Cursor c = bd.rawQuery("SELECT * FROM Libros WHERE Libros.NombreUsuario=='"+usuario+"'AND Libros.Titulo=='"+titulo+"' AND Libros.Autor=='"+autor+"' AND Libros.Empezado=='"+comienzo+"'",null);
+        while (c.moveToNext()){
+            lista.add(c.getString(1));
+        }
+        if (lista.size()<=0) {
+            existe=false;
+            bd.execSQL("INSERT INTO Libros ('NombreUsuario', 'Titulo', 'Autor', 'Genero', 'Paginas', 'Actual', 'Empezado', 'Acabado', 'Prevista') VALUES ('" + usuario + "','" + titulo + "','" + autor + "','" + genero + "','" + pag + "','" + act + "','" + comienzo + "','" + fin + "','" + finprev + "')");
+            bd.close();
+        }
+        else{
+            existe=true;
+        }
+        Log.i("TAG", "anadirLibro: "+existe);
+        return existe;
     }
-    public boolean actualizarMarcador(int marcar,String usu, String tit, String autor, LocalDate emp){
+    public boolean actualizarMarcador(int marcar,String usu, String tit, String autor, String emp){
         //Se emplea para actualizar el atributo que contiene la la página por la que va el usuario.
         SQLiteDatabase bd = getWritableDatabase();
         bd.execSQL("UPDATE Libros SET Actual=='"+marcar+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
         bd.close();
         return true;
     }
-    public boolean actualizarFechaFin(LocalDate fin,String usu, String tit, String autor, LocalDate emp){
+    public boolean actualizarFechaFin(String fin,String usu, String tit, String autor, String emp){
         //Se emplea para que cuando se actualiza la fecha de fin del libro en el momento en que el usuario lo indique dándole a un botón. Pues se da por finalizado un libro cuando el atributo "Acabado" no es null.
         SQLiteDatabase bd = getWritableDatabase();
         bd.execSQL("UPDATE Libros SET Acabado=='"+fin+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
@@ -78,5 +92,12 @@ public class BD extends SQLiteOpenHelper {
         c.close();
         bd.close();
         return misLibros;
+    }
+    public boolean actualizarGenero(String gen,String usu, String tit, String autor, String emp){
+        //Se emplea para actualizar el atributo que contiene la la página por la que va el usuario.
+        SQLiteDatabase bd = getWritableDatabase();
+        bd.execSQL("UPDATE Libros SET Genero=='"+gen+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
+        bd.close();
+        return true;
     }
 }

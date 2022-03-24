@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class leidos extends AppCompatActivity {
@@ -70,15 +72,31 @@ public class leidos extends AppCompatActivity {
         Integer[] libros = new Integer[longit];
         Random rand = new Random();
         for (int aux=0;aux<longit;aux++){
-            libros[aux]=imag[rand.nextInt(longit)];
+            libros[aux]=imag[rand.nextInt(imag.length)];
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma;
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Español")) {
+                idioma = "es";
+                this.cambiarIdioma(idioma);
+            }
+            else if (idim.equals("Euskara")){
+                idioma = "eu";
+                this.cambiarIdioma(idioma);
+            }
+            else{
+                idioma = "en";
+                this.cambiarIdioma(idioma);
+            }
+        }
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
             if (modOsc) {
                 setTheme(R.style.ModoOscuro);
             } else {
-                setTheme(R.style.Normal);
+                setTheme(R.style.Listas);
             }
         }
         super.onCreate(savedInstanceState);
@@ -111,5 +129,14 @@ public class leidos extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void cambiarIdioma(String idioma){
+        Locale local = new Locale(idioma);
+        Locale.setDefault(local);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.setLocale(local);
+        config.setLayoutDirection(local);
+        Context con = getBaseContext().createConfigurationContext(config);
+        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

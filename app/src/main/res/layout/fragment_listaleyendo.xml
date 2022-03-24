@@ -7,9 +7,9 @@
 
     <!-- TODO: Update blank fragment layout -->
     <ListView
-        android:id="@+id/listaleyendo"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="651dp"
         android:layout_row="0"
         android:layout_column="0" />
 

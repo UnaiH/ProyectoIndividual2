@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProyectoIndividual1Def</string>
+    <string name="app_name">Libuk</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hola fragmento en blanco</string>
     <!-- Preference Titles -->
@@ -55,7 +55,7 @@
     <string name="menscorreg">Se ha registrado el usuario correctamente</string>
     <string name="salirConf">¿Seguro que deseas salir de la configuración? Se guardaran los cambios realizados.</string>
     <string name="BDe">Problema BD</string>
-    <string name="BDMe">Problema en la creación de la BD</string>
+    <string name="BDMe">Problema en la creación de la BD. Prueba con una fecha válida.</string>
     <string name="addcor">Adición correcta</string>
     <string name="addlibmen">Se ha añadido el libro correctamente</string>
     <string name="anlibdiag">¿Seguro que deseas añadir el libro?</string>
@@ -73,4 +73,7 @@
     <string name="listidiom">Lista de los idiomas disponibles en la aplicación.</string>
     <string name="lisidomas">Lista Idiomas</string>
     <string name="camb">Cambiar</string>
+    <string name="reglib">Registro libro</string>
+    <string name="nopodregistrar">No se ha podido registrar el libro correctamente debido a que no se han definido las páginas o es un número no válido.</string>
+    <string name="salirleyendo">"¿Seguro que deseas salir de la lista de libros que se están leyendo?"</string>
 </resources>

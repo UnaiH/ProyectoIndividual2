@@ -18,6 +18,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
@@ -29,6 +30,7 @@ import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,6 +47,22 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String idioma;
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Español")) {
+                idioma = "es";
+                this.cambiarIdioma(idioma);
+            }
+            else if (idim.equals("Euskara")){
+                idioma = "eu";
+                this.cambiarIdioma(idioma);
+            }
+            else{
+                idioma = "en";
+                this.cambiarIdioma(idioma);
+            }
+        }
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
 
@@ -100,8 +118,8 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                 elManager.createNotificationChannel(elCanal);
             }
-            builder.setContentTitle("Registro libro")
-                    .setContentText("No se ha podido registrar el libro correctamente debido a que no se han definido las páginas o es un número no válido")
+            builder.setContentTitle(getResources().getString(R.string.reglib))
+                    .setContentText(getResources().getString(R.string.nopodregistrar))
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setAutoCancel(true);
             elManager.notify(1, builder.build());
@@ -119,8 +137,8 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                     NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                     elManager.createNotificationChannel(elCanal);
                 }
-                builder.setContentTitle("Registro libro")
-                        .setContentText("No se ha podido registrar el libro correctamente debido a que no se han definido las páginas o es un número no válido")
+                builder.setContentTitle(getResources().getString(R.string.reglib))
+                        .setContentText(getResources().getString(R.string.nopodregistrar))
                         .setSmallIcon(R.drawable.ic_launcher_background)
                         .setAutoCancel(true);
                 elManager.notify(1, builder.build());
@@ -140,39 +158,6 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                         .setCancelable(false)
                         .setPositiveButton(R.string.psop, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
-                                    ActivityCompat.requestPermissions(anadirLibroALista.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
-                                }
-                                if ((ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)== PackageManager.PERMISSION_GRANTED)||(ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.READ_CALENDAR)== PackageManager.PERMISSION_GRANTED)) {
-                                    fecha = fecha+" 00:00";
-                                    String com=fecha;
-                                    try
-                                    {
-                                       long calID=1;
-                                       long empMillis = 0;
-                                       long acabaMillis = 0;
-                                       Calendar empieza = Calendar.getInstance();
-                                       empieza.set(anno,mes,dia,0,0);
-                                       empMillis = empieza.getTimeInMillis();
-                                       Calendar acaba = Calendar.getInstance();
-                                       acaba.set(anno,mes,dia,23,59);
-                                       acabaMillis = acaba.getTimeInMillis();
-                                        ContentResolver cr = getContentResolver();
-                                        ContentValues valores = new ContentValues();
-                                        valores.put(CalendarContract.Events.DTSTART,empMillis);
-                                        valores.put(CalendarContract.Events.DTEND,acabaMillis);
-                                        valores.put(CalendarContract.Events.TITLE, titulo.getText().toString()+" "+autor.getText().toString());
-                                        valores.put(CalendarContract.Events.DESCRIPTION, genero.getText().toString()+ finalUsu);
-                                        valores.put(CalendarContract.Events.CALENDAR_ID,calID);
-                                        valores.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-                                        Uri uri = cr.insert(CalendarContract.Events.CONTENT_URI, valores);
-
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        e.printStackTrace();
-                                    }
-                                }
                                 BD base = new BD(anadirLibroALista.this);
                                 SQLiteDatabase db = base.getWritableDatabase();
                                 if (db != null) {
@@ -187,14 +172,57 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                         elManager.createNotificationChannel(elCanal);
                                     }
                                     String ahora = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-                                    base.anadirLibro(usu,titulo.getText().toString(),autor.getText().toString(),genero.getText().toString(),Integer.parseInt(paginas.getText().toString()),0,ahora,fecha);
-                                    builder.setContentTitle(getResources().getString(R.string.addcor))
-                                            .setContentText(getResources().getString(R.string.addlibmen))
-                                            .setSmallIcon(R.drawable.ic_launcher_background)
-                                            .setAutoCancel(true);
-                                    elManager.notify(1, builder.build());
-                                    finish();
-                                    startActivity(i);
+                                    boolean existe = false;
+                                    existe=base.anadirLibro(usu,titulo.getText().toString(),autor.getText().toString(),genero.getText().toString(),Integer.parseInt(paginas.getText().toString()),0,ahora,fecha);
+                                    if(!existe) {
+                                        if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
+                                            ActivityCompat.requestPermissions(anadirLibroALista.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
+                                        }
+                                        if ((ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)== PackageManager.PERMISSION_GRANTED)) {
+                                            fecha = fecha+" 00:00";
+                                            try
+                                            {
+                                                Log.i("TAG", "onClick: Pasa por calendar");
+                                                long empMillis = 0;
+                                                long acabaMillis = 0;
+                                                Calendar empieza = Calendar.getInstance();
+                                                empieza.set(anno,mes,dia,0,0);
+                                                empMillis = empieza.getTimeInMillis();
+                                                Calendar acaba = Calendar.getInstance();
+                                                acaba.set(anno,mes,dia,23,59);
+                                                acabaMillis = acaba.getTimeInMillis();
+                                                Intent valores = new Intent(Intent.ACTION_INSERT);
+                                                valores.setData(CalendarContract.Events.CONTENT_URI);
+                                                valores.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,empMillis);
+                                                valores.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,acabaMillis);
+                                                valores.putExtra(CalendarContract.Events.TITLE, titulo.getText().toString()+" "+autor.getText().toString());
+                                                valores.putExtra(CalendarContract.Events.DESCRIPTION, genero.getText().toString()+ finalUsu);
+                                                valores.putExtra(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
+                                                if(valores.resolveActivity(getPackageManager()) == null){
+                                                    Log.i("TAG", "onClick: inicia activity calendar");
+                                                    startActivity(valores);
+                                                }
+                                            }
+                                            catch (Exception e)
+                                            {
+                                                e.printStackTrace();
+                                            }
+                                        }
+                                        builder.setContentTitle(getResources().getString(R.string.addcor))
+                                                .setContentText(getResources().getString(R.string.addlibmen))
+                                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                                .setAutoCancel(true);
+                                        elManager.notify(1, builder.build());
+                                    }
+                                    else{
+                                        builder.setContentTitle(getResources().getString(R.string.BDe))
+                                                .setContentText(getResources().getString(R.string.BDMe))
+                                                .setSmallIcon(R.drawable.ic_launcher_background)
+                                                .setAutoCancel(true);
+                                        elManager.notify(1, builder.build());
+                                        finish();
+                                        startActivity(i);
+                                    }
                                 }
                                 else {
                                     NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -249,5 +277,14 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void cambiarIdioma(String idioma){
+        Locale local = new Locale(idioma);
+        Locale.setDefault(local);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.setLocale(local);
+        config.setLayoutDirection(local);
+        Context con = getBaseContext().createConfigurationContext(config);
+        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProyectoIndividual1EN</string>
+    <string name="app_name">Libuk</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="messages_header">Messages</string>
     <string name="sync_header">Sync</string>
@@ -41,7 +41,7 @@
     <string name="alpulelim">you push the button the book will be deleted</string>
     <string name="leyelistfin">from reading list and add to finish list.</string>
     <string name="bienv">You are wellcome</string>
-    <string name="salida">Do you want ro exit from the app?</string>
+    <string name="salida">Do you want to exit from the app?</string>
     <string name="si">Yes</string>
     <string name="no">No</string>
     <string name="errorsesion">Login failed</string>
@@ -50,7 +50,7 @@
     <string name="menscorreg">The user has been sign up succesfully</string>
     <string name="salirConf">Do you want ro exit from the settings? Changes will be saved</string>
     <string name="BDe">DB\'s problem</string>
-    <string name="BDMe">Database creation error</string>
+    <string name="BDMe">Database creation error. Try with valid date.</string>
     <string name="addcor">Add successfull</string>
     <string name="addlibmen">Book added successfully</string>
     <string name="anlibdiag">" Are you sure you want to add the book?"</string>
@@ -65,8 +65,11 @@
     <string name="podgenlib">Check this box if you want to be able to type the genre of the book. For example if it is a drama or a romantic novel</string>
     <string name="idiom">Languages</string>
     <string name="idimaplic">App language</string>
-    <string name="listidiom">Aplikazioan erabilgarri dauden hizkuntzen zerrenda.</string>
+    <string name="listidiom">List of languages ​​available in the application.</string>
     <string name="lisidomas">languages list</string>
     <string name="camb">Change</string>
     <string name="salidapan">Are you sure you want to exit this screen?</string>
+    <string name="reglib">Book registation</string>
+    <string name="nopodregistrar">The book could not be registered correctly because the pages were not defined or it is an invalid number</string>
+    <string name="salirleyendo">Are you sure you want to exit the list of books being read?</string>
 </resources>

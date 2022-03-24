@@ -8,6 +8,8 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,13 +22,33 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.preference.PreferenceManager;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.Locale;
+
 //Esta actividad gestiona lo relacionado con el registro como su nombre indica.
 public class registro extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        String idioma;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (prefs.contains("listapreferencias")) {
+            String idim = prefs.getString("listapreferencias", "Español");
+            if (idim.equals("Español")) {
+                idioma = "es";
+                this.cambiarIdioma(idioma);
+            }
+            else if (idim.equals("Euskara")){
+                idioma = "eu";
+                this.cambiarIdioma(idioma);
+            }
+            else{
+                idioma = "en";
+                this.cambiarIdioma(idioma);
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
     }
@@ -91,13 +113,15 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
     }
     @Override
     public void onBackPressed() {
-        //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir.
+        //En caso de pulsar el botón de retroceder se lanzará un Dialog preguntando si realmente se quiere salir de la pantalla.
+        Intent i = new Intent(this, MainActivity.class);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.salida)
+        builder.setMessage(R.string.salidapan)
                 .setCancelable(false)
                 .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
+                        startActivity(i);
                     }
                 })
                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
@@ -107,5 +131,14 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void cambiarIdioma(String idioma){
+        Locale local = new Locale(idioma);
+        Locale.setDefault(local);
+        Configuration config = getBaseContext().getResources().getConfiguration();
+        config.setLocale(local);
+        config.setLayoutDirection(local);
+        Context con = getBaseContext().createConfigurationContext(config);
+        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }
