@@ -118,6 +118,8 @@ public class activListaleyendo extends AppCompatActivity{
                 bundle.putString("usuario",usu);
                 fragmento.setArguments(bundle);
                 ftransac.replace(R.id.fragmentos,fragmento);
+                //Se tiene un fragmento en blanco que se emplea para "reiniciar" el content del fragment cuando se cambia la orientación.
+                ftransac.replace(R.id.fragmentosdatos,new fragmentoblanco());
                 ftransac.commit();
             }
         }

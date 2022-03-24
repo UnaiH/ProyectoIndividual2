@@ -26,6 +26,7 @@ public class datos_leyendo extends Fragment{
         View view = inflater.inflate(R.layout.fragment_datos_leyendo, container, false);
         return view;
     }
+
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         usuario = getArguments().getString("usuario");
