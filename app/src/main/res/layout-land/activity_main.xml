@@ -24,13 +24,10 @@
         android:id="@+id/botonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
+        android:layout_marginStart="388dp"
         android:layout_marginTop="76dp"
-        android:layout_marginEnd="162dp"
         android:onClick="IniciarSesion"
         android:text="@string/iniciarsesion"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -38,13 +35,10 @@
         android:id="@+id/botonLogin2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginTop="168dp"
-        android:layout_marginEnd="162dp"
+        android:layout_marginStart="388dp"
+        android:layout_marginTop="152dp"
         android:onClick="Registrarse"
         android:text="@string/registrarse"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

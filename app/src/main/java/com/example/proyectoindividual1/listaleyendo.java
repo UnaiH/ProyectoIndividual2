@@ -59,7 +59,6 @@ public class listaleyendo extends ListFragment{
                 act[indice]=libitr.getActual();
                 paginas[indice]=libitr.getPaginas();
                 indice++;
-                Log.i("TAG", "onCreate: "+titulos[2]);
             }
         }
         int longit = titulos.length;
@@ -82,7 +81,8 @@ public class listaleyendo extends ListFragment{
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Libro lib1 = librs.get(i);
                 activListaleyendo leyendo = (activListaleyendo) getActivity();
-                leyendo.gestorFragmentos(lib1);
+                String leer="leer";
+                leyendo.gestorFragmentos(lib1,leer);
             }
         });
     }

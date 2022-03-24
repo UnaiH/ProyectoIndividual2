@@ -7,9 +7,12 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/activity_anadir_libro_alista.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/activity_leidos.xml" value="0.16181657848324515" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/activity_leyendo.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/activity_main.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/activity_tipo_listas.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/config.xml" value="0.22" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/fragment_datos_leyendo.xml" value="0.31040564373897706" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/fragment_listaleyendo.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/ltoastregneg.xml" value="0.16313932980599646" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/menuprinc.xml" value="0.31040564373897706" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout-land/registro.xml" value="0.31040564373897706" />
@@ -34,6 +37,7 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_datos_leidos.xml" value="0.46770833333333334" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_datos_leyedo.xml" value="0.19114583333333332" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_datos_leyendo.xml" value="0.33" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_fragmentobalnco.xml" value="0.23777173913043478" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_lista_leidos.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_lista_leyendo.xml" value="0.23385416666666667" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_lista_leyendo_list.xml" value="0.240625" />

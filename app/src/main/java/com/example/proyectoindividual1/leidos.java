@@ -65,7 +65,6 @@ public class leidos extends AppCompatActivity {
                 fechaFin[indice]=libitr.getFechaFin();
                 fechaInicio[indice]=libitr.getFechaInicio();
                 indice++;
-                Log.i("TAG", "onCreate: "+titulos[2]);
             }
         }
         int longit = titulos.length;

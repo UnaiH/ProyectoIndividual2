@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.text.SimpleDateFormat;
@@ -17,27 +18,40 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.Locale;
 
-public class datos_leyendo extends Fragment implements View.OnClickListener {
+public class datos_leyendo extends Fragment{
     public Libro libof;
     private String usuario="";
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_datos_leyendo, container, false);
+        View view = inflater.inflate(R.layout.fragment_datos_leyendo, container, false);
+        return view;
     }
-
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         usuario = getArguments().getString("usuario");
         super.onViewCreated(view, savedInstanceState);
         EditText gen = view.findViewById(R.id.nuevogen);
-        gen.setText(libof.getGenero());
+        EditText marca = view.findViewById(R.id.nuevaMarca);
+        if(libof!=null) {
+            gen.setText(libof.getGenero());
+            marca.setText("" + libof.getActual());
+        }
+        else{
+            gen.setText("");
+            marca.setText("" + 0);
+        }
+        Button botoncam=(Button) view.findViewById(R.id.cambiarMarcaLib);
+        Button botonfin=(Button) view.findViewById(R.id.FinalizarLib);
+        Button aplic=(Button) view.findViewById(R.id.AplicaGenLib);
+        if (libof!=null) {
+            botoncam.setOnClickListener(this::onClickCambiarMarca);
+            botonfin.setOnClickListener(this::onClickFinalizar);
+            aplic.setOnClickListener(this::onClickAplicar);
+        }
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
     public void onClickCambiarMarca(View view) {
+        view=getView();
         BD base = new BD(this.getContext());
         SQLiteDatabase db = base.getWritableDatabase();
         if (db != null) {
@@ -46,9 +60,10 @@ public class datos_leyendo extends Fragment implements View.OnClickListener {
             base.actualizarMarcador(marcnum,usuario,libof.getNombre(), libof.getAutor(), libof.getFechaInicio());
         }
         activListaleyendo leyendo = (activListaleyendo) getActivity();
-        leyendo.gestorFragmentos(null);
+        leyendo.gestorFragmentos(libof,"noleer");
     }
     public void onClickFinalizar(View view) {
+        view=getView();
         String ahora = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         BD base = new BD(this.getContext());
         SQLiteDatabase db = base.getWritableDatabase();
@@ -57,9 +72,10 @@ public class datos_leyendo extends Fragment implements View.OnClickListener {
             base.actualizarFechaFin(ahora,usuario,libof.getNombre(), libof.getAutor(), libof.getFechaInicio());
         }
         activListaleyendo leyendo = (activListaleyendo) getActivity();
-        leyendo.gestorFragmentos(null);
+        leyendo.gestorFragmentos(libof,"noleer");
     }
     public void onClickAplicar(View view) {
+        view=getView();
         BD base = new BD(this.getContext());
         SQLiteDatabase db = base.getWritableDatabase();
         if (db != null) {
@@ -67,6 +83,6 @@ public class datos_leyendo extends Fragment implements View.OnClickListener {
             base.actualizarGenero(gen.getText().toString(),usuario,libof.getNombre(), libof.getAutor(), libof.getFechaInicio());
         }
         activListaleyendo leyendo = (activListaleyendo) getActivity();
-        leyendo.gestorFragmentos(null);
+        leyendo.gestorFragmentos(libof,"noleer");
     }
 }
