@@ -31,31 +31,8 @@ public class activListaleyendo extends AppCompatActivity{
             usu = extras.getString("usuario");
         }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String idioma;
-        //Para que el idioma esté acorde a las preferencias al igual que el tema de la interfaz.
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Español")) {
-                idioma = "es";
-                this.cambiarIdioma(idioma);
-            }
-            else if (idim.equals("Euskara")){
-                idioma = "eu";
-                this.cambiarIdioma(idioma);
-            }
-            else{
-                idioma = "en";
-                this.cambiarIdioma(idioma);
-            }
-        }
-        if (prefs.contains("tema")) {
-            Boolean modOsc = prefs.getBoolean("tema", false);
-            if (modOsc) {
-                setTheme(R.style.ModoOscuro);
-            } else {
-                setTheme(R.style.Listas);
-            }
-        }
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaListas(this);
         //Se carga el fragment correspondiente al carga que es el de la lista.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leyendo);
@@ -145,19 +122,9 @@ public class activListaleyendo extends AppCompatActivity{
                 Bundle bundle = new Bundle();
                 bundle.putString("usuario",usu);
                 fragmento.setArguments(bundle);
-                ftransac.replace(R.id.fragmentos,fragmento);
+                ftransac.replace(R.id.fragmentosdatos,fragmento);
                 ftransac.commit();
             }
         }
-    }
-
-    private void cambiarIdioma(String idioma){
-        Locale local = new Locale(idioma);
-        Locale.setDefault(local);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.setLocale(local);
-        config.setLayoutDirection(local);
-        Context con = getBaseContext().createConfigurationContext(config);
-        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

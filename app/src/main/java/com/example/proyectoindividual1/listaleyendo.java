@@ -25,7 +25,7 @@ public class listaleyendo extends ListFragment{
     String[] autor = {};
     String[] fechaPrev = {};
     String[] fechaInicio = {};
-    Integer[] imag={R.drawable.libro1,R.drawable.libro2,R.drawable.libro3,R.drawable.libro4,R.drawable.libro5};
+    Integer[] imag={R.drawable.libroabierto,R.drawable.libroabierto2,R.drawable.libroabierto3,R.drawable.libroabierto4,R.drawable.libroabierto5};
     Integer[] act={};
     Integer[] paginas={};
     private String usuario;

@@ -1,12 +1,15 @@
 package com.example.proyectoindividual1;
 
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +44,15 @@ public class datos_leyendo extends Fragment{
             gen.setText("");
             marca.setText("" + 0);
         }
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
+        if ( prefs.contains("genero")) {
+            Boolean genero = prefs.getBoolean("genero", true);
+            if (!genero) {
+                gen.setVisibility(View.INVISIBLE);
+            } else {
+                gen.setVisibility(View.VISIBLE);
+            }
+        }
         Button botoncam=(Button) view.findViewById(R.id.cambiarMarcaLib);
         Button botonfin=(Button) view.findViewById(R.id.FinalizarLib);
         Button aplic=(Button) view.findViewById(R.id.AplicaGenLib);
@@ -69,7 +81,6 @@ public class datos_leyendo extends Fragment{
         BD base = new BD(this.getContext());
         SQLiteDatabase db = base.getWritableDatabase();
         if (db != null) {
-            EditText marca = (EditText) view.findViewById(R.id.nuevaMarca);
             base.actualizarFechaFin(ahora,usuario,libof.getNombre(), libof.getAutor(), libof.getFechaInicio());
         }
         activListaleyendo leyendo = (activListaleyendo) getActivity();

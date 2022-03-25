@@ -42,6 +42,7 @@ public class leidos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Idiomas().setIdioma(this);
         int indice=0;
         Bundle extras = getIntent().getExtras();
         String usuario = "";
@@ -73,31 +74,7 @@ public class leidos extends AppCompatActivity {
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(imag.length)];
         }
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String idioma;
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Español")) {
-                idioma = "es";
-                this.cambiarIdioma(idioma);
-            }
-            else if (idim.equals("Euskara")){
-                idioma = "eu";
-                this.cambiarIdioma(idioma);
-            }
-            else{
-                idioma = "en";
-                this.cambiarIdioma(idioma);
-            }
-        }
-        if (prefs.contains("tema")) {
-            Boolean modOsc = prefs.getBoolean("tema", false);
-            if (modOsc) {
-                setTheme(R.style.ModoOscuro);
-            } else {
-                setTheme(R.style.Listas);
-            }
-        }
+        new Pantalla().cambiarPantallaListas(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leidos);
         ListView lista=(ListView)findViewById(R.id.listaleidos);
@@ -128,14 +105,5 @@ public class leidos extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-    private void cambiarIdioma(String idioma){
-        Locale local = new Locale(idioma);
-        Locale.setDefault(local);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.setLocale(local);
-        config.setLayoutDirection(local);
-        Context con = getBaseContext().createConfigurationContext(config);
-        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

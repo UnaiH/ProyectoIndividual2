@@ -47,31 +47,8 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String idioma;
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Español")) {
-                idioma = "es";
-                this.cambiarIdioma(idioma);
-            }
-            else if (idim.equals("Euskara")){
-                idioma = "eu";
-                this.cambiarIdioma(idioma);
-            }
-            else{
-                idioma = "en";
-                this.cambiarIdioma(idioma);
-            }
-        }
-        if (prefs.contains("tema")) {
-            Boolean modOsc = prefs.getBoolean("tema", false);
-
-            if (modOsc) {
-                setTheme(R.style.ModoOscuro);
-            } else {
-                setTheme(R.style.Normal);
-            }
-        }
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_libro_alista);
         EditText etgen=(EditText) findViewById(R.id.ngeneroanadirlibro);
@@ -277,14 +254,5 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-    private void cambiarIdioma(String idioma){
-        Locale local = new Locale(idioma);
-        Locale.setDefault(local);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.setLocale(local);
-        config.setLayoutDirection(local);
-        Context con = getBaseContext().createConfigurationContext(config);
-        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

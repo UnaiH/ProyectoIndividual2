@@ -32,15 +32,8 @@ public class config extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Se pone en modo oscuro o no la pantalla
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.contains("tema")) {
-            Boolean modOsc = prefs.getBoolean("tema", false);
-            if (modOsc) {
-                setTheme(R.style.ModoOscuro);
-            } else {
-                setTheme(R.style.Normal);
-            }
-        }
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.config);
         //se añade el fragment que contiene la pref_config. Si no está ya añadida el fragmento se añadiría.

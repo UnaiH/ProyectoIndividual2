@@ -32,23 +32,7 @@ import java.util.Locale;
 public class registro extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        String idioma;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Español")) {
-                idioma = "es";
-                this.cambiarIdioma(idioma);
-            }
-            else if (idim.equals("Euskara")){
-                idioma = "eu";
-                this.cambiarIdioma(idioma);
-            }
-            else{
-                idioma = "en";
-                this.cambiarIdioma(idioma);
-            }
-        }
+        new Idiomas().setIdioma(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro);
     }
@@ -131,14 +115,5 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
         AlertDialog alert = builder.create();
         alert.show();
-    }
-    private void cambiarIdioma(String idioma){
-        Locale local = new Locale(idioma);
-        Locale.setDefault(local);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.setLocale(local);
-        config.setLayoutDirection(local);
-        Context con = getBaseContext().createConfigurationContext(config);
-        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }

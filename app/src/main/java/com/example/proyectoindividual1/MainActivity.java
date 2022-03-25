@@ -38,24 +38,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Se carga el idioma al inicio en la actividad principal por si acaso se ha cambiado el idioma del sistema. Si no se ha especificado el idioma en preferencias se pondrá en inglés por considerarse un idioma oficial.
-        String idioma;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        if (prefs.contains("listapreferencias")) {
-            String idim = prefs.getString("listapreferencias", "Español");
-            if (idim.equals("Español")) {
-                idioma = "es";
-                this.cambiarIdioma(idioma);
-            }
-            else if (idim.equals("Euskara")){
-                idioma = "eu";
-                this.cambiarIdioma(idioma);
-            }
-            else{
-                idioma = "en";
-                this.cambiarIdioma(idioma);
-            }
-        }
         valor=0;
+        new Idiomas().setIdioma(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Existe un toast para indicar que al registrarse y volver a esta el registro se ha realizado correctamente.
@@ -152,15 +136,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-    }
-    //Método para cambiar el idioma haciendo uso del Locale.
-    private void cambiarIdioma(String idioma){
-        Locale local = new Locale(idioma);
-        Locale.setDefault(local);
-        Configuration config = getBaseContext().getResources().getConfiguration();
-        config.setLocale(local);
-        config.setLayoutDirection(local);
-        Context con = getBaseContext().createConfigurationContext(config);
-        getBaseContext().getResources().updateConfiguration(config,con.getResources().getDisplayMetrics());
     }
 }
