@@ -10,6 +10,7 @@ public class Pantalla {
 
     }
     public  void cambiarPantallaMenus(Context contexto){
+        //Cambia entre el tema oscuro y el tema normal de las interfaces de los menús.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contexto);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);
@@ -21,6 +22,7 @@ public class Pantalla {
         }
     }
     public  void cambiarPantallaListas(Context contexto){
+        //Cambia entre el tema oscuro y el tema normal de las interfaces de listas.
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contexto);
         if (prefs.contains("tema")) {
             Boolean modOsc = prefs.getBoolean("tema", false);

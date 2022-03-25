@@ -72,4 +72,7 @@
     <string name="reglib">Book registation</string>
     <string name="nopodregistrar">The book could not be registered correctly because the pages were not defined or it is an invalid number</string>
     <string name="salirleyendo">Are you sure you want to exit the list of books being read?</string>
+    <string name="valorno">Not valid value</string>
+    <string name="fin">Book end</string>
+    <string name="felfin">Congratulations on finishing the book.</string>
 </resources>

@@ -16,11 +16,17 @@ import android.view.View;
 import java.util.Locale;
 
 public class tipo_listas extends AppCompatActivity implements View.OnClickListener {
-
+    private String usuario="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Se pone el modo oscuro si así se especifica en las preferencias.
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if (savedInstanceState!= null) {
+            usuario= savedInstanceState.getString("usuario");
+        }
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        //Se pone el modo oscuro si así se especifica en las preferencias y también se modifica el idioma.
         new Idiomas().setIdioma(this);
         new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
@@ -29,12 +35,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
 
     public void onClickALibro(View view) {
         //Se pasa a la activity para añadir el libro.
-        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, anadirLibroALista.class);
-        String usuario = "";
-        if (extras != null) {
-            usuario = extras.getString("usuario");
-        }
         i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         finish();
@@ -42,24 +43,14 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
     public void onClickLeidos(View view) {
         //Se pasa a la activity que se corresponde la lista de libros ya leidos.
-        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, leidos.class);
-        String usuario = "";
-        if (extras != null) {
-            usuario = extras.getString("usuario");
-        }
         i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         startActivity(i);
     }
     public void onClickLeyendo(View view) {
         //Al pulsar se irá a la interfaz donde se mostrarán los libros que el usuario se está leyendo en este momento.
-        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, activListaleyendo.class);
-        String usuario = "";
-        if (extras != null) {
-            usuario = extras.getString("usuario");
-        }
         i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         startActivity(i);
@@ -67,12 +58,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
 
     public void onClickVolver(View view) {
         //Al pulsar se devolverá al usuario a la interfaz del menú principal.
-        Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, menuPrincipal.class);
-        String usuario = "";
-        if (extras != null) {
-            usuario = extras.getString("usuario");
-        }
         i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         finish();
@@ -85,7 +71,7 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
     }
     @Override
     public void onBackPressed() {
-        //En caso de que se pulse el "botón" back se preguntará al usuario mediante un Dialog si desea salir de la aplicación.
+        //En caso de que se pulse el "botón" back se preguntará al usuario mediante un Dialog si desea salir de la aplicación. Si se pulsa afirmativamente se sale de la aplicación y si se contesta negativamente se cancela el cierre de esta.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.salida)
                 .setCancelable(false)
@@ -101,5 +87,16 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        //Para evitar problemas de incoherencia cuando hay llamadas por ejemplo.
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
     }
 }

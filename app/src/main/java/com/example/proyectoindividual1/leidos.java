@@ -34,21 +34,26 @@ import java.util.Locale;
 import java.util.Random;
 
 public class leidos extends AppCompatActivity {
+    //Esta clase implementa la interfaz para mostrar los libros ya leídos.
     String[] titulos = {};
     String[] autor = {};
     String[] fechaFin = {};
     String[] fechaInicio = {};
     Integer[] imag={R.drawable.libro1,R.drawable.libro2,R.drawable.libro3,R.drawable.libro4,R.drawable.libro5};
+    private String usuario="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        new Idiomas().setIdioma(this);
-        int indice=0;
+        //Se realiza la carga de los datos necesarios
+        if (savedInstanceState!= null) {
+            usuario= savedInstanceState.getString("usuario");
+        }
         Bundle extras = getIntent().getExtras();
-        String usuario = "";
         if (extras != null) {
             usuario = extras.getString("usuario");
         }
+        new Idiomas().setIdioma(this);
+        int indice=0;
         ArrayList<Libro> librs;
         BD base = new BD(leidos.this);
         SQLiteDatabase db = base.getWritableDatabase();
@@ -71,6 +76,7 @@ public class leidos extends AppCompatActivity {
         int longit = titulos.length;
         Integer[] libros = new Integer[longit];
         Random rand = new Random();
+        //Se realiza la selección aleatoria de los libros para cada elemento de la lista.
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(imag.length)];
         }
@@ -79,16 +85,13 @@ public class leidos extends AppCompatActivity {
         setContentView(R.layout.activity_leidos);
         ListView lista=(ListView)findViewById(R.id.listaleidos);
         AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaInicio, fechaFin, libros);
+        //Se llama al adaptador de esta lista.
         lista.setAdapter(adaptador);
     }
     public void onBackPressed() {
+        //Se programa un Dialog para preguntar si se desea salir de la pantalla al pulsar Back.
         Intent i = new Intent(this, tipo_listas.class);
-        Bundle extras = getIntent().getExtras();
-        String usu = "";
-        if (extras != null) {
-            usu= extras.getString("usuario");
-        }
-        i.putExtra("usuario", usu);
+        i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.salidapan)
@@ -105,5 +108,15 @@ public class leidos extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
     }
 }

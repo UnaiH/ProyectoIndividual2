@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+//Éste fragmento es únicamente un fragmento en blanco para que sustituya el fragmento de datos_leyendo cuando es necesario.
 public class fragmentoblanco extends Fragment {
 
     public fragmentoblanco() {

@@ -52,7 +52,7 @@ public class BD extends SQLiteOpenHelper {
         return existe;
     }
     public boolean actualizarMarcador(int marcar,String usu, String tit, String autor, String emp){
-        //Se emplea para actualizar el atributo que contiene la la página por la que va el usuario.
+        //Se emplea para actualizar el atributo que contiene la página por la que va el usuario.
         SQLiteDatabase bd = getWritableDatabase();
         bd.execSQL("UPDATE Libros SET Actual=='"+marcar+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
         bd.close();
@@ -94,7 +94,7 @@ public class BD extends SQLiteOpenHelper {
         return misLibros;
     }
     public boolean actualizarGenero(String gen,String usu, String tit, String autor, String emp){
-        //Se emplea para actualizar el atributo que contiene la la página por la que va el usuario.
+        //Se emplea para actualizar el atributo que contiene el género del libro.
         SQLiteDatabase bd = getWritableDatabase();
         bd.execSQL("UPDATE Libros SET Genero=='"+gen+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
         bd.close();

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+//Esta calse es el adaptador de la lista de los que se han leído.
 public class AdaptadorLeidos extends BaseAdapter {
     //Esta clase es el adaptador de la lista de leidos y es el que se ocupa de ello para que además cada elemento de la lista esté personalizado de una forma en concreto.
     private LayoutInflater inflater;

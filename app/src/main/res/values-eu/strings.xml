@@ -72,4 +72,7 @@
     <string name="reglib">Librur erregistrua</string>
     <string name="nopodregistrar">Liburua ezin izan da behar bezala erregistratu orrialdeak definitu ez direlako edo zenbaki baliogabea delako.</string>
     <string name="salirleyendo">Ziur irakurtzen ari diren liburuen zerrendatik irten nahi duzula?</string>
+    <string name="valorno">Balio hau ez du balio</string>
+    <string name="fin">Liburu amaiera</string>
+    <string name="felfin">Zorionak liburua amaitzeagatik.</string>
 </resources>

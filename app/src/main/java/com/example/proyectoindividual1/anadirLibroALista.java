@@ -44,8 +44,17 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     private int dia;
     private int mes;
     private int anno;
+    private String usu="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Se inicializa el layout.
+        if (savedInstanceState!= null) {
+            usu= savedInstanceState.getString("usuario");
+        }
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usu = extras.getString("usuario");
+        }
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         new Idiomas().setIdioma(this);
         new Pantalla().cambiarPantallaMenus(this);
@@ -61,6 +70,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 etgen.setVisibility(View.VISIBLE);
             }
         }
+        //Se implementa el método para que se actualice la fecha especificada en el CalendarVIew.
         calendario = (CalendarView) findViewById(R.id.calendario);
         calendario.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -76,30 +86,19 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
 
     @Override
     public void onClick(View view) {
+        //Método para gestionar el botón para añadir el libro.
+        //Se cargan los datos de los edittext.
         EditText titulo = (EditText) findViewById(R.id.ntitulo2);
         EditText autor = (EditText) findViewById(R.id.nautor3);
         EditText paginas = (EditText) findViewById(R.id.npag2);
         EditText genero = (EditText) findViewById(R.id.ngeneroanadirlibro);
         Bundle extras = getIntent().getExtras();
-        String usu = "";
-        if (extras != null) {
-            usu= extras.getString("usuario");
-        }
         if(fecha==""){
             fecha = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         }
+        //Si las páginas son null se lanza una notificación local.
         if (paginas.getText()==null){
-            NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this,"CanalLibro");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                elManager.createNotificationChannel(elCanal);
-            }
-            builder.setContentTitle(getResources().getString(R.string.reglib))
-                    .setContentText(getResources().getString(R.string.nopodregistrar))
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setAutoCancel(true);
-            elManager.notify(1, builder.build());
+            notifError();
             Intent i = new Intent(this, tipo_listas.class);
             i.putExtra("usuario", usu);
             setResult(RESULT_OK, i);
@@ -107,18 +106,9 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
             startActivity(i);
         }
         else{
+            //Si las páginas se especifican con un número menor o igual a cero se lanza una notificación local.
             if (Integer.parseInt(paginas.getText().toString())<=0){
-                NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this,"CanalLibro");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                    elManager.createNotificationChannel(elCanal);
-                }
-                builder.setContentTitle(getResources().getString(R.string.reglib))
-                        .setContentText(getResources().getString(R.string.nopodregistrar))
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setAutoCancel(true);
-                elManager.notify(1, builder.build());
+                notifError();
                 Intent i = new Intent(this, tipo_listas.class);
                 i.putExtra("usuario", usu);
                 setResult(RESULT_OK, i);
@@ -126,6 +116,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 startActivity(i);
             }
             else {
+                //Si no se lanza un Dialog que si se pulsa el botón de afirmación se continúa el registro y si no se cancela.
                 Intent i = new Intent(this, tipo_listas.class);
                 i.putExtra("usuario", usu);
                 setResult(RESULT_OK, i);
@@ -138,12 +129,9 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                 BD base = new BD(anadirLibroALista.this);
                                 SQLiteDatabase db = base.getWritableDatabase();
                                 if (db != null) {
+                                    //Se informa de error en la base de datos con una notifiación.
                                     NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                                     NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this, "CanalLibro");
-                                    String usu="";
-                                    if (extras != null) {
-                                        usu= extras.getString("usuario");
-                                    }
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                         NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
                                         elManager.createNotificationChannel(elCanal);
@@ -151,6 +139,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                     String ahora = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
                                     boolean existe = false;
                                     existe=base.anadirLibro(usu,titulo.getText().toString(),autor.getText().toString(),genero.getText().toString(),Integer.parseInt(paginas.getText().toString()),0,ahora,fecha);
+                                    //Si no existe el libro en la base de datos se comprueban los permisos y se tienen se lanza un intent para añadir un evento a la aplicación Calendar.
                                     if(!existe) {
                                         if (ContextCompat.checkSelfPermission(anadirLibroALista.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
                                             ActivityCompat.requestPermissions(anadirLibroALista.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
@@ -159,7 +148,6 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                             fecha = fecha+" 00:00";
                                             try
                                             {
-                                                Log.i("TAG", "onClick: Pasa por calendar");
                                                 long empMillis = 0;
                                                 long acabaMillis = 0;
                                                 Calendar empieza = Calendar.getInstance();
@@ -185,6 +173,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                                 e.printStackTrace();
                                             }
                                         }
+                                        //Se lanza una notificación de que se ha añadido bien.
                                         builder.setContentTitle(getResources().getString(R.string.addcor))
                                                 .setContentText(getResources().getString(R.string.addlibmen))
                                                 .setSmallIcon(R.drawable.ic_launcher_background)
@@ -192,27 +181,14 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                         elManager.notify(1, builder.build());
                                     }
                                     else{
-                                        builder.setContentTitle(getResources().getString(R.string.BDe))
-                                                .setContentText(getResources().getString(R.string.BDMe))
-                                                .setSmallIcon(R.drawable.ic_launcher_background)
-                                                .setAutoCancel(true);
-                                        elManager.notify(1, builder.build());
+                                        //Se informa de un problema en la base de datos mediante una notificación.
+                                        notifError2();
                                         finish();
                                         startActivity(i);
                                     }
                                 }
                                 else {
-                                    NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                                    NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this, "CanalLibro");
-                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                                        NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                                        elManager.createNotificationChannel(elCanal);
-                                    }
-                                    builder.setContentTitle(getResources().getString(R.string.BDe))
-                                            .setContentText(getResources().getString(R.string.BDMe))
-                                            .setSmallIcon(R.drawable.ic_launcher_background)
-                                            .setAutoCancel(true);
-                                    elManager.notify(1, builder.build());
+                                    notifError2();
                                     finish();
                                     startActivity(i);
                                 }
@@ -230,12 +206,9 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     }
     @Override
     public void onBackPressed() {
+        // Al pulsar "back" se vuelve a la activity tipo_listas y sino se cancela.
         Intent i = new Intent(this, tipo_listas.class);
         Bundle extras = getIntent().getExtras();
-        String usu = "";
-        if (extras != null) {
-            usu= extras.getString("usuario");
-        }
         i.putExtra("usuario", usu);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -254,5 +227,43 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
+    }
+    //Se notifica error.
+    private void notifError(){
+        NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this,"CanalLibro");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+            elManager.createNotificationChannel(elCanal);
+        }
+        builder.setContentTitle(getResources().getString(R.string.reglib))
+                .setContentText(getResources().getString(R.string.nopodregistrar))
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setAutoCancel(true);
+        elManager.notify(1, builder.build());
+    }
+    //Se notifica error en la base de datos.
+    private void notifError2(){
+        NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(anadirLibroALista.this, "CanalLibro");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+            elManager.createNotificationChannel(elCanal);
+        }
+        builder.setContentTitle(getResources().getString(R.string.BDe))
+                .setContentText(getResources().getString(R.string.BDMe))
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setAutoCancel(true);
+        elManager.notify(1, builder.build());
     }
 }

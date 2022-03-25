@@ -25,8 +25,10 @@ public class activListaleyendo extends AppCompatActivity{
     private String usu= "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState!= null) {
+            usu= savedInstanceState.getString("usuario");
+        }
         Bundle extras = getIntent().getExtras();
-        usu = "";
         if (extras != null) {
             usu = extras.getString("usuario");
         }
@@ -72,6 +74,7 @@ public class activListaleyendo extends AppCompatActivity{
         alert.show();
     }
     public void gestorFragmentos(Libro lib1, String leer){
+        //Se cambia la carga de los fragmentos en función de la orientación del móvil
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
             if (listaact && leer.equals("leer")){
                 listaact=false;
@@ -122,9 +125,19 @@ public class activListaleyendo extends AppCompatActivity{
                 Bundle bundle = new Bundle();
                 bundle.putString("usuario",usu);
                 fragmento.setArguments(bundle);
-                ftransac.replace(R.id.fragmentosdatos,fragmento);
+                ftransac.replace(R.id.fragmentos,fragmento);
                 ftransac.commit();
             }
         }
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
     }
 }

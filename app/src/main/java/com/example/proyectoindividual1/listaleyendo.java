@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
+//Esta clase implementa el fragment de la lista de libros que se están leyendo.
 public class listaleyendo extends ListFragment{
     String[] titulos = {};
     String[] autor = {};
@@ -37,6 +37,7 @@ public class listaleyendo extends ListFragment{
 
     @Override
     public void onViewCreated( View view, Bundle savedInstanceState) {
+        //Se realiza la carga de los datos necesarios y las llamadas a la base de datos requeridas.
         int indice=0;
         usuario = getArguments().getString("usuario");
         BD base = new BD(this.getContext());
@@ -65,6 +66,7 @@ public class listaleyendo extends ListFragment{
         Integer[] libros = new Integer[longit];
         Random rand = new Random();
         int auxiliar=0;
+        //Se seleccionan las imágenes aleatoriamente para mostrarlas por cada elemento de la lista.
         for (int aux=0;aux<longit;aux++){
             auxiliar=rand.nextInt(imag.length);
             libros[aux]=imag[auxiliar];
@@ -73,6 +75,7 @@ public class listaleyendo extends ListFragment{
         AdaptadorLeyendo adaptador = new AdaptadorLeyendo(this.getActivity(), titulos, autor, fechaInicio, fechaPrev, libros, act, paginas);
         setListAdapter(adaptador);
     }
+    //En éste método se implementa lo que sucede al pulsar un elemento de la lista.
     @Override
     public void onStart() {
         super.onStart();

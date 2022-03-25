@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+//Esta clase es el adaptador de la lista (en un fragment) de libros que se están leyendo.
 public class AdaptadorLeyendo extends BaseAdapter {
     private LayoutInflater inflater;
     private String[] titulos;

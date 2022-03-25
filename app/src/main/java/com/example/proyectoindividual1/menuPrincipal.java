@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -19,6 +20,7 @@ import java.util.Locale;
 
 //Es el menú principal una vez iniciada la sesión
 public class menuPrincipal extends AppCompatActivity implements View.OnClickListener {
+    private String usu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Se realiza el cambio de idioma de la aplicación pues es la primera activiadad por la que se pasa tras haber estado en configuración. También se comprueba si se ha especificado si se quiere el modo oscuro o el que se poen de forma predeterminada.
@@ -30,9 +32,12 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         Bundle extras = getIntent().getExtras();
         //Se da la bienvenida con la escritura del usuario en el TextView.
         if (extras != null) {
-            String usu= extras.getString("usuario");
+            usu= extras.getString("usuario");
             TextView bienvenida = (TextView) findViewById(R.id.bienvenidatext);
             bienvenida.setText(getResources().getString(R.string.bienv)+" "+usu);
+        }
+        if (savedInstanceState!= null) {
+            usu= savedInstanceState.getString("usuario");
         }
     }
 
@@ -85,5 +90,16 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    //Los dos sisguientes métodos se emplean para no perder el usuario si se cierra inesperadamente la actividad.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usu);
     }
 }

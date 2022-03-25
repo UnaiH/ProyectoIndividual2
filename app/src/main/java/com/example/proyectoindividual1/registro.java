@@ -48,6 +48,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 fichero.write(contret.getText().toString());
                 fichero.close();
             } catch (IOException e) {
+                //Si hay un error se comunica mediante una notificación.
                 Log.i("Error", getResources().getString(R.string.errorreg));
                 NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
@@ -61,7 +62,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                         .setAutoCancel(true);
                 elManager.notify(1, builder.build());
             }
-            //Una vez creado se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
+            //Una vez creado el usuario  se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
             NotificationCompat.Builder builder = new NotificationCompat.Builder(registro.this,"CanalLibro");
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

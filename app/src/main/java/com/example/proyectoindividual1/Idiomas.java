@@ -14,6 +14,7 @@ public class Idiomas {
     public Idiomas(){
 
     }
+    //Se selecciona el idioma que se desea.
     public void setIdioma(Context contexto){
         String idioma;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contexto);
