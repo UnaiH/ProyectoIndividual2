@@ -10,6 +10,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -74,7 +75,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
             if (ContextCompat.checkSelfPermission(locact.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(locact.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
-            if (ContextCompat.checkSelfPermission(locact.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            else if (ContextCompat.checkSelfPermission(locact.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(locact.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             }
             if (ContextCompat.checkSelfPermission(locact.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED||ContextCompat.checkSelfPermission(locact.this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -87,6 +88,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                             List<Address> direccion;
                             try {
                                 direccion=geo.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                                Log.i("Dir", "onSuccess: "+direccion);
                                 if(!direccion.isEmpty()) {
                                     actual.setText(direccion.get(0).getAddressLine(0));
                                 }
@@ -123,6 +125,9 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                             try {
                                 direccion=geo.getFromLocation(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),1);
                                 actual.setText(direccion.get(0).getAddressLine(0)+","+direccion.get(0).getLocality());
+                                Log.i("Dir", "Actualizar: "+locationResult.getLastLocation().getLatitude());
+                                Log.i("Dir", "Actualizar: "+locationResult.getLastLocation().getLongitude());
+                                Log.i("Dir", "Actualizar: "+direccion);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }}
@@ -142,7 +147,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                 };
-                cliente.requestLocationUpdates(peticion,actualizar,null);
+                cliente.requestLocationUpdates(peticion,actualizar, Looper.getMainLooper());
             } else {
                 localizacion.setText(getResources().getString(R.string.errorLocali));
             }
@@ -164,8 +169,8 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         cliente.removeLocationUpdates(actualizar);
+        super.onDestroy();
     }
 
     @Override

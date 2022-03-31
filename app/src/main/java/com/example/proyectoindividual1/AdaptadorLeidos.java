@@ -2,6 +2,9 @@ package com.example.proyectoindividual1;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +19,10 @@ public class AdaptadorLeidos extends BaseAdapter {
     private String[] autores;
     private String[] fechafin;
     private String[] fechaInicio;
-    private Integer[] imageid;
+    private String[] imageid;
     private Activity context;
 
-    public AdaptadorLeidos(Activity context, String[] titulos, String[] autores,String[] fechainicio, String[] fechafin, Integer[] imageid) {
+    public AdaptadorLeidos(Activity context, String[] titulos, String[] autores,String[] fechainicio, String[] fechafin, String[] imageid) {
         this.context = context;
         this.titulos = titulos;
         this.autores = autores;
@@ -57,7 +60,23 @@ public class AdaptadorLeidos extends BaseAdapter {
         textViewAutor.setText(autores[i]);
         textViewFechaIni.setText(fechaInicio[i]);
         textViewFechaFin.setText(fechafin[i]);
-        imagen.setImageResource(imageid[i]);
+        if (imageid[i].equals(2131230854)||imageid[i].equals("2131230855")||imageid[i].equals("2131230856")||imageid[i].equals("2131230857")||imageid[i].equals("2131230858")){
+            imagen.setImageResource(Integer.parseInt(imageid[i]));
+        }
+        else{
+            imagen.setImageBitmap(StringToBitMap(imageid[i]));
+        }
         return  view;
+    }
+    public Bitmap StringToBitMap(String encodedString){
+        try{
+            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
     }
 }

@@ -1,36 +1,22 @@
 package com.example.proyectoindividual1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Typeface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
+import android.util.Base64;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 public class leidos extends AppCompatActivity {
@@ -41,6 +27,10 @@ public class leidos extends AppCompatActivity {
     String[] fechaInicio = {};
     Integer[] imag={R.drawable.libro1,R.drawable.libro2,R.drawable.libro3,R.drawable.libro4,R.drawable.libro5};
     private String usuario="";
+    private ListView lista;
+    private String[] libros;
+    private static final int CAMERA_REQUEST = 1888;
+    private int clicado=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,16 +64,16 @@ public class leidos extends AppCompatActivity {
             }
         }
         int longit = titulos.length;
-        Integer[] libros = new Integer[longit];
+        libros = new String[longit];
         Random rand = new Random();
         //Se realiza la selección aleatoria de los libros para cada elemento de la lista.
         for (int aux=0;aux<longit;aux++){
-            libros[aux]=imag[rand.nextInt(imag.length)];
+            libros[aux]=imag[rand.nextInt(imag.length)].toString();
         }
         new Pantalla().cambiarPantallaListas(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leidos);
-        ListView lista=(ListView)findViewById(R.id.listaleidos);
+        lista=(ListView)findViewById(R.id.listaleidos);
         AdaptadorLeidos adaptador = new AdaptadorLeidos(this, titulos, autor, fechaInicio, fechaFin, libros);
         //Se llama al adaptador de esta lista.
         lista.setAdapter(adaptador);
@@ -118,5 +108,33 @@ public class leidos extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        lista.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent camara = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(camara,CAMERA_REQUEST);
+                clicado=i;
+                return true;
+            }
+        });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap theImage = (Bitmap) data.getExtras().get("data");
+            String photo = getEncodedString(theImage);
+            libros[clicado]=photo;
+        }
+    }
+    private String getEncodedString(Bitmap bitmap){
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
+        byte[] imageArr = os.toByteArray();
+        return Base64.encodeToString(imageArr, Base64.URL_SAFE);
     }
 }
