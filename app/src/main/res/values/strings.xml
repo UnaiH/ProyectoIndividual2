@@ -79,4 +79,7 @@
     <string name="valorno">Valor no válido</string>
     <string name="fin">Fin libro</string>
     <string name="felfin">Felicidades por la finalización del libro</string>
+    <string name="buslib">Buscar libreria</string>
+    <string name="errorLocali">Error en la localizacion del usuario</string>
+    <string name="libcerc">Libreria mas cercana</string>
 </resources>

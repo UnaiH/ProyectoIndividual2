@@ -6,11 +6,23 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/buscLib2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="172dp"
+        android:onClick="onClickLoc"
+        android:text="@string/buslib"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/config"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="264dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="96dp"
         android:onClick="onClickConfig"
         android:text="Configuración"
         android:visibility="visible"
@@ -22,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="76dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="96dp"
         android:onClick="onClickUsar"
         android:text="Usar"
         android:visibility="visible"

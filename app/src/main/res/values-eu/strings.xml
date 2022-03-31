@@ -75,4 +75,7 @@
     <string name="valorno">Balio hau ez du balio</string>
     <string name="fin">Liburu amaiera</string>
     <string name="felfin">Zorionak liburua amaitzeagatik.</string>
+    <string name="buslib">Bilatu liburua</string>
+    <string name="errorLocali">Arazoa erabiltzailearen lolkalizazioa</string>
+    <string name="libcerc">hurbilen dagoen liburu-denda</string>
 </resources>

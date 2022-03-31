@@ -75,4 +75,7 @@
     <string name="valorno">Not valid value</string>
     <string name="fin">Book end</string>
     <string name="felfin">Congratulations on finishing the book.</string>
+    <string name="buslib">Search library</string>
+    <string name="errorLocali">localization error</string>
+    <string name="libcerc">nearest bookstore</string>
 </resources>

@@ -68,6 +68,19 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         startActivity(i);
     }
 
+    public void onClickLoc(View view){
+        Bundle extras = getIntent().getExtras();
+        Intent i = new Intent(this, locact.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
+        startActivity(i);
+    }
+
     @Override
     public void onClick(View view) {
 
