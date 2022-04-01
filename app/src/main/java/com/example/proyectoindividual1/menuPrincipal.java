@@ -26,6 +26,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menuprinc);
+        pedirpermisos();
         Bundle extras = getIntent().getExtras();
         //Se da la bienvenida con la escritura del usuario en el TextView.
         if (extras != null) {
@@ -36,7 +37,6 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         if (savedInstanceState!= null) {
             usu= savedInstanceState.getString("usuario");
         }
-        pedirpermisos();
     }
 
     public void onClickUsar(View view) {

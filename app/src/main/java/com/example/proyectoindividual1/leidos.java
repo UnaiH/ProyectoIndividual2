@@ -70,6 +70,14 @@ public class leidos extends AppCompatActivity {
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(imag.length)].toString();
         }
+        String[] imagenes = getImagenes();
+        if(imagenes!=null) {
+            for (int aux = 0; aux < longit; aux++) {
+                if (!imagenes[aux].equals("0")) {
+                    libros[aux] = imagenes[aux];
+                }
+            }
+        }
         new Pantalla().cambiarPantallaListas(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_leidos);
@@ -128,7 +136,11 @@ public class leidos extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap theImage = (Bitmap) data.getExtras().get("data");
             String photo = getEncodedString(theImage);
-            libros[clicado]=photo;
+            BDExterna base = new BDExterna(leidos.this);
+            SQLiteDatabase db = base.getWritableDatabase();
+            if (db!=null){
+                base.anadirFoto(usuario,titulos[clicado],photo);
+            }
         }
     }
     private String getEncodedString(Bitmap bitmap){
@@ -136,5 +148,26 @@ public class leidos extends AppCompatActivity {
         bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
         byte[] imageArr = os.toByteArray();
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
+    }
+    private String[] getImagenes(){
+        String[] imagenes=null;
+        String comprobar="";
+        BDExterna base = new BDExterna(leidos.this);
+        SQLiteDatabase db = base.getWritableDatabase();
+        if(db!=null) {
+            imagenes=new String[titulos.length];
+            int indice = 0;
+            while (indice < titulos.length) {
+                comprobar = base.getImagen(usuario,titulos[indice]);
+                if(!comprobar.equals(0)){
+                    imagenes[indice]=comprobar;
+                }
+                else{
+                    imagenes[indice]="0";
+                }
+                indice++;
+            }
+        }
+        return imagenes;
     }
 }

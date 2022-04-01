@@ -1,7 +1,11 @@
 package com.example.proyectoindividual1;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +13,7 @@ import android.widget.AdapterView;
 
 import androidx.fragment.app.ListFragment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -23,6 +28,9 @@ public class listaleyendo extends ListFragment{
     Integer[] paginas={};
     private String usuario;
     private ArrayList<Libro> librs;
+    private static final int CAMERA_REQUEST = 1888;
+    private int clicado=0;
+    private String[] libros;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_listaleyendo,container,false);
@@ -56,13 +64,21 @@ public class listaleyendo extends ListFragment{
             }
         }
         int longit = titulos.length;
-        Integer[] libros = new Integer[longit];
+        libros = new String[longit];
         Random rand = new Random();
         int auxiliar=0;
         //Se seleccionan las imágenes aleatoriamente para mostrarlas por cada elemento de la lista.
         for (int aux=0;aux<longit;aux++){
             auxiliar=rand.nextInt(imag.length);
-            libros[aux]=imag[auxiliar];
+            libros[aux]=imag[auxiliar].toString();
+        }
+        String[] imagenes = getImagenes();
+        if(imagenes!=null) {
+            for (int aux = 0; aux < longit; aux++) {
+                if (!imagenes[aux].equals("0")) {
+                    libros[aux] = imagenes[aux];
+                }
+            }
         }
         super.onViewCreated(view, savedInstanceState);
         AdaptadorLeyendo adaptador = new AdaptadorLeyendo(this.getActivity(), titulos, autor, fechaInicio, fechaPrev, libros, act, paginas);
@@ -81,5 +97,54 @@ public class listaleyendo extends ListFragment{
                 leyendo.gestorFragmentos(lib1,leer);
             }
         });
+        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent camara = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(camara,CAMERA_REQUEST);
+                clicado=i;
+                return true;
+            }
+        });
+    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap theImage = (Bitmap) data.getExtras().get("data");
+            String photo = getEncodedString(theImage);
+            BDExterna base = new BDExterna(this.getContext());
+            SQLiteDatabase db = base.getWritableDatabase();
+            if (db!=null){
+                base.anadirFoto(usuario,titulos[clicado],photo);
+            }
+        }
+    }
+    private String getEncodedString(Bitmap bitmap){
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
+        byte[] imageArr = os.toByteArray();
+        return Base64.encodeToString(imageArr, Base64.URL_SAFE);
+    }
+    private String[] getImagenes(){
+        String[] imagenes=null;
+        String comprobar="";
+        BDExterna base = new BDExterna(getContext());
+        SQLiteDatabase db = base.getWritableDatabase();
+        if(db!=null) {
+            imagenes=new String[titulos.length];
+            int indice = 0;
+            while (indice < titulos.length) {
+                comprobar = base.getImagen(usuario,titulos[indice]);
+                if(!comprobar.equals(0)){
+                    imagenes[indice]=comprobar;
+                }
+                else{
+                    imagenes[indice]="0";
+                }
+                indice++;
+            }
+        }
+        return imagenes;
     }
 }

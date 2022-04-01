@@ -78,4 +78,7 @@
     <string name="buslib">Bilatu liburua</string>
     <string name="errorLocali">Arazoa erabiltzailearen lolkalizazioa</string>
     <string name="libcerc">hurbilen dagoen liburu-denda</string>
+    <string name="contract">Pasahitza eguneratu da</string>
+    <string name="contractcontenido">Pasahitza ondo eguneratu da</string>
+    <string name="error">Errorea</string>
 </resources>

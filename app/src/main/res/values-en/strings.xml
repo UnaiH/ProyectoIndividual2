@@ -78,4 +78,7 @@
     <string name="buslib">Search library</string>
     <string name="errorLocali">localization error</string>
     <string name="libcerc">nearest bookstore</string>
+    <string name="contract">Password updated</string>
+    <string name="contractcontenido">The password has been updated correctly</string>
+    <string name="error">Error</string>
 </resources>

@@ -82,4 +82,7 @@
     <string name="buslib">Buscar libreria</string>
     <string name="errorLocali">Error en la localizacion del usuario</string>
     <string name="libcerc">Libreria mas cercana</string>
+    <string name="contract">Contraseña actualizada</string>
+    <string name="contractcontenido">La contraseña se ha actualizado correctamente</string>
+    <string name="error">Error</string>
 </resources>

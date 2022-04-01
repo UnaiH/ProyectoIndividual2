@@ -1,18 +1,14 @@
 package com.example.proyectoindividual1;
 
-import static com.example.proyectoindividual1.R.string.menscorreg;
-
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,11 +18,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
-import androidx.preference.PreferenceManager;
-
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Locale;
 
 //Esta actividad gestiona lo relacionado con el registro como su nombre indica.
 public class registro extends AppCompatActivity implements View.OnClickListener {
@@ -43,42 +34,31 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         EditText contret = (EditText) findViewById(R.id.RegContr);
         EditText contretrep = (EditText) findViewById(R.id.RegContrRep);
         if (contret.getText().toString().equals(contretrep.getText().toString())) {
-            try {
-                OutputStreamWriter fichero = new OutputStreamWriter(openFileOutput(usuarioret.getText().toString()+".txt", Context.MODE_PRIVATE));
-                fichero.write(contret.getText().toString());
-                fichero.close();
-            } catch (IOException e) {
+            BDExterna base = new BDExterna(registro.this);
+            SQLiteDatabase db = base.getWritableDatabase();
+            boolean existe =false;
+            if (db==null){
                 //Si hay un error se comunica mediante una notificación.
-                Log.i("Error", getResources().getString(R.string.errorreg));
-                NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-                NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                    elManager.createNotificationChannel(elCanal);
-                }
-                builder.setContentTitle("Error")
-                        .setContentText(getResources().getString(R.string.errorreg))
-                        .setSmallIcon(R.drawable.ic_launcher_background)
-                        .setAutoCancel(true);
-                elManager.notify(1, builder.build());
+                enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errorreg));
             }
-            //Una vez creado el usuario  se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
-            NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(registro.this,"CanalLibro");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                elManager.createNotificationChannel(elCanal);
+            else{
+                existe=base.registrarse(usuarioret.getText().toString(),contret.getText().toString());
             }
-            builder.setContentTitle(getResources().getString(R.string.correg))
-                    .setContentText(getResources().getString(R.string.menscorreg))
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setAutoCancel(true);
-            elManager.notify(1, builder.build());
-
-            finish();
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("regok", 1);
-            startActivity(i);
+            if (!existe) {
+                //Una vez creado el usuario  se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
+                enviarMensajeLocal(getResources().getString(R.string.correg),getResources().getString(R.string.menscorreg));
+                finish();
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("regok", 1);
+                startActivity(i);
+            }
+            else{
+                enviarMensajeLocal(getResources().getString(R.string.contract),getResources().getString(R.string.contractcontenido));
+                finish();
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("regok", 1);
+                startActivity(i);
+            }
         }
         else{
             //Se mostrará un toast indicando que no se ha registrado corectamente.
@@ -116,5 +96,18 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    private void enviarMensajeLocal(String titulo, String contenido){
+        NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(registro.this, "CanalLibro");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+            elManager.createNotificationChannel(elCanal);
+        }
+        builder.setContentTitle(titulo)
+                .setContentText(contenido)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setAutoCancel(true);
+        elManager.notify(1, builder.build());
     }
 }
