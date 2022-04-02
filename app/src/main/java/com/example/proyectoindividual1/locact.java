@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -113,8 +114,8 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                     }
                 });
                 LocationRequest peticion = LocationRequest.create();
-                peticion.setInterval(10000);
-                peticion.setFastestInterval(5000);
+                peticion.setInterval(5000);
+                peticion.setFastestInterval(1000);
                 peticion.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
                 actualizar = new LocationCallback() {
                     @Override
@@ -125,9 +126,6 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                             try {
                                 direccion=geo.getFromLocation(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),1);
                                 actual.setText(direccion.get(0).getAddressLine(0)+","+direccion.get(0).getLocality());
-                                Log.i("Dir", "Actualizar: "+locationResult.getLastLocation().getLatitude());
-                                Log.i("Dir", "Actualizar: "+locationResult.getLastLocation().getLongitude());
-                                Log.i("Dir", "Actualizar: "+direccion);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }}
@@ -180,5 +178,13 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         if (libcercana.getVisibility() == View.INVISIBLE){
             libcercana.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(this, menuPrincipal.class);
+        finish();
+        startActivity(i);
     }
 }

@@ -1,18 +1,14 @@
 package com.example.proyectoindividual1;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.preference.PreferenceManager;
 
 //Es el menú principal una vez iniciada la sesión
@@ -26,7 +22,6 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menuprinc);
-        pedirpermisos();
         Bundle extras = getIntent().getExtras();
         //Se da la bienvenida con la escritura del usuario en el TextView.
         if (extras != null) {
@@ -112,19 +107,5 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
     protected void onRestoreInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usu);
-    }
-    private void pedirpermisos() {
-        if (ContextCompat.checkSelfPermission(menuPrincipal.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(menuPrincipal.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
-        else if (ContextCompat.checkSelfPermission(menuPrincipal.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(menuPrincipal.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-        }
-        if (ContextCompat.checkSelfPermission(menuPrincipal.this, Manifest.permission.WRITE_CALENDAR)!= PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(menuPrincipal.this, new String[]{Manifest.permission.WRITE_CALENDAR},1);
-        }
-        if (ContextCompat.checkSelfPermission(menuPrincipal.this, Manifest.permission.CAMERA)!= PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(menuPrincipal.this, new String[]{Manifest.permission.CAMERA},1);
-        }
     }
 }

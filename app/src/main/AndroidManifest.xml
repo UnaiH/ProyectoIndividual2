@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -41,6 +42,10 @@
         <activity android:name=".menuPrincipal" />
         <activity android:name=".config" />
         <activity android:name=".leidos" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="A3:C4:6A:60:CA:3D:FD:7E:4C:D2:DB:CA:E4:72:43:93:50:8D:9F:E4" />
+
     </application>
 
 </manifest>

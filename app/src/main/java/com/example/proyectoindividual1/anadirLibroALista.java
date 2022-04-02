@@ -1,27 +1,15 @@
 package com.example.proyectoindividual1;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
-import androidx.preference.PreferenceManager;
-
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -29,8 +17,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
+import androidx.preference.PreferenceManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -47,6 +39,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     private String usu="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new permisos().permisosCalendar(anadirLibroALista.this, anadirLibroALista.this);
         //Se inicializa el layout.
         if (savedInstanceState!= null) {
             usu= savedInstanceState.getString("usuario");

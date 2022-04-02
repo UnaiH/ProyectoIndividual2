@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toastcustomizado.setView(el_layout);
             toastcustomizado.show();
         };
+        new permisos().pedirpermisosLocalizar(MainActivity.this, MainActivity.this);
     }
 
     public void IniciarSesion(View view) {

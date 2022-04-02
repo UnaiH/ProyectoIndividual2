@@ -63,7 +63,6 @@ public class AdaptadorLeyendo extends BaseAdapter {
         textViewAutor.setText(autores[i]);
         textViewFechaIni.setText(fechaInicio[i]);
         textViewFechaFin.setText(fechaprev[i]);
-        Log.i("TAG", "getView:"+imageid[i]);
         if (imageid[i].equals("2131230859")||imageid[i].equals("2131230860")||imageid[i].equals("2131230861")||imageid[i].equals("2131230862")||imageid[i].equals("2131230863")){
             imagen.setImageResource(Integer.parseInt(imageid[i]));
         }
@@ -77,7 +76,7 @@ public class AdaptadorLeyendo extends BaseAdapter {
     }
     public Bitmap StringToBitMap(String encodedString){
         try{
-            byte [] encodeByte = Base64.decode(encodedString,Base64.DEFAULT);
+            byte [] encodeByte = Base64.decode(encodedString,Base64.URL_SAFE);
             Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
             return bitmap;
         }

@@ -34,6 +34,7 @@ public class leidos extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new permisos().permisosCamara(leidos.this, leidos.this);
         //Se realiza la carga de los datos necesarios
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");

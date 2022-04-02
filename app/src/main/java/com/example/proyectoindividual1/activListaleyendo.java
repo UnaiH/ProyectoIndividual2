@@ -1,23 +1,16 @@
 package com.example.proyectoindividual1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.preference.PreferenceManager;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 
-import java.util.List;
-import java.util.Locale;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.preference.PreferenceManager;
 
 public class activListaleyendo extends AppCompatActivity{
     //Esta lista se encarga de gestionar los fragments.
@@ -25,6 +18,7 @@ public class activListaleyendo extends AppCompatActivity{
     private String usu= "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new permisos().permisosCamara(activListaleyendo.this, activListaleyendo.this);
         if (savedInstanceState!= null) {
             usu= savedInstanceState.getString("usuario");
         }
