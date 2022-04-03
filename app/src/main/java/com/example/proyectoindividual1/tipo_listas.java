@@ -1,24 +1,18 @@
 package com.example.proyectoindividual1;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
-import java.util.Locale;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class tipo_listas extends AppCompatActivity implements View.OnClickListener {
     private String usuario="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new permisos().permisosCalendarLeer(tipo_listas.this,tipo_listas.this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");
         }
@@ -64,7 +58,13 @@ public class tipo_listas extends AppCompatActivity implements View.OnClickListen
         finish();
         startActivity(i);
     }
-
+    public void onClickEventos(View view) {
+        //Al pulsar se devolverá al usuario a la interfaz del menú principal.
+        Intent i = new Intent(this, listarEventos.class);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        startActivity(i);
+    }
     @Override
     public void onClick(View view) {
 

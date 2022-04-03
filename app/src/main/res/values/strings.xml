@@ -85,4 +85,9 @@
     <string name="contract">Contraseña actualizada</string>
     <string name="contractcontenido">La contraseña se ha actualizado correctamente</string>
     <string name="error">Error</string>
+    <string name="appwidget_text">Localización</string>
+    <string name="add_widget">Añadir widget</string>
+    <string name="app_widget_description">Se mostrará la calle en la que te encuentras actualmente.</string>
+    <string name="listaEventos">Listar Eventos</string>
+    <string name="nulo">Ninguno</string>
 </resources>

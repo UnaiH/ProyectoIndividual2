@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.proyectoindividual1" >
+    package="com.example.proyectoindividual1">
+
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -17,7 +22,26 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ProyectoIndividual1" >
+        android:theme="@style/Theme.ProyectoIndividual1">
+        <activity
+            android:name=".listarEventos"
+            android:exported="false" />
+
+        <receiver
+            android:name=".NewAppWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/new_app_widget_info" />
+        </receiver>
+
+        <activity
+            android:name=".MainActivity_mapa"
+            android:exported="false" />
         <activity
             android:name=".activListaleyendo"
             android:exported="false" />
@@ -32,9 +56,10 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -42,10 +67,10 @@
         <activity android:name=".menuPrincipal" />
         <activity android:name=".config" />
         <activity android:name=".leidos" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="A3:C4:6A:60:CA:3D:FD:7E:4C:D2:DB:CA:E4:72:43:93:50:8D:9F:E4" />
-
+            android:value="AIzaSyAZYm0UJayCtI0Ct4BZJ88W5X1azpPEJ_0" />
     </application>
 
 </manifest>

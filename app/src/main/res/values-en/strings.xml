@@ -81,4 +81,9 @@
     <string name="contract">Password updated</string>
     <string name="contractcontenido">The password has been updated correctly</string>
     <string name="error">Error</string>
+    <string name="add_widget">Add widget</string>
+    <string name="appwidget_text">Localitation</string>
+    <string name="app_widget_description">You can see the street were you are</string>
+    <string name="listaEventos">List Events</string>
+    <string name="nulo">None</string>
 </resources>

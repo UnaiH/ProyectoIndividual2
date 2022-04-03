@@ -13,14 +13,17 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
     <style name="RegBien" parent="Theme.AppCompat">
         <item name="android:fontFamily">sans-serif-smallcaps</item>
         <item name="android:textColor">#00B000</item>
     </style>
+
     <style name="RegMal" parent="Theme.AppCompat">
         <item name="android:fontFamily">sans-serif-smallcaps</item>
         <item name="android:textColor">#C00000</item>
     </style>
+
     <style name="ModoOscuro" parent="Theme.AppCompat">
         <item name="android:title">#FFFFFF</item>
         <item name="android:textColor">#FFFFFF</item>
@@ -28,11 +31,13 @@
         <item name="android:statusBarColor" tools:targetApi="l">#505050</item>
         <item name="colorPrimary">#404060</item>
     </style>
+
     <style name="MenuPrincipal" parent="Theme.AppCompat">
         <item name="android:title">#A0AA50</item>
         <item name="android:textColor">#182111</item>
         <item name="android:background">#3A5AAA</item>
     </style>
+
     <style name="Normal" parent="Theme.AppCompat">
         <item name="colorPrimary">#222288</item>
         <item name="android:title">#AAAAAA</item>
@@ -41,6 +46,7 @@
         <item name="android:background">#5555CC</item>
         <item name="android:statusBarColor" tools:targetApi="l">#555588</item>
     </style>
+
     <style name="Listas" parent="Theme.AppCompat">
         <item name="colorPrimary">#CBBBCB</item>
         <item name="android:title">#000000</item>
@@ -48,5 +54,29 @@
         <item name="android:textSize">16dp</item>
         <item name="android:background">#AAAAAA</item>
         <item name="android:statusBarColor" tools:targetApi="l">#DDDDDD</item>
+    </style>
+
+    <style name="Theme.ProyectoIndividual1.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.ProyectoIndividual1.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.ProyectoIndividual1.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="Theme.ProyectoIndividual1.AppWidgetContainerParent" parent="@android:style/Theme.DeviceDefault">
+        <!-- Radius of the outer bound of widgets to make the rounded corners -->
+        <item name="appWidgetRadius">16dp</item>
+        <!--
+        Radius of the inner view's bound of widgets to make the rounded corners.
+        It needs to be 8dp or less than the value of appWidgetRadius
+        -->
+        <item name="appWidgetInnerRadius">8dp</item>
+    </style>
+
+    <style name="Theme.ProyectoIndividual1.AppWidgetContainer" parent="Theme.ProyectoIndividual1.AppWidgetContainerParent">
+        <!-- Apply padding to avoid the content of the widget colliding with the rounded corners -->
+        <item name="appWidgetPadding">16dp</item>
     </style>
 </resources>

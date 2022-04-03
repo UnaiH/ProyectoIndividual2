@@ -41,6 +41,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
     private TextView libcercana;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new permisos().permisosInternet(locact.this, locact.this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");
         }
@@ -175,9 +176,12 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         TextView libcercana=findViewById(R.id.mascerc);
         Log.i("TAG", "onClick: PasaVis"+libcercana.getVisibility());
-        if (libcercana.getVisibility() == View.INVISIBLE){
+        /*if (libcercana.getVisibility() == View.INVISIBLE){
             libcercana.setVisibility(View.VISIBLE);
-        }
+        }*/
+        Intent i = new Intent(this, MainActivity_mapa.class);
+        finish();
+        startActivity(i);
     }
 
     @Override

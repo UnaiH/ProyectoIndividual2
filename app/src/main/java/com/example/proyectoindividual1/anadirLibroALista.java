@@ -39,7 +39,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
     private String usu="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        new permisos().permisosCalendar(anadirLibroALista.this, anadirLibroALista.this);
+        new permisos().permisosCalendarEscribir(anadirLibroALista.this, anadirLibroALista.this);
         //Se inicializa el layout.
         if (savedInstanceState!= null) {
             usu= savedInstanceState.getString("usuario");
@@ -154,7 +154,7 @@ public class anadirLibroALista extends AppCompatActivity implements View.OnClick
                                                 valores.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,empMillis);
                                                 valores.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,acabaMillis);
                                                 valores.putExtra(CalendarContract.Events.TITLE, titulo.getText().toString()+" "+autor.getText().toString());
-                                                valores.putExtra(CalendarContract.Events.DESCRIPTION, genero.getText().toString()+ finalUsu);
+                                                valores.putExtra(CalendarContract.Events.DESCRIPTION, "Libuk"+ finalUsu);
                                                 valores.putExtra(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
                                                 if(valores.resolveActivity(getPackageManager()) == null){
                                                     Log.i("TAG", "onClick: inicia activity calendar");

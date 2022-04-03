@@ -25,7 +25,10 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_leidos.xml" value="0.25" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_leyendo.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_lista_leidos.xml" value="0.240625" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_listar_eventos.xml" value="0.266304347826087" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_main.xml" value="0.23626373626373626" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_main_mapa.xml" value="0.33" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_mapa.xml" value="0.1" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/activity_tipo_listas.xml" value="0.25" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/anadir.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/buscargoogle.xml" value="0.5" />
@@ -33,6 +36,7 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/configuracion.xml" value="0.5" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/elementosleidos.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/elementosleyendo.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/elemevento.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/enlectura.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_anadir_libro.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/fragment_datos_leidos.xml" value="0.46770833333333334" />
@@ -50,6 +54,7 @@
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/leidos.xml" value="0.25" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/ltoastregneg.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/menuprinc.xml" value="0.22" />
+        <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/new_app_widget.xml" value="0.67" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/registro.xml" value="0.33" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/tiposlistas.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jonka/AndroidStudioProjects/ProyectoIndividual1/app/src/main/res/layout/toastregistro.xml" value="0.25" />

@@ -81,4 +81,9 @@
     <string name="contract">Pasahitza eguneratu da</string>
     <string name="contractcontenido">Pasahitza ondo eguneratu da</string>
     <string name="error">Errorea</string>
+    <string name="add_widget">Gehitu widget</string>
+    <string name="appwidget_text">Localizazioa</string>
+    <string name="app_widget_description">Orain zauden kalea ikusi dezakezu</string>
+    <string name="listaEventos">Gertaeren zerrenda egin</string>
+    <string name="nulo">Ez dauka</string>
 </resources>
