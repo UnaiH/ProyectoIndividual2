@@ -90,4 +90,9 @@
     <string name="app_widget_description">Se mostrará la calle en la que te encuentras actualmente.</string>
     <string name="listaEventos">Listar Eventos</string>
     <string name="nulo">Ninguno</string>
+    <string name="finlec">Programar fin lectura</string>
+    <string name="defh">En una hora</string>
+    <string name="defh2">En dos hora</string>
+    <string name="hdefinida">La hora definida es:</string>
+    <string name="fhlec">Fin del tiempo indicado de lectura</string>
 </resources>

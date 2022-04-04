@@ -86,4 +86,9 @@
     <string name="app_widget_description">You can see the street were you are</string>
     <string name="listaEventos">List Events</string>
     <string name="nulo">None</string>
+    <string name="finlec">Program reading end</string>
+    <string name="defh">In one hour</string>
+    <string name="hdefinida">The defined hour is:</string>
+    <string name="defh2">In two hour</string>
+    <string name="fhlec">End of indicated reading time</string>
 </resources>

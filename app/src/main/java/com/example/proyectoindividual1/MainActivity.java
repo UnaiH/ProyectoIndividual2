@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             toastcustomizado.setView(el_layout);
             toastcustomizado.show();
         };
-        new permisos().pedirpermisosLocalizar(MainActivity.this, MainActivity.this);
+        new permisos().permisosInternet(MainActivity.this, MainActivity.this);
     }
 
     public void IniciarSesion(View view) {
@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             inicio = base.iniciarSesion(usuarios.getText().toString(), contr.getText().toString());
             //Se realiza la comparación de la contraseña del EditText y la guardada en el archivo .txt.
             if (inicio) {
+                new permisos().pedirpermisosLocalizar(MainActivity.this, MainActivity.this);
                 Intent i = new Intent(this, menuPrincipal.class);
                 i.putExtra("usuario", usuarios.getText().toString());
                 setResult(RESULT_OK, i);

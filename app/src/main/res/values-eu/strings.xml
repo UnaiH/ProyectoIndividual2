@@ -86,4 +86,9 @@
     <string name="app_widget_description">Orain zauden kalea ikusi dezakezu</string>
     <string name="listaEventos">Gertaeren zerrenda egin</string>
     <string name="nulo">Ez dauka</string>
+    <string name="finlec">Programatu irakurketaren amaiera</string>
+    <string name="defh">Hurrego orduan</string>
+    <string name="hdefinida">Aukeraturako ordua:</string>
+    <string name="defh2">Bi ordu barru</string>
+    <string name="fhlec">Adierazitako irakurketa denbora amaitu da</string>
 </resources>

@@ -26,6 +26,8 @@ public class listarEventos extends AppCompatActivity {
     private AdaptadorEventos adaptador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaListas(this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");
         }

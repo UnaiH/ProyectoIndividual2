@@ -41,6 +41,8 @@ public class MainActivity_mapa extends FragmentActivity implements OnMapReadyCal
     private double Latact=0; private double Longact=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_mapa);
         fragmentoMapa = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentoMapa);

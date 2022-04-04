@@ -3,13 +3,11 @@ package com.example.proyectoindividual1;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 
 //Es el menú principal una vez iniciada la sesión
 public class menuPrincipal extends AppCompatActivity implements View.OnClickListener {
@@ -17,7 +15,6 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Se realiza el cambio de idioma de la aplicación pues es la primera activiadad por la que se pasa tras haber estado en configuración. También se comprueba si se ha especificado si se quiere el modo oscuro o el que se poen de forma predeterminada.
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         new Idiomas().setIdioma(this);
         new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
@@ -64,6 +61,18 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
     public void onClickLoc(View view){
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, locact.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
+        startActivity(i);
+    }
+    public void onClickHora(View view){
+        Bundle extras = getIntent().getExtras();
+        Intent i = new Intent(this, FinLectura.class);
         String usuario = "";
         if (extras != null) {
             usuario = extras.getString("usuario");
