@@ -1,5 +1,6 @@
 package com.example.proyectoindividual1;
 //Esta clase se emplea como pantalla de inicio al ejecutar la aplicación
+
 import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +21,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private int valor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        crearLista();
         //Se carga el idioma al inicio en la actividad principal por si acaso se ha cambiado el idioma del sistema. Si no se ha especificado el idioma en preferencias se pondrá en inglés por considerarse un idioma oficial.
         valor=0;
         new Idiomas().setIdioma(this);
@@ -121,5 +128,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
+    }
+    private void crearLista(){
+        String[] autores=new String[]{"Stephen King, IT","Stephen King, Carrie","Stephen King, The Green Mile","Stephen King, Revival","Gabriel García Márquez, Cien años de soledad", "Ernest Hemingway, Fiesta", "Ernest Hemingway, Por quien doblan las campanas","Ernest Hemingway, Old man and the sea","Charles Dickens, Oliver Twist", "Charles Dickens, A Tale of Two Cities","Edgar Allan Poe, The Black Cat", "Edgar Allan Poe, The Bells","William Shakespeare, Hamlet","William Shakespeare, Otelo","William Shakespeare, Macbeth","Migel de Cervantes, Don Quijote de la Mancha", "Migel de Cervantes, Entremeses","Mark Twain, The Adventures of Tom Sawyer", "Oscar Wilde, The Picture of Dorian Gray", "George Orwell, 1984", "George Orwell, Animal Farm","George Orwell, Homage to Catalonia","Fiódor Dostoievski, Crime and Punishment", "Fiódor Dostoievski, CThe Brothers Karamazov", "Aldous Huxley, Brave New World", "Pio Baroja, El árbol de la ciencia", "Pio Baroja, La busca","Migel de Unamuno, Niebla", "Migel de Unamuno, San Manuel Bueno mártir","Goethe, Fausto", "Mary Shelley, Frankenstein", "Victor Hugo, Les Misérables", "Alejandro Dumas, Les Trois Mousquetaires", "Alejandro Dumas, Le Comte de Monte-Cristo","Julio Verne, Around the World in Eighty Days", "Julio Verne, Around the World in Eighty Days", "Julio Verne, Twenty Thousand Leagues Under the Sea", "León Tolstói, War and Peace","León Tolstói, Ana Karenina", "Bram Stoker, Dracula", "The Call of Cthulhu, H.P.Lovecraft", "The Shadow Out of Time, H.P.Lovecraft", "Isabel Allende, La casa de los espíritus", "Agatha Christie, Death on the Nile", "Agatha Christie, Murder on the Orient Express","Mario Vargas Llosa, El pez en el agua", "J. R. R. Tolkien, The Hobbit","J. R. R. Tolkien, The Lord of the Rings"};
+        try {
+            BufferedWriter fichero = new BufferedWriter(new OutputStreamWriter(openFileOutput("recomautores.txt", Context.MODE_PRIVATE)));
+            int itr = 0;
+            while (itr < autores.length) {
+                fichero.write(autores[itr]);
+                fichero.newLine();
+                itr++;
+            }
+            fichero.close();
+        }catch (IOException e) {
+            Log.i("Error", "onClickAnadir");
+        }
     }
 }

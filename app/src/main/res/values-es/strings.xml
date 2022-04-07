@@ -91,4 +91,8 @@
     <string name="hdefinida">La hora definida es:</string>
     <string name="defh2">En dos hora</string>
     <string name="fhlec">Fin del tiempo indicado de lectura</string>
+    <string name="nAutRecB">Añadir</string>
+    <string name="nAutRec">Nuevo autor a recomendar</string>
+    <string name="autorrecomendarw">Autor</string>
+    <string name="recomendacion">"Recomendado: "</string>
 </resources>

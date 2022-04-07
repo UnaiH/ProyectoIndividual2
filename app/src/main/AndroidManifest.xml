@@ -29,13 +29,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoIndividual1">
-        <activity
-            android:name=".FinLectura"
-            android:exported="false" />
-        <activity
-            android:name=".listarEventos"
-            android:exported="false" />
-
         <receiver
             android:name=".NewAppWidget"
             android:exported="true">
@@ -48,6 +41,12 @@
                 android:resource="@xml/new_app_widget_info" />
         </receiver>
 
+        <activity
+            android:name=".FinLectura"
+            android:exported="false" />
+        <activity
+            android:name=".listarEventos"
+            android:exported="false" />
         <activity
             android:name=".MainActivity_mapa"
             android:exported="false" />
@@ -76,10 +75,14 @@
         <activity android:name=".menuPrincipal" />
         <activity android:name=".config" />
         <activity android:name=".leidos" />
-        <receiver android:name=".AlarmReceiver"
-            android:enabled="true"></receiver>
-        <service android:name=".notificar"
-            android:enabled="true"></service>
+
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true" />
+
+        <service
+            android:name=".notificar"
+            android:enabled="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

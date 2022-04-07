@@ -91,4 +91,8 @@
     <string name="hdefinida">The defined hour is:</string>
     <string name="defh2">In two hour</string>
     <string name="fhlec">End of indicated reading time</string>
+    <string name="nAutRecB">Add</string>
+    <string name="nAutRec">Recommend new author</string>
+    <string name="autorrecomendarw">Author</string>
+    <string name="recomendacion">"Recommended: "</string>
 </resources>

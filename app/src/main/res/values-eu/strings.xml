@@ -91,4 +91,8 @@
     <string name="hdefinida">Aukeraturako ordua:</string>
     <string name="defh2">Bi ordu barru</string>
     <string name="fhlec">Adierazitako irakurketa denbora amaitu da</string>
+    <string name="nAutRecB">Gehitu</string>
+    <string name="nAutRec">Idazle berria gomendatua</string>
+    <string name="autorrecomendarw">Idazle</string>
+    <string name="recomendacion">"Gomendatua: "</string>
 </resources>

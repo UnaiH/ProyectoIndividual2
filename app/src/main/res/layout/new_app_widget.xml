@@ -5,10 +5,11 @@
     android:theme="@style/Theme.ProyectoIndividual1.AppWidgetContainer">
 
     <TextView
-        android:id="@+id/appwidget_text"
+        android:background="@color/grey"
+        android:id="@+id/textorecomendarwidget"
         style="@style/Widget.ProyectoIndividual1.AppWidget.InnerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="387dp"
+        android:layout_height="707dp"
         android:layout_centerInParent="true"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -16,7 +17,6 @@
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/appwidget_text"
         android:text="@string/appwidget_text"
-        android:textSize="8sp"
+        android:textSize="14sp"
         android:textStyle="bold|italic" />
-
 </RelativeLayout>

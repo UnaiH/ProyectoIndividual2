@@ -122,7 +122,7 @@ public class listaleyendo extends ListFragment{
     }
     private String getEncodedString(Bitmap bitmap){
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,35, os);
         byte[] imageArr = os.toByteArray();
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
     }

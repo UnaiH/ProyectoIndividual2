@@ -6,11 +6,23 @@
     android:layout_height="match_parent">
 
     <Button
+        android:id="@+id/buscLib3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="252dp"
+        android:onClick="onClickHora"
+        android:text="@string/finlec"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/uso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="96dp"
+        android:layout_marginTop="68dp"
         android:onClick="onClickUsar"
         android:text="@string/usar"
         android:visibility="visible"
@@ -21,8 +33,8 @@
         android:id="@+id/config"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="127dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginStart="124dp"
+        android:layout_marginTop="128dp"
         android:onClick="onClickConfig"
         android:text="@string/conf"
         android:visibility="visible"
@@ -33,22 +45,10 @@
         android:id="@+id/buscLib"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="122dp"
-        android:layout_marginTop="240dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="188dp"
         android:onClick="onClickLoc"
         android:text="@string/buslib"
-        android:visibility="visible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/buscLib3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="88dp"
-        android:layout_marginTop="308dp"
-        android:onClick="onClickHora"
-        android:text="@string/finlec"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -60,6 +60,18 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="36dp"
         android:text="@string/bvenida"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/recomendarAutor"
+        android:layout_width="221dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="312dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/nAutRec"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
