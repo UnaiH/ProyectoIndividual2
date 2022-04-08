@@ -70,26 +70,18 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         if (h>12){
             h-=12;
         }
-        hFin=""+h;
-        minFin=""+minuto;
-        Log.i("TAG", "onClickDefhora: "+hFin);
-        notificaciones.setText(getString(R.string.hdefinida)+" "+hFin+":"+minFin);
         Calendar horaAlarma= Calendar.getInstance();
         horaAlarma.set(Calendar.HOUR_OF_DAY, hora+1);
         horaAlarma.set(Calendar.MINUTE, minuto);
         horaAlarma.set(Calendar.SECOND,00);
-        edit.putString("hour", hFin);
-        edit.putString("minute", minFin);
-        edit.putInt("alarmID", alarmID);
-        edit.putLong("alarmTime", actual.getTimeInMillis());
-        edit.commit();
-        Utils.setAlarm(alarmID, horaAlarma.getTimeInMillis(), FinLectura.this);
+        hFin=""+h;
+        minFin=""+minuto;
+        definirHora(hFin,minFin,horaAlarma);
     }
     public void onClickDef2hora(View view) {
         Calendar actual = Calendar.getInstance();
         int hora = actual.get(Calendar.HOUR_OF_DAY);
         int minuto = actual.get(Calendar.MINUTE);
-        SharedPreferences.Editor edit = definidas.edit();
         String hFin, minFin;
         int h = (hora+2);
         if (h>12){
@@ -101,6 +93,53 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         horaAlarma.set(Calendar.SECOND,00);
         hFin=""+h;
         minFin=""+minuto;
+        definirHora(hFin,minFin,horaAlarma);
+
+    }
+    public void onClickDef3hora(View view) {
+        Calendar actual = Calendar.getInstance();
+        int hora = actual.get(Calendar.HOUR_OF_DAY);
+        int minuto = actual.get(Calendar.MINUTE);
+        String hFin, minFin;
+        int h = (hora+3);
+        if (h>12){
+            h-=12;
+        }
+        Calendar horaAlarma= Calendar.getInstance();
+        horaAlarma.set(Calendar.HOUR_OF_DAY, hora+2);
+        horaAlarma.set(Calendar.MINUTE, minuto);
+        horaAlarma.set(Calendar.SECOND,00);
+        hFin=""+h;
+        minFin=""+minuto;
+        definirHora(hFin,minFin,horaAlarma);
+
+    }
+    public void onClickDefmediahora(View view) {
+        Calendar actual = Calendar.getInstance();
+        int hora = actual.get(Calendar.HOUR_OF_DAY);
+        int minuto = actual.get(Calendar.MINUTE);
+        String hFin, minFin;
+        minuto = (minuto+30);
+        int h = (hora);
+        if(minuto>60){
+            minuto-=60;
+            h++;
+        }
+        if (h>12){
+            h-=12;
+        }
+        Calendar horaAlarma= Calendar.getInstance();
+        horaAlarma.set(Calendar.HOUR_OF_DAY, hora+2);
+        horaAlarma.set(Calendar.MINUTE, minuto);
+        horaAlarma.set(Calendar.SECOND,00);
+        hFin=""+h;
+        minFin=""+minuto;
+        definirHora(hFin,minFin,horaAlarma);
+
+    }
+    private void definirHora(String hFin, String minFin, Calendar horaAlarma){
+        Calendar actual = Calendar.getInstance();
+        SharedPreferences.Editor edit = definidas.edit();
         notificaciones.setText(getString(R.string.hdefinida)+" "+hFin+":"+minFin);
         edit.putString("hour", hFin);
         edit.putString("minute", minFin);

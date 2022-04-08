@@ -29,6 +29,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoIndividual1">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAZYm0UJayCtI0Ct4BZJ88W5X1azpPEJ_0" />
+
+        <activity
+            android:name=".mapamislibrerias"
+            android:exported="false"
+            android:label="@string/mapamislibrerias" />
+        <activity
+            android:name=".mensajeerror"
+            android:exported="false" />
+
         <receiver
             android:name=".NewAppWidget"
             android:exported="true">
@@ -83,10 +95,20 @@
         <service
             android:name=".notificar"
             android:enabled="true" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAZYm0UJayCtI0Ct4BZJ88W5X1azpPEJ_0" />
+        <service
+            android:name=".FireBase"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".FireBaseRecibir"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

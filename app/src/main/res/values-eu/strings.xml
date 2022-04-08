@@ -95,4 +95,14 @@
     <string name="nAutRec">Idazle berria gomendatua</string>
     <string name="autorrecomendarw">Idazle</string>
     <string name="recomendacion">"Gomendatua: "</string>
+    <string name="citlit">Literaturaren hiriak</string>
+    <string name="comerror">Komunikatu Errorea</string>
+    <string name="escrerror">Idatzi zure arazoa</string>
+    <string name="defh3">Hiru ordu barru</string>
+    <string name="defh30">Erdi ordu barru</string>
+    <string name="mascercanos">Hurbileneko markatzailea</string>
+    <string name="vermarc">Ikusi gordetako liburudendak</string>
+    <string name="errbd">Datu-basearen errorea</string>
+    <string name="sinmarcas">Markak barik</string>
+    <string name="mapamislibrerias">Liburu denda</string>
 </resources>

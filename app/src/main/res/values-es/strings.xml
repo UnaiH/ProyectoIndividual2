@@ -95,4 +95,14 @@
     <string name="nAutRec">Nuevo autor a recomendar</string>
     <string name="autorrecomendarw">Autor</string>
     <string name="recomendacion">"Recomendado: "</string>
+    <string name="citlit">Ciudades de la literatura</string>
+    <string name="comerror">Comunicar error</string>
+    <string name="escrerror">Escriba su problema</string>
+    <string name="defh3">En tres hora</string>
+    <string name="defh30">En media hora</string>
+    <string name="mascercanos">Marcador más cercano</string>
+    <string name="vermarc">" Ver librerias guardadas"</string>
+    <string name="errbd">Error base de datos</string>
+    <string name="sinmarcas">Sin marcadores</string>
+    <string name="mapamislibrerias">Librería</string>
 </resources>

@@ -1,11 +1,14 @@
 package com.example.proyectoindividual1;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteDatabase;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +35,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,6 +44,9 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
     private FusedLocationProviderClient cliente;
     private LocationCallback actualizar;
     private TextView libcercana;
+    private Double ActLog;
+    private Double ActLat;
+    private Location local;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         new permisos().permisosInternet(locact.this, locact.this);
@@ -56,6 +64,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.buscargoogle);
         libcercana= findViewById(R.id.mascerc);
         libcercana.setVisibility(View.INVISIBLE);
+        findViewById(R.id.bmascerc).setVisibility(View.INVISIBLE);
         localizacion();
     }
     @Override
@@ -90,6 +99,9 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                             List<Address> direccion;
                             try {
                                 direccion=geo.getFromLocation(location.getLatitude(),location.getLongitude(),1);
+                                ActLat=location.getLatitude();
+                                ActLog=location.getLongitude();
+                                local=location;
                                 Log.i("Dir", "onSuccess: "+direccion);
                                 if(!direccion.isEmpty()) {
                                     actual.setText(direccion.get(0).getAddressLine(0));
@@ -125,6 +137,9 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                         if(locationResult !=null){
                             List<Address> direccion;
                             try {
+                                ActLat=locationResult.getLastLocation().getLatitude();
+                                ActLog=locationResult.getLastLocation().getLongitude();
+                                local=locationResult.getLastLocation();
                                 direccion=geo.getFromLocation(locationResult.getLastLocation().getLatitude(),locationResult.getLastLocation().getLongitude(),1);
                                 actual.setText(direccion.get(0).getAddressLine(0)+","+direccion.get(0).getLocality());
                             } catch (IOException e) {
@@ -176,19 +191,101 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View view) {
         TextView libcercana=findViewById(R.id.mascerc);
         Log.i("TAG", "onClick: PasaVis"+libcercana.getVisibility());
-        /*if (libcercana.getVisibility() == View.INVISIBLE){
-            libcercana.setVisibility(View.VISIBLE);
-        }*/
         Intent i = new Intent(this, MainActivity_mapa.class);
+        finish();
+        startActivity(i);
+    }
+    public void onClickCercanos(View view) throws IOException {
+        double lat=ActLat;
+        double lon=ActLog;
+        Location loc = local;
+        double dist=0.0;
+        Button verMapa = findViewById(R.id.bmascerc);
+        TextView libcercana=findViewById(R.id.mascerc);
+        if (libcercana.getVisibility() == View.INVISIBLE){
+            libcercana.setVisibility(View.VISIBLE);
+            verMapa.setVisibility(View.VISIBLE);
+        }
+        BD base = new BD(locact.this);
+        SQLiteDatabase db = base.getWritableDatabase();
+        Log.i("TAG", "onClickCercanos: Pasando por aqui");
+        if (db==null){
+            //Si hay un error se comunica mediante una notificación.
+            enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errbd));
+        }
+        else{
+            ArrayList<Marcador> marcadores = base.misMarcadores(usuario);
+            Log.i("TAG", "onClickCercanos: Pasando por aqui"+marcadores.size());
+            if(marcadores.size()<=0 || marcadores ==null){
+                libcercana.setText(R.string.sinmarcas);
+            }
+            else{
+                int indicemax=0;
+                double dmax=Double.POSITIVE_INFINITY;
+                int indice=0;
+                while(indice<marcadores.size()){
+                    Location l = new Location("");
+                    l.setLatitude(marcadores.get(indice).getLat());
+                    l.setLongitude(marcadores.get(indice).getLon());
+                    dist=loc.distanceTo(l);
+                    Log.i("TAG", "onClickCercanos: "+dist);
+                    if(dmax>dist){
+                        indicemax=indice;
+                        dmax=dist;
+                    }
+                    indice++;
+                }
+                Log.i("TAG", "onClickCercanos: "+marcadores.size());
+                Geocoder geo = new Geocoder(this, Locale.getDefault());
+                List<Address> direccion = geo.getFromLocation(marcadores.get(indicemax).getLat(), marcadores.get(indicemax).getLon(), 1);
+                libcercana.setText(""+dmax+" m "+direccion.get(0).getAddressLine(0)+","+direccion.get(0).getLocality());
+            }
+        }
+
+    }
+    public void onClickMapa2(View view){
+        TextView libcercana=findViewById(R.id.mascerc);
+        Log.i("TAG", "onClick: PasaVis"+libcercana.getVisibility());
+        Intent i = new Intent(this, mapamislibrerias.class);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
         finish();
         startActivity(i);
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent i = new Intent(this, menuPrincipal.class);
-        finish();
-        startActivity(i);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.salidapan)
+                .setCancelable(false)
+                .setPositiveButton(R.string.si, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        startActivity(i);
+                        finish();
+                    }
+                })
+                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+    private void enviarMensajeLocal(String titulo, String contenido){
+        NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(locact.this, "CanalLibro");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+            elManager.createNotificationChannel(elCanal);
+        }
+        builder.setContentTitle(titulo)
+                .setContentText(contenido)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setAutoCancel(true);
+        elManager.notify(1, builder.build());
     }
 }

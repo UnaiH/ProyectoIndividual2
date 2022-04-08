@@ -82,6 +82,18 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         finish();
         startActivity(i);
     }
+    public void onClickComError(View view){
+        Bundle extras = getIntent().getExtras();
+        Intent i = new Intent(this, mensajeerror.class);
+        String usuario = "";
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
+        startActivity(i);
+    }
 
     @Override
     public void onClick(View view) {

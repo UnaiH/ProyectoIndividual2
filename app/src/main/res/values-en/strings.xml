@@ -89,10 +89,20 @@
     <string name="finlec">Program reading end</string>
     <string name="defh">In one hour</string>
     <string name="hdefinida">The defined hour is:</string>
-    <string name="defh2">In two hour</string>
+    <string name="defh2">In two hours</string>
     <string name="fhlec">End of indicated reading time</string>
     <string name="nAutRecB">Add</string>
     <string name="nAutRec">Recommend new author</string>
     <string name="autorrecomendarw">Author</string>
     <string name="recomendacion">"Recommended: "</string>
+    <string name="citlit">City of literature</string>
+    <string name="comerror">Report error</string>
+    <string name="escrerror">Explain your problem</string>
+    <string name="defh3">In three hours</string>
+    <string name="defh30">In half hour</string>
+    <string name="mascercanos">Closest marker</string>
+    <string name="vermarc">Show saved bookshops</string>
+    <string name="errbd">Data base error</string>
+    <string name="sinmarcas">Without marks</string>
+    <string name="mapamislibrerias">Bookshop</string>
 </resources>

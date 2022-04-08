@@ -5,11 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.Nullable;
-
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class BD extends SQLiteOpenHelper {
     //Esta clase se encarga de la conexiones con la base de datos.
@@ -24,6 +20,7 @@ public class BD extends SQLiteOpenHelper {
         //Se crea la tabla en la base de datos que se denominará Libros.
         Log.i("TAG", "onCreate: Pasa");
         sqLiteDatabase.execSQL("CREATE TABLE Libros (NombreUsuario VARCHAR(225), Titulo VARCHAR(225), Autor VARCHAR(225), Genero VARCHAR(225), Paginas INTEGER, Actual INTEGER, Empezado VARCHAR(225), Acabado VARCHAR(225), Prevista VARCHAR(225), PRIMARY KEY (NombreUsuario,Titulo,Autor,Empezado))");
+        sqLiteDatabase.execSQL("CREATE TABLE Marcadores (NombreUsuario VARCHAR(225), Titulo VARCHAR(225), Latitud REAL, Longitud REAL, PRIMARY KEY (NombreUsuario,Latitud,Longitud))");
     }
 
     @Override
@@ -49,6 +46,7 @@ public class BD extends SQLiteOpenHelper {
             existe=true;
         }
         Log.i("TAG", "anadirLibro: "+existe);
+        bd.close();
         return existe;
     }
     public boolean actualizarMarcador(int marcar,String usu, String tit, String autor, String emp){
@@ -99,5 +97,39 @@ public class BD extends SQLiteOpenHelper {
         bd.execSQL("UPDATE Libros SET Genero=='"+gen+"' WHERE NombreUsuario=='"+usu+"' AND Titulo == '"+tit+"' AND Empezado=='"+emp+"'AND Autor=='"+autor+"'");
         bd.close();
         return true;
+    }
+    public ArrayList<Marcador> misMarcadores(String usu){
+        //Se obtienen todos los marcadores.
+        String fin = "nulo";
+        ArrayList<Marcador> misMarcadores = new ArrayList<Marcador>();
+        SQLiteDatabase bd = getWritableDatabase();
+        Cursor c = bd.rawQuery("SELECT * FROM Marcadores WHERE Marcadores.NombreUsuario=='"+usu+"'",null);
+        while (c.moveToNext()){
+            Log.i("TAG", "misMarcadores: "+usu);
+            Marcador mark = new Marcador(c.getString(1),c.getDouble(2),c.getDouble(3));
+            misMarcadores.add(mark);
+        }
+        c.close();
+        bd.close();
+        return misMarcadores;
+    }
+    public boolean anadirMarcador(String usu, String tit, Double lat, Double lon){
+        boolean existe = false;
+        SQLiteDatabase bd = getWritableDatabase();
+        ArrayList<String> lista = new ArrayList<String>();
+        Cursor c = bd.rawQuery("SELECT * FROM Marcadores WHERE Marcadores.NombreUsuario=='"+usu+"' AND Marcadores.Latitud=='"+lat+"'AND Marcadores.Longitud=='"+lon+"'",null);
+        while (c.moveToNext()){
+            lista.add(c.getString(1));
+        }
+        if (lista.size()<=0) {
+            existe=false;
+            bd.execSQL("INSERT INTO Marcadores ('NombreUsuario', 'Titulo', 'Latitud', 'Longitud') VALUES ('" + usu + "','" + tit + "','" + lat + "','" + lon + "')");
+            bd.close();
+        }
+        else{
+            existe=true;
+        }
+        bd.close();
+        return existe;
     }
 }

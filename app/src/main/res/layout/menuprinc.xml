@@ -18,6 +18,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
+        android:id="@+id/buscLib4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="316dp"
+        android:onClick="onClickComError"
+        android:text="@string/comerror"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/uso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,18 +72,6 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="36dp"
         android:text="@string/bvenida"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/recomendarAutor"
-        android:layout_width="221dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="312dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/nAutRec"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
