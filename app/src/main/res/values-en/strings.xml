@@ -105,4 +105,5 @@
     <string name="errbd">Data base error</string>
     <string name="sinmarcas">Without marks</string>
     <string name="mapamislibrerias">Bookshop</string>
+    <string name="env">Send</string>
 </resources>

@@ -105,4 +105,5 @@
     <string name="errbd">Error base de datos</string>
     <string name="sinmarcas">Sin marcadores</string>
     <string name="mapamislibrerias">Librería</string>
+    <string name="env">Enviar</string>
 </resources>
