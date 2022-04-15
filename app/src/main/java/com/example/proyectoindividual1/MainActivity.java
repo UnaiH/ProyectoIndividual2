@@ -20,6 +20,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.Observer;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -143,5 +147,51 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }catch (IOException e) {
             Log.i("Error", "onClickAnadir");
         }
+    }
+    public void onClickServidor (View v)
+    {
+        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHP.class).build();
+        WorkManager.getInstance(this).getWorkInfoByIdLiveData(otwr.getId())
+                .observe(this, new Observer<WorkInfo>() {
+                    @Override
+                    public void onChanged(WorkInfo workInfo)
+                    {
+                        EditText usuarios = (EditText) findViewById(R.id.Usuario);
+                        EditText contr = (EditText) findViewById(R.id.Contr);
+                        if(workInfo != null && workInfo.getState().isFinished())
+                        {
+                            String inicio = workInfo.getOutputData().getString("result");
+                            Log.i("TAG", "onChanged: "+inicio);
+                            if (inicio!=null) {
+                                if (inicio.equals("true")) {
+                                    new permisos().pedirpermisosLocalizar(MainActivity.this, MainActivity.this);
+                                    Intent i = new Intent(getApplicationContext(), menuPrincipal.class);
+                                    i.putExtra("usuario", usuarios.getText().toString());
+                                    setResult(RESULT_OK, i);
+                                    finish();
+                                    startActivity(i);
+                                } else {
+                                    LayoutInflater inflater = getLayoutInflater();
+                                    View el_layout = inflater.inflate(R.layout.ltoastregneg, (ViewGroup) findViewById(R.id.ltoastregmal));
+                                    Toast toastcustomizado = new Toast(getApplicationContext());
+                                    toastcustomizado.setGravity(Gravity.TOP, 0, 0);
+                                    toastcustomizado.setDuration(Toast.LENGTH_LONG);
+                                    toastcustomizado.setView(el_layout);
+                                    toastcustomizado.show();
+                                }
+                            }
+                            else {
+                                LayoutInflater inflater = getLayoutInflater();
+                                View el_layout = inflater.inflate(R.layout.ltoastregneg, (ViewGroup) findViewById(R.id.ltoastregmal));
+                                Toast toastcustomizado = new Toast(getApplicationContext());
+                                toastcustomizado.setGravity(Gravity.TOP, 0, 0);
+                                toastcustomizado.setDuration(Toast.LENGTH_LONG);
+                                toastcustomizado.setView(el_layout);
+                                toastcustomizado.show();
+                            }
+                        }
+                    }
+                });
+        WorkManager.getInstance(this).enqueue(otwr);
     }
 }

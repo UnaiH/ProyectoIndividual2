@@ -11,6 +11,8 @@ public class mensajeerror extends AppCompatActivity {
     private String usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        new Idiomas().setIdioma(this);
+        new Pantalla().cambiarPantallaMenus(this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");
         }
@@ -23,7 +25,7 @@ public class mensajeerror extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent i = new Intent(this, tipo_listas.class);
+        Intent i = new Intent(this, menuPrincipal.class);
         i.putExtra("usuario", usuario);
         setResult(RESULT_OK, i);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

@@ -5,11 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.work.WorkerParameters;
+
 import java.util.ArrayList;
 
 public class BDExterna extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "baseExterna.bd";
+
+    public BDExterna(Context context, WorkerParameters workerParams) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
     public BDExterna(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -43,6 +49,7 @@ public class BDExterna extends SQLiteOpenHelper {
         }
         return existe;
     }
+
     public boolean anadirFoto(String usuario, String titulo, String imagen){
         boolean existe =false;
         SQLiteDatabase bd = getWritableDatabase();

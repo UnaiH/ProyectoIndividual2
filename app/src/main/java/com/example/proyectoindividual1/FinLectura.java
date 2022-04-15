@@ -75,7 +75,12 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         horaAlarma.set(Calendar.MINUTE, minuto);
         horaAlarma.set(Calendar.SECOND,00);
         hFin=""+h;
-        minFin=""+minuto;
+        if (minuto<10) {
+            minFin = "0" + minuto;
+        }
+        else{
+            minFin = "" + minuto;
+        }
         definirHora(hFin,minFin,horaAlarma);
     }
     public void onClickDef2hora(View view) {
@@ -92,7 +97,12 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         horaAlarma.set(Calendar.MINUTE, minuto);
         horaAlarma.set(Calendar.SECOND,00);
         hFin=""+h;
-        minFin=""+minuto;
+        if (minuto<10) {
+            minFin = "0" + minuto;
+        }
+        else{
+            minFin = "" + minuto;
+        }
         definirHora(hFin,minFin,horaAlarma);
 
     }
@@ -110,7 +120,12 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         horaAlarma.set(Calendar.MINUTE, minuto);
         horaAlarma.set(Calendar.SECOND,00);
         hFin=""+h;
-        minFin=""+minuto;
+        if (minuto<10) {
+            minFin = "0" + minuto;
+        }
+        else{
+            minFin = "" + minuto;
+        }
         definirHora(hFin,minFin,horaAlarma);
 
     }
@@ -133,7 +148,12 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         horaAlarma.set(Calendar.MINUTE, minuto);
         horaAlarma.set(Calendar.SECOND,00);
         hFin=""+h;
-        minFin=""+minuto;
+        if (minuto<10) {
+            minFin = "0" + minuto;
+        }
+        else{
+            minFin = "" + minuto;
+        }
         definirHora(hFin,minFin,horaAlarma);
 
     }

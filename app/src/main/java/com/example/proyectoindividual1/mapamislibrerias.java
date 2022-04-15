@@ -42,7 +42,6 @@ public class mapamislibrerias extends FragmentActivity implements OnMapReadyCall
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         new Idiomas().setIdioma(this);
-        new Pantalla().cambiarPantallaMenus(this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");
         }
