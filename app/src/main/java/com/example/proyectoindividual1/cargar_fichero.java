@@ -7,7 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
+//Este fichero carga las duplas autor-libro que se guardan en un archivo local para el widget.
 public class cargar_fichero {
     cargar_fichero(){
 

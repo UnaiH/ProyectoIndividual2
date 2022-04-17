@@ -4,10 +4,17 @@ import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.work.Data;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -23,6 +30,10 @@ public class ConexionPHPInsertUsuario extends Worker {
     @Override
     public Result doWork()
     {
+        String usuario = getInputData().getString("usuario");
+        String contrasena = getInputData().getString("contrasena");
+        Log.i("TAG1", "doWork: "+usuario);
+        Log.i("TAG1", "doWork: "+contrasena);
         String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/registrarse.php";
         HttpURLConnection urlConnection = null;
         try
@@ -36,7 +47,7 @@ public class ConexionPHPInsertUsuario extends Worker {
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 
             PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
-            String parametros="Usuario=usu&Contrasena=contr";
+            String parametros="usu="+usuario+"&contrasena="+contrasena;
             out.print(parametros);
             out.close();
 
@@ -44,12 +55,31 @@ public class ConexionPHPInsertUsuario extends Worker {
             Log.i("php","statusCode: " + statusCode);
             if (statusCode == 200)
             {
-                return Result.success();
+                BufferedInputStream inputStream = new BufferedInputStream(urlConnection.getInputStream());
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+                String line, result = "";
+                while ((line = bufferedReader.readLine()) != null) {
+                    result += line;
+                }
+                inputStream.close();
+                JSONArray jsonArray = new JSONArray(result);
+                String resultado="";
+                for(int i = 0; i < jsonArray.length(); i++)
+                {
+                    Log.i("TAG", "doWork: "+jsonArray.getJSONObject(i));
+                    resultado = jsonArray.getJSONObject(i).getString("resultado");
+                }
+                Data json = new Data.Builder()
+                        .putString("result",resultado)
+                        .build();
+                Log.i("php","listaJson: " + json);
+                return Result.success(json);
             }
             return Result.failure();
         }
         catch (MalformedURLException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}
+        catch (JSONException e) {e.printStackTrace();}
         return Result.failure();
     }
 }

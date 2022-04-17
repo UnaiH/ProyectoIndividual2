@@ -25,11 +25,15 @@ public class ConexionPHP  extends Worker {
     {
         super(context, workerParams);
     }
-
+    //Esta clase se emplea unicamente para la conexión a la base de datos para iniciar sesión en la aplicación.
     @NonNull
     @Override
     public Result doWork()
     {
+        String usuario = getInputData().getString("usuario");
+        String contrasena = getInputData().getString("contrasena");
+        Log.i("TAG1", "doWork: "+usuario);
+        Log.i("TAG1", "doWork: "+contrasena);
         String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/iniciarSesion.php";
         HttpURLConnection urlConnection = null;
         try
@@ -41,7 +45,7 @@ public class ConexionPHP  extends Worker {
             urlConnection.setRequestMethod("POST");
             urlConnection.setDoOutput(true);
             urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-            String parametros = "usu="+"prueba"+"&contrasena="+"prueba";
+            String parametros = "usu="+usuario+"&contrasena="+contrasena;
             PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
             out.print(parametros);
             out.close();
@@ -61,7 +65,8 @@ public class ConexionPHP  extends Worker {
                 String resultado="";
                 for(int i = 0; i < jsonArray.length(); i++)
                 {
-                    resultado = jsonArray.getJSONObject(i).getString("result");
+                    Log.i("TAG", "doWork: "+jsonArray.getJSONObject(i));
+                    resultado = jsonArray.getJSONObject(i).getString("resultado");
                 }
                 Data json = new Data.Builder()
                         .putString("result",resultado)

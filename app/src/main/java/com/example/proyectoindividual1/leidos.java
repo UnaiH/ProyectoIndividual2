@@ -2,19 +2,34 @@ package com.example.proyectoindividual1;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -31,6 +46,7 @@ public class leidos extends AppCompatActivity {
     private String[] libros;
     private static final int CAMERA_REQUEST = 1888;
     private int clicado=0;
+    public String[] imagenes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +87,15 @@ public class leidos extends AppCompatActivity {
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(imag.length)].toString();
         }
-        String[] imagenes = getImagenes();
+        String[] imags;
+        imags=getImagenes();
+        Log.i("PasagetImagenesnotfalse", "onChanged: "+imags[0]);
         if(imagenes!=null) {
             for (int aux = 0; aux < longit; aux++) {
-                if (!imagenes[aux].equals("0")) {
-                    libros[aux] = imagenes[aux];
+                if(imagenes[aux] !=null) {
+                    if (!imagenes[aux].equals("0")) {
+                        libros[aux] = imagenes[aux];
+                    }
                 }
             }
         }
@@ -137,38 +157,128 @@ public class leidos extends AppCompatActivity {
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
             Bitmap theImage = (Bitmap) data.getExtras().get("data");
             String photo = getEncodedString(theImage);
-            BDExterna base = new BDExterna(leidos.this);
-            SQLiteDatabase db = base.getWritableDatabase();
-            if (db!=null){
-                base.anadirFoto(usuario,titulos[clicado],photo);
-            }
+            Data.Builder datos = new Data.Builder();
+            datos.putString("usuario",usuario);
+            datos.putString("titulo", titulos[clicado]);
+            datos.putString("imagen", photo);
+            OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHPInsertImagenes.class)
+                    .setInputData(datos.build())
+                    .build();
+            WorkManager.getInstance(this).getWorkInfoByIdLiveData(otwr.getId())
+                    .observe(this, new Observer<WorkInfo>() {
+                        @Override
+                        public void onChanged(WorkInfo workInfo)
+                        {
+                            if(workInfo != null && workInfo.getState().isFinished())
+                            {
+                                String inicio = workInfo.getOutputData().getString("result");
+                                Log.i("TAG", "onChanged: "+inicio);
+                                if (inicio!=null) {
+                                    if (inicio.equals("true")) {
+                                        Intent i = new Intent(getApplicationContext(), leidos.class);
+                                        i.putExtra("usuario", usuario);
+                                        setResult(RESULT_OK, i);
+                                        finish();
+                                        startActivity(i);
+                                    } else {
+                                        enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errbd));
+                                    }
+                                }
+                                else {
+                                    enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errorreg));
+                                }
+                            }
+                        }
+                    });
+            WorkManager.getInstance(this).enqueue(otwr);
         }
     }
     private String getEncodedString(Bitmap bitmap){
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100, os);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,65, os);
         byte[] imageArr = os.toByteArray();
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
     }
     private String[] getImagenes(){
-        String[] imagenes=null;
-        String comprobar="";
-        BDExterna base = new BDExterna(leidos.this);
-        SQLiteDatabase db = base.getWritableDatabase();
-        if(db!=null) {
-            imagenes=new String[titulos.length];
-            int indice = 0;
-            while (indice < titulos.length) {
-                comprobar = base.getImagen(usuario,titulos[indice]);
-                if(!comprobar.equals(0)){
-                    imagenes[indice]=comprobar;
+        int indice=0;
+        imagenes=new String[titulos.length];
+        Log.i("Datos", "usuario: "+usuario);
+        Log.i("Datos", "titulo: "+titulos[indice]);
+        while (indice<titulos.length) {
+            Data.Builder datos = new Data.Builder();
+            datos.putString("usuario", usuario);
+            datos.putString("titulo", titulos[indice]);
+            OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHPImagenes.class)
+                    .setInputData(datos.build())
+                    .build();
+            int finalIndice = indice;
+            WorkManager.getInstance(this).getWorkInfoByIdLiveData(otwr.getId())
+                    .observe(this, new Observer<WorkInfo>() {
+                        @Override
+                        public void onChanged(WorkInfo workInfo) {
+                            if (workInfo != null && workInfo.getState().isFinished()) {
+                                String foto = workInfo.getOutputData().getString("foto");
+                                if (foto != null) {
+                                    if (!foto.equals("false")) {
+                                        try {
+                                            OutputStreamWriter fichero = new OutputStreamWriter(openFileOutput(usuario+titulos[finalIndice]+finalIndice +".txt", Context.MODE_PRIVATE));
+                                            fichero.write(foto);
+                                            fichero.close();
+                                        } catch (IOException e) {
+                                            //Si hay un error se comunica mediante una notificación.
+                                            Log.i("Error", "Error Imag");
+                                        }
+                                    }
+                                    else{
+                                        try {
+                                            OutputStreamWriter fichero = new OutputStreamWriter(openFileOutput(usuario+titulos[finalIndice]+finalIndice +".txt", Context.MODE_PRIVATE));
+                                            fichero.write("0");
+                                            fichero.close();
+                                        } catch (IOException e) {
+                                            //Si hay un error se comunica mediante una notificación.
+                                            Log.i("Error", "Error Imag");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+            WorkManager.getInstance(this).enqueue(otwr);
+            String Linea ="";
+            String imagen = "";
+            try {
+                String archivo= usuario;
+                archivo += titulos[indice];
+                archivo+=indice;
+                Log.i("indicefinal", "getImagenes: "+archivo);
+                BufferedReader ficherointerno = new BufferedReader(new InputStreamReader(openFileInput(archivo+".txt")));
+                Linea=ficherointerno.readLine();
+                while (Linea!=null) {
+                    imagen=imagen+Linea;
+                    Linea = ficherointerno.readLine();
                 }
-                else{
-                    imagenes[indice]="0";
-                }
-                indice++;
+                ficherointerno.close();
+            } catch (IOException e) {
+                //Si se produjera un error se lanzará una notificación local para informar de que se ha producido y dónde.
+                Log.i("Error", "Error");
             }
+            Log.i("Leido", ""+imagen);
+            imagenes[indice]=imagen;
+            indice++;
         }
         return imagenes;
+    }
+    private void enviarMensajeLocal(String titulo, String contenido){
+        NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(leidos.this, "CanalLibro");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
+            elManager.createNotificationChannel(elCanal);
+        }
+        builder.setContentTitle(titulo)
+                .setContentText(contenido)
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setAutoCancel(true);
+        elManager.notify(1, builder.build());
     }
 }

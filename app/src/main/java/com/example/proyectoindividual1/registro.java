@@ -6,9 +6,9 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +18,11 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.Observer;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
+import androidx.work.WorkManager;
 
 //Esta actividad gestiona lo relacionado con el registro como su nombre indica.
 public class registro extends AppCompatActivity implements View.OnClickListener {
@@ -34,31 +39,43 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         EditText contret = (EditText) findViewById(R.id.RegContr);
         EditText contretrep = (EditText) findViewById(R.id.RegContrRep);
         if (contret.getText().toString().equals(contretrep.getText().toString())) {
-            BDExterna base = new BDExterna(registro.this);
-            SQLiteDatabase db = base.getWritableDatabase();
-            boolean existe =false;
-            if (db==null){
-                //Si hay un error se comunica mediante una notificación.
-                enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errorreg));
-            }
-            else{
-                existe=base.registrarse(usuarioret.getText().toString(),contret.getText().toString());
-            }
-            if (!existe) {
-                //Una vez creado el usuario  se lanzará una notificación y se mostrará un toast en el inicio porque se le pasará un valor en el intent.
-                enviarMensajeLocal(getResources().getString(R.string.correg),getResources().getString(R.string.menscorreg));
-                finish();
-                Intent i = new Intent(this, MainActivity.class);
-                i.putExtra("regok", 1);
-                startActivity(i);
-            }
-            else{
-                enviarMensajeLocal(getResources().getString(R.string.contract),getResources().getString(R.string.contractcontenido));
-                finish();
-                Intent i = new Intent(this, MainActivity.class);
-                i.putExtra("regok", 1);
-                startActivity(i);
-            }
+            Data.Builder data = new Data.Builder();
+            data.putString("usuario",usuarioret.getText().toString());
+            data.putString("contrasena",contret.getText().toString());
+            OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHPInsertUsuario.class)
+                    .setInputData(data.build())
+                    .build();
+            WorkManager.getInstance(this).getWorkInfoByIdLiveData(otwr.getId())
+                    .observe(this, new Observer<WorkInfo>() {
+                        @Override
+                        public void onChanged(WorkInfo workInfo)
+                        {
+                            if(workInfo != null && workInfo.getState().isFinished())
+                            {
+                                String inicio = workInfo.getOutputData().getString("result");
+                                Log.i("TAG", "onChanged: "+inicio);
+                                if (inicio!=null) {
+                                    if (inicio.equals("true")) {
+                                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                        i.putExtra("usuario", usuarioret.getText().toString());
+                                        setResult(RESULT_OK, i);
+                                        finish();
+                                        startActivity(i);
+                                    } else {
+                                        enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errorreg));
+                                        finish();
+                                        Intent i = new Intent(getApplicationContext(), registro.class);
+                                        i.putExtra("regok", 1);
+                                        startActivity(i);
+                                    }
+                                }
+                                else {
+                                    enviarMensajeLocal(getResources().getString(R.string.error),getResources().getString(R.string.errorreg));
+                                }
+                            }
+                        }
+                    });
+            WorkManager.getInstance(this).enqueue(otwr);
         }
         else{
             //Se mostrará un toast indicando que no se ha registrado corectamente.

@@ -16,10 +16,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class ConexionPHPImagenes extends Worker {
     public ConexionPHPImagenes(@NonNull Context context, @NonNull WorkerParameters workerParams)
@@ -29,8 +29,10 @@ public class ConexionPHPImagenes extends Worker {
 
     @NonNull
     @Override
-    public ListenableWorker.Result doWork()
+    public Result doWork()
     {
+        String usuario = getInputData().getString("usuario");
+        String titulo = getInputData().getString("titulo");
         String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/selectImagen.php";
         HttpURLConnection urlConnection = null;
         try
@@ -39,6 +41,14 @@ public class ConexionPHPImagenes extends Worker {
             urlConnection = (HttpURLConnection) destino.openConnection();
             urlConnection.setConnectTimeout(5000);
             urlConnection.setReadTimeout(5000);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setDoOutput(true);
+            urlConnection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+            String parametros = "usuario="+usuario+"&titulo="+titulo;
+            Log.i("Parametros", "doWork: "+parametros);
+            PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
+            out.print(parametros);
+            out.close();
 
             int statusCode = urlConnection.getResponseCode();
             Log.i("php","statusCode: " + statusCode);
@@ -52,19 +62,19 @@ public class ConexionPHPImagenes extends Worker {
                 }
                 inputStream.close();
                 JSONArray jsonArray = new JSONArray(result);
-                ArrayList<String> lista = new ArrayList<>();
+                String resultado="";
                 for(int i = 0; i < jsonArray.length(); i++)
                 {
-                    String imagen = jsonArray.getJSONObject(i).getString("imagen");
-                    lista.add(imagen);
+                    Log.i("JSONImagenes", "doWork: "+jsonArray.getJSONObject(i));
+                    resultado = jsonArray.getJSONObject(i).getString("resultado");
+                    Log.i("JSONImagenes", "doWork: "+resultado);
                 }
-                Log.i("php","listaJson: " + lista);
-                Data jason = new Data.Builder()
-                        .putString("nombres",lista.toString())
+                Data json = new Data.Builder()
+                        .putString("foto",resultado)
                         .build();
-                return ListenableWorker.Result.success(jason);
+                return Result.success(json);
             }
-            return ListenableWorker.Result.failure();
+            return Result.failure();
         }
         catch (MalformedURLException e) {e.printStackTrace();}
         catch (IOException e) {e.printStackTrace();}

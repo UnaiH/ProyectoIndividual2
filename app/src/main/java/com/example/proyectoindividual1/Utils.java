@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 
 public class Utils {
+    //Se emplea para configurar la alarma para la clase FinLectura y que se empleará para avisar del fin del tiempo definido.
     public static void setAlarm(int i, Long timestamp, Context ctx) {
         AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(ALARM_SERVICE);
         Intent alarmIntent = new Intent(ctx, AlarmReceiver.class);

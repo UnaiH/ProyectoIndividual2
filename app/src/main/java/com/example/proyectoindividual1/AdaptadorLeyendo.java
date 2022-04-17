@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +62,7 @@ public class AdaptadorLeyendo extends BaseAdapter {
         textViewAutor.setText(autores[i]);
         textViewFechaIni.setText(fechaInicio[i]);
         textViewFechaFin.setText(fechaprev[i]);
-        if (imageid[i].equals("2131230859")||imageid[i].equals("2131230860")||imageid[i].equals("2131230861")||imageid[i].equals("2131230862")||imageid[i].equals("2131230863")){
+        if (imageid[i].equals("2131230864")||imageid[i].equals("2131230865")||imageid[i].equals("2131230866")||imageid[i].equals("2131230863")||imageid[i].equals("2131230862")){
             imagen.setImageResource(Integer.parseInt(imageid[i]));
         }
         else{

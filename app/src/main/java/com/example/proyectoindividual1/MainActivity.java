@@ -2,13 +2,9 @@ package com.example.proyectoindividual1;
 //Esta clase se emplea como pantalla de inicio al ejecutar la aplicación
 
 import android.app.AlertDialog;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,8 +15,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.lifecycle.Observer;
+import androidx.work.Data;
 import androidx.work.OneTimeWorkRequest;
 import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
@@ -56,53 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         new permisos().permisosInternet(MainActivity.this, MainActivity.this);
     }
 
-    public void IniciarSesion(View view) {
-        //OnClick del botón para iniciar sesión una vez se clica se lee lo escrito en EditText en el que se escribe el Usuario. Se comprueba que el archivo que tiene como nombre el usuario.txt y se comprueba que el fichero tiene la contraseña indicada en el EditText
-        EditText usuarios = (EditText) findViewById(R.id.Usuario);
-        EditText contr = (EditText) findViewById(R.id.Contr);
-        BDExterna base = new BDExterna(MainActivity.this);
-        SQLiteDatabase db = base.getWritableDatabase();
-        boolean inicio =false;
-        if (db==null){
-            NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this,"CanalLibro");
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel elCanal = new NotificationChannel("CanalLibro", "Mi Notificacion", NotificationManager.IMPORTANCE_HIGH);
-                elManager.createNotificationChannel(elCanal);
-            }
-            builder.setContentTitle("Error")
-                    .setContentText(String.valueOf(getResources().getString(R.string.errorsesion)))
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setAutoCancel(true);
-            elManager.notify(1, builder.build());
-
-            finish();
-            Intent i = new Intent(this, MainActivity.class);
-            i.putExtra("regok", 1);
-            startActivity(i);
-        }
-        else {
-            inicio = base.iniciarSesion(usuarios.getText().toString(), contr.getText().toString());
-            //Se realiza la comparación de la contraseña del EditText y la guardada en el archivo .txt.
-            if (inicio) {
-                new permisos().pedirpermisosLocalizar(MainActivity.this, MainActivity.this);
-                Intent i = new Intent(this, menuPrincipal.class);
-                i.putExtra("usuario", usuarios.getText().toString());
-                setResult(RESULT_OK, i);
-                finish();
-                startActivity(i);
-            } else {
-                //Si la constraseña no coincide o en su defecto no existe el usuario se mostrará un toast indicando que las contraseñas no coinciden.
-                LayoutInflater inflater = getLayoutInflater();
-                View el_layout = inflater.inflate(R.layout.ltoastregneg, (ViewGroup) findViewById(R.id.ltoastregmal));
-                Toast toastcustomizado = new Toast(this);
-                toastcustomizado.setGravity(Gravity.TOP, 0, 0);
-                toastcustomizado.setDuration(Toast.LENGTH_LONG);
-                toastcustomizado.setView(el_layout);
-                toastcustomizado.show();
-            }
-        }
-    }
     public void Registrarse(View view) {
         //El boton registrarse redirige a la actividad del registro.
         finish();
@@ -134,6 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
     private void crearLista(){
+        //Se crea un archivo local con una serie de duplas autor-libro que se emplea para el widget de recomendación diaria de autor y obra.
         String[] autores=new String[]{"Stephen King, IT","Stephen King, Carrie","Stephen King, The Green Mile","Stephen King, Revival","Gabriel García Márquez, Cien años de soledad", "Ernest Hemingway, Fiesta", "Ernest Hemingway, Por quien doblan las campanas","Ernest Hemingway, Old man and the sea","Charles Dickens, Oliver Twist", "Charles Dickens, A Tale of Two Cities","Edgar Allan Poe, The Black Cat", "Edgar Allan Poe, The Bells","William Shakespeare, Hamlet","William Shakespeare, Otelo","William Shakespeare, Macbeth","Migel de Cervantes, Don Quijote de la Mancha", "Migel de Cervantes, Entremeses","Mark Twain, The Adventures of Tom Sawyer", "Oscar Wilde, The Picture of Dorian Gray", "George Orwell, 1984", "George Orwell, Animal Farm","George Orwell, Homage to Catalonia","Fiódor Dostoievski, Crime and Punishment", "Fiódor Dostoievski, CThe Brothers Karamazov", "Aldous Huxley, Brave New World", "Pio Baroja, El árbol de la ciencia", "Pio Baroja, La busca","Migel de Unamuno, Niebla", "Migel de Unamuno, San Manuel Bueno mártir","Goethe, Fausto", "Mary Shelley, Frankenstein", "Victor Hugo, Les Misérables", "Alejandro Dumas, Les Trois Mousquetaires", "Alejandro Dumas, Le Comte de Monte-Cristo","Julio Verne, Around the World in Eighty Days", "Julio Verne, Around the World in Eighty Days", "Julio Verne, Twenty Thousand Leagues Under the Sea", "León Tolstói, War and Peace","León Tolstói, Ana Karenina", "Bram Stoker, Dracula", "The Call of Cthulhu, H.P.Lovecraft", "The Shadow Out of Time, H.P.Lovecraft", "Isabel Allende, La casa de los espíritus", "Agatha Christie, Death on the Nile", "Agatha Christie, Murder on the Orient Express","Mario Vargas Llosa, El pez en el agua", "J. R. R. Tolkien, The Hobbit","J. R. R. Tolkien, The Lord of the Rings"};
         try {
             BufferedWriter fichero = new BufferedWriter(new OutputStreamWriter(openFileOutput("recomautores.txt", Context.MODE_PRIVATE)));
@@ -150,14 +100,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void onClickServidor (View v)
     {
-        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHP.class).build();
+        EditText usuarios = (EditText) findViewById(R.id.Usuario);
+        EditText contr = (EditText) findViewById(R.id.Contr);
+        Data.Builder data = new Data.Builder();
+        data.putString("usuario",usuarios.getText().toString());
+        data.putString("contrasena",contr.getText().toString());
+        //Se realiza la comparación de la contraseña del EditText y la guardada en la base de datos remotas mediante la conexión a una clase llamada ConexionPHP. Si inicio fuera null o se devolviera false como respuesta se lanza un toast sino se "inicia sesion" en la aplicacion.
+        OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHP.class)
+                .setInputData(data.build())
+                .build();
         WorkManager.getInstance(this).getWorkInfoByIdLiveData(otwr.getId())
                 .observe(this, new Observer<WorkInfo>() {
                     @Override
                     public void onChanged(WorkInfo workInfo)
                     {
-                        EditText usuarios = (EditText) findViewById(R.id.Usuario);
-                        EditText contr = (EditText) findViewById(R.id.Contr);
                         if(workInfo != null && workInfo.getState().isFinished())
                         {
                             String inicio = workInfo.getOutputData().getString("result");

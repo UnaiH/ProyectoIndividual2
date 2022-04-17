@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +61,8 @@ public class AdaptadorLeidos extends BaseAdapter {
         textViewAutor.setText(autores[i]);
         textViewFechaIni.setText(fechaInicio[i]);
         textViewFechaFin.setText(fechafin[i]);
-        if (imageid[i].equals("2131230854")||imageid[i].equals("2131230855")||imageid[i].equals("2131230856")||imageid[i].equals("2131230857")||imageid[i].equals("2131230858")){
+        Log.i("TAGImag", "getView: "+imageid[i]);
+        if (imageid[i].equals("2131230859")||imageid[i].equals("2131230860")||imageid[i].equals("2131230861")||imageid[i].equals("2131230857")||imageid[i].equals("2131230858")){
             imagen.setImageResource(Integer.parseInt(imageid[i]));
         }
         else{
