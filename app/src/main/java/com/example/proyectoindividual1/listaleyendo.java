@@ -80,7 +80,7 @@ public class listaleyendo extends ListFragment{
         libros = new String[longit];
         Random rand = new Random();
         int auxiliar=0;
-        //Se seleccionan las imágenes aleatoriamente para mostrarlas por cada elemento de la lista.
+        //Se seleccionan las imágenes aleatoriamente para mostrarlas por cada elemento de la lista si no hay ninguna imagen del libro en la base de datos remota.
         for (int aux=0;aux<longit;aux++){
             auxiliar=rand.nextInt(imag.length);
             libros[aux]=imag[auxiliar].toString();
@@ -100,19 +100,10 @@ public class listaleyendo extends ListFragment{
         AdaptadorLeyendo adaptador = new AdaptadorLeyendo(this.getActivity(), titulos, autor, fechaInicio, fechaPrev, libros, act, paginas);
         setListAdapter(adaptador);
     }
-    //En éste método se implementa lo que sucede al pulsar un elemento de la lista.
+    //En este metodo se implementa lo que sucede al pulsar un elemento de la lista que sera basicamente que al mantener pulsado un elemento se pueda sacar una foto..
     @Override
     public void onStart() {
         super.onStart();
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Libro lib1 = librs.get(i);
-                activListaleyendo leyendo = (activListaleyendo) getActivity();
-                String leer="leer";
-                leyendo.gestorFragmentos(lib1,leer);
-            }
-        });
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -123,6 +114,7 @@ public class listaleyendo extends ListFragment{
             }
         });
     }
+    //Se obtiene la informacion de sacar la foto con la camara. Ademas, se guarda en la base de datos remota.
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -161,12 +153,14 @@ public class listaleyendo extends ListFragment{
             WorkManager.getInstance(getContext()).enqueue(otwr);
         }
     }
+    //Se comprime la imagen obtenida de la camara. Cuenta con una calidad reducidad para evitar problemas por la capacidad.
     private String getEncodedString(Bitmap bitmap){
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,35, os);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,45, os);
         byte[] imageArr = os.toByteArray();
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
     }
+    //Este metodo se emplea para obtener de la base de datos remota las imagene sacadas para cada elemento de la lista.
     private String[] getImagenes(){
         int indicefinal=0;
         imagenes=new String[titulos.length];
@@ -226,7 +220,7 @@ public class listaleyendo extends ListFragment{
                 }
                 ficherointerno.close();
             } catch (IOException e) {
-                //Si se produjera un error se lanzará una notificación local para informar de que se ha producido y dónde.
+                //Si se produjera un error se lanzara una notificacion local para informar de que se ha producido y donde.
                 Log.i("Error", "Error");
             }
             Log.i("Leido", ""+imagen);

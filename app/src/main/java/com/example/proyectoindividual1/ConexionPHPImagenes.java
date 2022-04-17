@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+//Esta clase realiza la conexion a la base de datos externa para obtener la imagen de cada libro realizada por el usuario.
 public class ConexionPHPImagenes extends Worker {
     public ConexionPHPImagenes(@NonNull Context context, @NonNull WorkerParameters workerParams)
     {

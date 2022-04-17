@@ -100,12 +100,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void onClickServidor (View v)
     {
+        //Realiza la llamada a la clase ConexionPHP para que esta se conecte por internet al servidor remoto para consultar si se puede iniciar sesión o la contraseña es incorrecta.
         EditText usuarios = (EditText) findViewById(R.id.Usuario);
         EditText contr = (EditText) findViewById(R.id.Contr);
         Data.Builder data = new Data.Builder();
+        //Se introducen los datos necesarios a pasar a ConexionPHP
         data.putString("usuario",usuarios.getText().toString());
         data.putString("contrasena",contr.getText().toString());
-        //Se realiza la comparación de la contraseña del EditText y la guardada en la base de datos remotas mediante la conexión a una clase llamada ConexionPHP. Si inicio fuera null o se devolviera false como respuesta se lanza un toast sino se "inicia sesion" en la aplicacion.
         OneTimeWorkRequest otwr = new OneTimeWorkRequest.Builder(ConexionPHP.class)
                 .setInputData(data.build())
                 .build();
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onChanged(WorkInfo workInfo)
                     {
+                        //Si se puede iniciar sesión porque devulve true se cambiará la actividad cerrando en la que se encuentra. Si la devolución es null o no es true se mostrará un toast en la interfaz actual.
                         if(workInfo != null && workInfo.getState().isFinished())
                         {
                             String inicio = workInfo.getOutputData().getString("result");

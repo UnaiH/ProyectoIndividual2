@@ -7,11 +7,12 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//Esta clase gestiona la interfaz intermedia entre las lista de libros que se están leyendo, los que se han leido, la lista de eventos de esta app para el usuario en su calendar y la creación de nuevos libros en la base de datos local.
 public class tipo_listas extends AppCompatActivity implements View.OnClickListener {
     private String usuario="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Se lleva a cabo la solicitud de permisos si fuera necesario para el calendar.
         new permisos().permisosCalendarLeer(tipo_listas.this,tipo_listas.this);
         if (savedInstanceState!= null) {
             usuario= savedInstanceState.getString("usuario");

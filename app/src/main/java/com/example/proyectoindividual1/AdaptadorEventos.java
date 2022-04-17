@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+//Esta clase es el adaptador de la lista de eventos del calendar de la aplicacion.
 public class AdaptadorEventos extends BaseAdapter {
     private Activity context;
     private String[] ids;

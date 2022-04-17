@@ -83,7 +83,7 @@ public class leidos extends AppCompatActivity {
         int longit = titulos.length;
         libros = new String[longit];
         Random rand = new Random();
-        //Se realiza la selección aleatoria de los libros para cada elemento de la lista.
+        //Se realiza la selección aleatoria de los libros para cada elemento de la lista si no hay imagenes para el libro en la base de datos remota.
         for (int aux=0;aux<longit;aux++){
             libros[aux]=imag[rand.nextInt(imag.length)].toString();
         }
@@ -138,6 +138,7 @@ public class leidos extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
     }
+    //Para realizar una foto al mantener pulsado un elemento en la lista.
     @Override
     public void onStart() {
         super.onStart();
@@ -152,6 +153,7 @@ public class leidos extends AppCompatActivity {
         });
     }
     @Override
+    //Se recoge el resultado de sacar una foto con la camara para guardarlo en la base de datos remota.
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
@@ -193,9 +195,10 @@ public class leidos extends AppCompatActivity {
             WorkManager.getInstance(this).enqueue(otwr);
         }
     }
+    //Se lleva acabo la codificacion de la imagen en string para guardarla en la base de datos con una calidad no muy alta para evitar problemas de capacidad.
     private String getEncodedString(Bitmap bitmap){
         ByteArrayOutputStream os = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,65, os);
+        bitmap.compress(Bitmap.CompressFormat.JPEG,45, os);
         byte[] imageArr = os.toByteArray();
         return Base64.encodeToString(imageArr, Base64.URL_SAFE);
     }

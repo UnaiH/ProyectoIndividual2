@@ -38,9 +38,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+//Esta clase implementa lo necesario en la interfaz buscargoogle.xml
 public class locact extends AppCompatActivity implements View.OnClickListener {
-    private String usuario;
+    private String usuario="";
     private FusedLocationProviderClient cliente;
     private LocationCallback actualizar;
     private TextView libcercana;
@@ -57,7 +57,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         if (extras != null) {
             usuario = extras.getString("usuario");
         }
-        //Se pone el modo oscuro si así se especifica en las preferencias y también se modifica el idioma.
+        //Se pone el modo oscuro si asi se especifica en las preferencias y tambien se modifica el idioma.
         new Idiomas().setIdioma(this);
         new Pantalla().cambiarPantallaMenus(this);
         super.onCreate(savedInstanceState);
@@ -67,9 +67,9 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         findViewById(R.id.bmascerc).setVisibility(View.INVISIBLE);
         localizacion();
     }
+    //Para evitar problemas de incoherencia cuando hay llamadas por ejemplo.
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //Para evitar problemas de incoherencia cuando hay llamadas por ejemplo.
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
     }
@@ -78,6 +78,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
     }
+    //Se realiza la geolocalizacion del movil para poder mostrar la dirección actual en la que se encuentra el usuario.
     public void localizacion(){
         TextView actual = (TextView) findViewById(R.id.locactual);
         Geocoder geo = new Geocoder(this, Locale.getDefault());
@@ -94,6 +95,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                 cliente.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>(){
                     @Override
                     public void onSuccess(Location location) {
+                        // se escribe la ultima posicion del movil (generalmente la actual).
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
                             List<Address> direccion;
@@ -111,6 +113,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                             }
                         }
                         else{
+                            //Si fuera null la localizacion se lanza una notificacion local.
                             NotificationManager elManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
                             NotificationCompat.Builder builder = new NotificationCompat.Builder(locact.this,"CanalLibro");
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -126,6 +129,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
                         }
                     }
                 });
+                //Ahora se realiza la actualizacion de la posicion del usuario generalmente se intentara cada 5 segundos y en casos necesarios incluso cada segundo. Tambien, se le dara una prioridad alta
                 LocationRequest peticion = LocationRequest.create();
                 peticion.setInterval(5000);
                 peticion.setFastestInterval(1000);
@@ -167,6 +171,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
             }
         }
     }
+    //Se comprueba la GoogleApiAvailability
     private boolean comprobarPlayServices(){
         GoogleApiAvailability api = GoogleApiAvailability.getInstance();
         int code = api.isGooglePlayServicesAvailable(this);
@@ -181,20 +186,25 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    //Al destruirse la actividad se elimina la actualización de la geolocalización
     @Override
     protected void onDestroy() {
         cliente.removeLocationUpdates(actualizar);
         super.onDestroy();
     }
 
+    //Al pulsar el primer botón de la interfaz se carga la correspondiente al mapa con las ciudades de la literatura
     @Override
     public void onClick(View view) {
         TextView libcercana=findViewById(R.id.mascerc);
         Log.i("TAG", "onClick: PasaVis"+libcercana.getVisibility());
         Intent i = new Intent(this, MainActivity_mapa.class);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
         finish();
         startActivity(i);
     }
+    //Si se pulsa el segundo boton se mostrara la distancia junto con la localizacion de tu marcador mas cercano y un boton para ver en el mapa todos tus marcadores.
     public void onClickCercanos(View view) throws IOException {
         double lat=ActLat;
         double lon=ActLog;
@@ -243,6 +253,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         }
 
     }
+    //Al pulsar el tercer boton de la interfaz que solo aparece tras pulsar el segundo antes se mostrará el mapa con todos los marcadores del usuario.
     public void onClickMapa2(View view){
         TextView libcercana=findViewById(R.id.mascerc);
         Log.i("TAG", "onClick: PasaVis"+libcercana.getVisibility());
@@ -252,7 +263,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         finish();
         startActivity(i);
     }
-
+    //Que hará al pulsar retroceder.
     @Override
     public void onBackPressed() {
         Intent i = new Intent(this, menuPrincipal.class);
@@ -275,6 +286,7 @@ public class locact extends AppCompatActivity implements View.OnClickListener {
         AlertDialog alert = builder.create();
         alert.show();
     }
+    //Se encarga de enviar un mensaje local en esta clase.
     private void enviarMensajeLocal(String titulo, String contenido){
         NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(locact.this, "CanalLibro");

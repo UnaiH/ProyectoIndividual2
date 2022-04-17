@@ -3,7 +3,6 @@ package com.example.proyectoindividual1;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.util.Log;
 
 import androidx.preference.PreferenceManager;
 
@@ -14,7 +13,7 @@ public class Idiomas {
     public Idiomas(){
 
     }
-    //Se selecciona el idioma que se desea.
+    //Se selecciona el idioma que se desea especificado en las preferencias.
     public void setIdioma(Context contexto){
         String idioma;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(contexto);

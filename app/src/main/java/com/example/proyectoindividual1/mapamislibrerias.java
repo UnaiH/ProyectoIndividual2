@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
+//Esta interfaz gestiona la interfaz activity_mapamislibrerias y que contiene un fragmento del GoogleMaps.
 public class mapamislibrerias extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
     private String usuario;
     private SupportMapFragment fragmentoMapa;
@@ -39,6 +39,7 @@ public class mapamislibrerias extends FragmentActivity implements OnMapReadyCall
     Geocoder geocoder;
     private double Latact=0; private double Longact=0;
     private EditText input;
+    //Crea la vista con el fragmento correspondiente.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         new Idiomas().setIdioma(this);
@@ -66,7 +67,9 @@ public class mapamislibrerias extends FragmentActivity implements OnMapReadyCall
         finish();
         startActivity(i);
     }
-
+    //Cuando el fragmento de GoogleMaps ya está preparado se cargan de la base de datos local las marcas para ponerlas en el mapa.
+    //se encarga de la emisión de mensajes locales en esta clase.
+    //Implementa el LongClickListener sobre el fragmento del GoogleMaps si se mantiene pulsado sobre un punto concreto se obtienen las coordenadas donde se ha pulsado y se guarda en la base de datos local para después cargarlo como marcador.
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mapa = googleMap;
@@ -78,6 +81,7 @@ public class mapamislibrerias extends FragmentActivity implements OnMapReadyCall
         }
         else {
             ArrayList<Marcador> marcadores = base.misMarcadores(usuario);
+            //Si hay marcadores se realiza el addMarker.
             if (marcadores.size() > 0 || marcadores != null) {
                 Iterator<Marcador> itr = marcadores.iterator();
                 while(itr.hasNext()){
@@ -141,9 +145,9 @@ public class mapamislibrerias extends FragmentActivity implements OnMapReadyCall
                 .setAutoCancel(true);
         elManager.notify(1, builder.build());
     }
+    //Para evitar problemas de incoherencia cuando hay llamadas por ejemplo.
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        //Para evitar problemas de incoherencia cuando hay llamadas por ejemplo.
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
     }

@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+//Esta clase realiza la conexion a la base de datos externa para guardar una imagen.
 public class ConexionPHPInsertImagenes extends Worker {
     public ConexionPHPInsertImagenes(@NonNull Context context, @NonNull WorkerParameters workerParams)
     {

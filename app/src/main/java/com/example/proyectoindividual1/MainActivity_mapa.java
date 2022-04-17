@@ -2,6 +2,7 @@ package com.example.proyectoindividual1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -12,14 +13,23 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+//Esta clase gestiona la vista que contiene un mapa con marcadores posicionados en las ciudades de la literatura según la UNESCO.
 public class MainActivity_mapa extends FragmentActivity implements OnMapReadyCallback {
     private SupportMapFragment fragmentoMapa;
     private GoogleMap mapa;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private double Latact=0; private double Longact=0;
+    private String usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        new Idiomas().setIdioma(this);
+        if (savedInstanceState!= null) {
+            usuario= savedInstanceState.getString("usuario");
+        }
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            usuario = extras.getString("usuario");
+        }
+        Log.i("Main_mapa", "onCreate: Llega");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_mapa);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -31,12 +41,15 @@ public class MainActivity_mapa extends FragmentActivity implements OnMapReadyCal
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(this, locact.class);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
         finish();
         startActivity(i);
     }
-
+    //Cuando el mapa ya está listo se crean los marcadores de las ciudades de la Literatura (véase que la mayoría son en Europa y por eso parece un cúmulo en esa zona del mapa).
     @Override
     public void onMapReady(GoogleMap googleMap) {
+
         mapa = googleMap;
         LatLng edim = new LatLng(55.9494, -3.165);
         mapa.addMarker(new MarkerOptions()

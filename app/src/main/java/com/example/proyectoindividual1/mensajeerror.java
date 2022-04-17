@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+//Esta clase gestiona la interfaz que permite al usuario identificado comunicar un error.
 public class mensajeerror extends AppCompatActivity {
     private String usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Llama a idiomas y pantalla para realizar los cambios de la interfaz acorde a lo especificado en las preferencias.
         new Idiomas().setIdioma(this);
         new Pantalla().cambiarPantallaMenus(this);
         if (savedInstanceState!= null) {
@@ -44,5 +45,15 @@ public class mensajeerror extends AppCompatActivity {
                 });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
+    }
+    @Override
+    protected void onRestoreInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("usuario",usuario);
     }
 }

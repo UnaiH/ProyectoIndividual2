@@ -115,6 +115,7 @@ public class registro extends AppCompatActivity implements View.OnClickListener 
         alert.show();
     }
     private void enviarMensajeLocal(String titulo, String contenido){
+        //Este método se llama cuando hace falta rlanzar un mensaje local en esta clase.
         NotificationManager elManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(registro.this, "CanalLibro");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

@@ -25,7 +25,7 @@ public class ConexionPHP  extends Worker {
     {
         super(context, workerParams);
     }
-    //Esta clase se emplea unicamente para la conexión a la base de datos para iniciar sesión en la aplicación.
+    //Esta clase se emplea unicamente para la conexión a la base de datos para iniciar sesión en la aplicación (se comprueba la contraseña en el .php correpondiente).
     @NonNull
     @Override
     public Result doWork()

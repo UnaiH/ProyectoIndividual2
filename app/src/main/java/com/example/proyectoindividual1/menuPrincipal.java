@@ -59,6 +59,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
     }
 
     public void onClickLoc(View view){
+        //Este botón redirige a la clase llamada locact
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, locact.class);
         String usuario = "";
@@ -71,6 +72,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         startActivity(i);
     }
     public void onClickHora(View view){
+        //Este botón redirige a la clase FinLectura.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, FinLectura.class);
         String usuario = "";
@@ -83,6 +85,7 @@ public class menuPrincipal extends AppCompatActivity implements View.OnClickList
         startActivity(i);
     }
     public void onClickComError(View view){
+        //Este botón redirige a la clase mensajeerror.
         Bundle extras = getIntent().getExtras();
         Intent i = new Intent(this, mensajeerror.class);
         String usuario = "";

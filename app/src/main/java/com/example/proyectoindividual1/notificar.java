@@ -13,7 +13,7 @@ import android.net.Uri;
 import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
-
+//Esta clase realiza el lanzamiento de un mensaje local para comunicar el fin del tiempo determinado en la alarma.
 public class notificar extends IntentService {
     private NotificationManager notificar;
     private PendingIntent pendiente;
@@ -38,9 +38,9 @@ public class notificar extends IntentService {
         String message = getString(R.string.fhlec);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            final int NOTIFY_ID = 0; // ID of notification
-            String id = NOTIFICATION_CHANNEL_ID; // default_channel_id
-            String title = NOTIFICATION_CHANNEL_ID; // Default Channel
+            final int NOTIFY_ID = 0;
+            String id = NOTIFICATION_CHANNEL_ID;
+            String title = NOTIFICATION_CHANNEL_ID;
             PendingIntent pendingIntent;
             NotificationCompat.Builder builder;
             NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

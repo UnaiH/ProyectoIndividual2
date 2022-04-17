@@ -98,6 +98,7 @@ public class BD extends SQLiteOpenHelper {
         bd.close();
         return true;
     }
+    //Se obtienen los marcadores guardados en la base de datos local.
     public ArrayList<Marcador> misMarcadores(String usu){
         //Se obtienen todos los marcadores.
         String fin = "nulo";
@@ -113,6 +114,7 @@ public class BD extends SQLiteOpenHelper {
         bd.close();
         return misMarcadores;
     }
+    //Se guarda el usuario, titulo y coordenadas de los marcadores creados por el usuario.
     public boolean anadirMarcador(String usu, String tit, Double lat, Double lon){
         boolean existe = false;
         SQLiteDatabase bd = getWritableDatabase();

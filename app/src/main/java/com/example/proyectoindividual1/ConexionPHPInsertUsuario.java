@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
+//Esta clase realiza la conexion a la base de datos externa para registrar un usuario (la encriptacion de la contraseña se realiza con el archivo .php)
 public class ConexionPHPInsertUsuario extends Worker {
     public ConexionPHPInsertUsuario(@NonNull Context context, @NonNull WorkerParameters workerParams)
     {

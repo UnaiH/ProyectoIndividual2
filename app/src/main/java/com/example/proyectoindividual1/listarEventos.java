@@ -15,7 +15,7 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
+//Esta clase lista todos los eventos del Calendar que se corresponden con la aplicacion.
 public class listarEventos extends AppCompatActivity {
     private String usuario="";
     private String [] ids = {};
@@ -37,6 +37,7 @@ public class listarEventos extends AppCompatActivity {
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_eventos);
+        //Se inician los elementos de la lista obteniendo la informacion necesaria de la aplicacion de Calendar.
         if ((ContextCompat.checkSelfPermission(listarEventos.this, Manifest.permission.READ_CALENDAR)== PackageManager.PERMISSION_GRANTED)) {
             uri = CalendarContract.Events.CONTENT_URI;
             String[] columnas = {
@@ -97,6 +98,7 @@ public class listarEventos extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putString("usuario",usuario);
     }
+    //Se emplea para por un lado, configurar que al pulsar se alterne el evento entre rojo, verde y azul y por otro lado, para que al mantener pulsado se elimine el evento.
     @Override
     public void onStart() {
         super.onStart();

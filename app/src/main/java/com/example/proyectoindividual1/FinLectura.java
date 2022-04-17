@@ -11,11 +11,12 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
-
+//Esta clase gestiona la interfaz activity_fin_lectura
 public class FinLectura extends AppCompatActivity implements View.OnClickListener {
     private TextView notificaciones;
     private int alarmID = 1;
     private SharedPreferences definidas;
+    //Se carga la hora de la alarma definida ya para mostrarse sino se emplea la hora actual.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         new Idiomas().setIdioma(this);
@@ -60,6 +61,7 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
     public void onClick(View view) {
 
     }
+    //Se defina una alarma de una hora (para la proxima hora).
     public void onClickDefhora(View view) {
         Calendar actual = Calendar.getInstance();
         int hora = actual.get(Calendar.HOUR_OF_DAY);
@@ -83,6 +85,7 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         }
         definirHora(hFin,minFin,horaAlarma);
     }
+    //Se defina una alarma de dos hora (para dentro de dos horas).
     public void onClickDef2hora(View view) {
         Calendar actual = Calendar.getInstance();
         int hora = actual.get(Calendar.HOUR_OF_DAY);
@@ -106,6 +109,7 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         definirHora(hFin,minFin,horaAlarma);
 
     }
+    //Se defina una alarma de tres hora (para dentro de tres horas).
     public void onClickDef3hora(View view) {
         Calendar actual = Calendar.getInstance();
         int hora = actual.get(Calendar.HOUR_OF_DAY);
@@ -129,6 +133,7 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         definirHora(hFin,minFin,horaAlarma);
 
     }
+    //Se defina una alarma de media hora (para dentro de media hora).
     public void onClickDefmediahora(View view) {
         Calendar actual = Calendar.getInstance();
         int hora = actual.get(Calendar.HOUR_OF_DAY);
@@ -157,6 +162,7 @@ public class FinLectura extends AppCompatActivity implements View.OnClickListene
         definirHora(hFin,minFin,horaAlarma);
 
     }
+    //Es un metodo en general para todos los que configuran una alarma.
     private void definirHora(String hFin, String minFin, Calendar horaAlarma){
         Calendar actual = Calendar.getInstance();
         SharedPreferences.Editor edit = definidas.edit();

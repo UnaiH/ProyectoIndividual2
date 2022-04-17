@@ -7,7 +7,7 @@ import android.content.pm.PackageManager;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-
+//Esta clase gestiona la peticion de los distintos permisos que emplea la aplicación siendo permisos de camara, geolocalicación, escribir en calendar, leer en calendar, y internet.
 public class permisos {
     private boolean concedidos=false;
     public void permisosCamara(Context contexto, Activity actividad){
