@@ -4,62 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".tipo_listas"
-    tools:layout_editor_absoluteX="-20dp"
-    tools:layout_editor_absoluteY="-34dp">
+    tools:context=".FinLectura">
 
     <Button
-        android:id="@+id/anadirb3"
+        android:id="@+id/definirHorab4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="328dp"
-        android:layout_marginTop="144dp"
-        android:onClick="onClickEventos"
-        android:text="@string/listaEventos"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="148dp"
+        android:onClick="onClickDef3hora"
+        android:text="@string/defh3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/horaSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="48dp"
+        android:text="@string/hdefinida"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/anadirb"
+        android:id="@+id/definirHorab3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="328dp"
-        android:layout_marginTop="44dp"
-        android:onClick="onClickALibro"
-        android:text="Añadir libro"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="84dp"
+        android:onClick="onClickDefmediahora"
+        android:text="@string/defh30"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/lecturab"
+        android:id="@+id/definirHorab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="44dp"
-        android:onClick="onClickLeyendo"
-        android:text="En Lectura"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="148dp"
+        android:onClick="onClickDefhora"
+        android:text="@string/defh"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/leidosb"
+        android:id="@+id/definirHorab2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="144dp"
-        android:onClick="onClickLeidos"
-        android:text="Leídos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/bVolver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="228dp"
-        android:layout_marginTop="216dp"
-        android:onClick="onClickVolver"
-        android:text="Volver"
+        android:layout_marginStart="292dp"
+        android:layout_marginTop="84dp"
+        android:onClick="onClickDef2hora"
+        android:text="@string/defh2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
