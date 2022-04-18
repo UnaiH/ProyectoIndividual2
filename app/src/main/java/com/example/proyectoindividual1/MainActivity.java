@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int valor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FireBase firebase=new FireBase();
+        firebase.Desuscribirse();
         crearLista();
         //Se carga el idioma al inicio en la actividad principal por si acaso se ha cambiado el idioma del sistema. Si no se ha especificado el idioma en preferencias se pondrá en inglés por considerarse un idioma oficial.
         valor=0;
@@ -151,5 +154,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
         WorkManager.getInstance(this).enqueue(otwr);
+    }
+    //Al pulsar el tercer boton se solicitara una contraseña que si es correcta se suscribira el movil al topico Error para recibir los mensajes que lanzan los usuarios como errores.
+    //Si se pulsa Ok se suscribe con la contraseña correcta y con No se desuscribe.
+    public void OnClickHabilitar(View v){
+        Log.i("TAG", "OnClickHabilitar: ");
+        AlertDialog.Builder miDialogo = new AlertDialog.Builder(MainActivity.this);
+        miDialogo.setTitle("Password");
+        final EditText contrasena = new EditText(MainActivity.this);
+        contrasena.setInputType(InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        miDialogo.setView(contrasena);
+        miDialogo.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(contrasena.getText().toString().equals("ServicioTecnico")){
+                    FireBase firebase = new FireBase();
+                    firebase.Subscribirse();
+                    Log.i("TAG", "Habilitado");
+                }
+            }
+        });
+        miDialogo.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(contrasena.getText().toString().equals("ServicioTecnico")){
+                    FireBase firebase = new FireBase();
+                    firebase.Desuscribirse();
+                    Log.i("TAG", "Deshabilitado");
+                }
+            }
+        });
+        miDialogo.show();
     }
 }

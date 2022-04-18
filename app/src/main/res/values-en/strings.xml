@@ -108,4 +108,5 @@
     <string name="env">Send</string>
     <string name="luginteres">Interesting place</string>
     <string name="desde">since</string>
+    <string name="habilmens">Enable/Disable messages</string>
 </resources>

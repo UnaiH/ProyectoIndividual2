@@ -7,27 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/Usuario"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:text="@string/usuarioInicio"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
-        android:id="@+id/botonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="388dp"
-        android:layout_marginTop="76dp"
-        android:onClick="onClickServidor"
-        android:text="@string/iniciarsesion"
+        android:id="@+id/registroLogin2"
+        android:layout_width="166dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="184dp"
+        android:layout_marginEnd="160dp"
+        android:onClick="OnClickHabilitar"
+        android:text="@string/habilmens"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -36,9 +26,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="388dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="112dp"
         android:onClick="Registrarse"
         android:text="@string/registrarse"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/botonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="388dp"
+        android:layout_marginTop="36dp"
+        android:onClick="onClickServidor"
+        android:text="@string/iniciarsesion"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,9 +48,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="152dp"
+        android:layout_marginTop="124dp"
         android:ems="10"
         android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:text="@string/usuarioInicio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -58,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="124dp"
+        android:layout_marginTop="96dp"
         android:text="@string/contrasenaInicio"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"

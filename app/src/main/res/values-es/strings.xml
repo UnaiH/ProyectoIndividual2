@@ -108,4 +108,5 @@
     <string name="env">Enviar</string>
     <string name="luginteres">Lugares de interés</string>
     <string name="desde">desde</string>
+    <string name="habilmens">Habilitar/Deshabilitar mensajes</string>
 </resources>

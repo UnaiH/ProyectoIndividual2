@@ -12,11 +12,33 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:text="@string/usuarioInicio"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Contr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="148dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="104dp"
+        android:text="@string/contrasenaInicio"
+        android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="232dp"
         android:layout_marginEnd="162dp"
         android:onClick="onClickServidor"
         android:text="@string/iniciarsesion"
@@ -38,33 +60,27 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="161dp"
-        android:layout_marginTop="392dp"
+        android:layout_marginTop="300dp"
         android:layout_marginEnd="160dp"
         android:onClick="Registrarse"
         android:text="@string/registrarse"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Contr"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="168dp"
-        android:ems="10"
-        android:inputType="textPassword"
+    <Button
+        android:id="@+id/registroLogin"
+        android:layout_width="166dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="364dp"
+        android:layout_marginEnd="160dp"
+        android:onClick="OnClickHabilitar"
+        android:text="@string/habilmens"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="124dp"
-        android:text="@string/contrasenaInicio"
-        android:textColor="#FFFFFF"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
