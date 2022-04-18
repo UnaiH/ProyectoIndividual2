@@ -113,4 +113,6 @@
     <string name="luginteres">Lugares de interés</string>
     <string name="desde">desde</string>
     <string name="habilmens">Habilitar/ Deshabilitar mensajes</string>
+    <string name="enviado">Enviado</string>
+    <string name="escribe">Explica el error lo mas conciso posible por favor.</string>
 </resources>

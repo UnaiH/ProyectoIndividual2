@@ -109,4 +109,6 @@
     <string name="luginteres">Leku interesgarriak</string>
     <string name="desde">etik</string>
     <string name="habilmens">Gaitu/Desgaitu mezuak</string>
+    <string name="enviado">Bidalita</string>
+    <string name="escribe">Mesedez, azaldu errorea ahalik eta zehatzen.</string>
 </resources>

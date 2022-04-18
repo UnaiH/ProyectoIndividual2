@@ -109,4 +109,6 @@
     <string name="luginteres">Interesting place</string>
     <string name="desde">since</string>
     <string name="habilmens">Enable/Disable messages</string>
+    <string name="enviado">Sended</string>
+    <string name="escribe">Please explain the error as concisely as possible.</string>
 </resources>
