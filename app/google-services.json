@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "617716630293",
+    "project_id": "libuk2-13b46",
+    "storage_bucket": "libuk2-13b46.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617716630293:android:bed84a295849d063039f1c",
+        "android_client_info": {
+          "package_name": "com.example.proyectoindividual1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617716630293-ckh3gpb1ekk2o4uujl9eqo7ci92r0mou.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGFE28dqwM_hoM5tNUVAlsftAOq-Hg428"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617716630293-ckh3gpb1ekk2o4uujl9eqo7ci92r0mou.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
