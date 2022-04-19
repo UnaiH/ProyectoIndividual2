@@ -89,7 +89,6 @@ public class leidos extends AppCompatActivity {
         }
         String[] imags;
         imags=getImagenes();
-        Log.i("PasagetImagenesnotfalse", "onChanged: "+imags[0]);
         if(imagenes!=null) {
             for (int aux = 0; aux < longit; aux++) {
                 if(imagenes[aux] !=null) {
@@ -206,7 +205,6 @@ public class leidos extends AppCompatActivity {
         int indice=0;
         imagenes=new String[titulos.length];
         Log.i("Datos", "usuario: "+usuario);
-        Log.i("Datos", "titulo: "+titulos[indice]);
         while (indice<titulos.length) {
             Data.Builder datos = new Data.Builder();
             datos.putString("usuario", usuario);

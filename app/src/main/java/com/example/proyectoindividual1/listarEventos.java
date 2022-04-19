@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
+import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 //Esta clase lista todos los eventos del Calendar que se corresponden con la aplicacion.
@@ -131,5 +131,13 @@ public class listarEventos extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    public void onBackPressed() {
+        //Se programa un Dialog para preguntar si se desea salir de la pantalla al pulsar Back.
+        Intent i = new Intent(this, tipo_listas.class);
+        i.putExtra("usuario", usuario);
+        setResult(RESULT_OK, i);
+        finish();
+        startActivity(i);
     }
 }
