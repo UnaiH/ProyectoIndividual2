@@ -33,7 +33,7 @@ public class ConexionPHPImagenes extends Worker {
     {
         String usuario = getInputData().getString("usuario");
         String titulo = getInputData().getString("titulo");
-        String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/selectImagen.php";
+        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/selectImagen.php";
         HttpURLConnection urlConnection = null;
         try
         {

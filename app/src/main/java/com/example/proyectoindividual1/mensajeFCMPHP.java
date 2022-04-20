@@ -29,7 +29,7 @@ public class mensajeFCMPHP extends Worker {
         String mensaje="Default";
         mensaje = getInputData().getString("mens");
         Log.i("TAG1Mensaje", "doWork: "+mensaje);
-        String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/mensajear.php";
+        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/mensajear.php";
         HttpURLConnection urlConnection = null;
         try
         {

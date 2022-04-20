@@ -34,7 +34,7 @@ public class ConexionPHP  extends Worker {
         String contrasena = getInputData().getString("contrasena");
         Log.i("TAG1", "doWork: "+usuario);
         Log.i("TAG1", "doWork: "+contrasena);
-        String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/iniciarSesion.php";
+        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/iniciarSesion.php";
         HttpURLConnection urlConnection = null;
         try
         {

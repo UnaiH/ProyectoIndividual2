@@ -36,7 +36,7 @@ public class ConexionPHPInsertImagenes extends Worker {
         Log.i("TAG1", "doWork: "+usuario);
         Log.i("TAG1", "doWork: "+titulo);
         Log.i("TAG1", "doWork: "+photo);
-        String direccion = "http://ec2-18-132-60-229.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/anadirImagen.php";
+        String direccion = "http://ec2-52-56-170-196.eu-west-2.compute.amazonaws.com/uhernandez008/WEB/anadirImagen.php";
         HttpURLConnection urlConnection = null;
         try
         {
